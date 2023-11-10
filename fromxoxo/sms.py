@@ -40,7 +40,7 @@ def Send_SMS(to, contents, can_receive):
     data = {
         "type":"SMS",
         "from":contact_phone,  #deploy check
-        "content":'[Plan & Coach]' +contents,
+        "content":'[From.XoXo]' +contents,
         "subject":"SENS",
         "messages":[
             {
@@ -48,11 +48,11 @@ def Send_SMS(to, contents, can_receive):
             }
         ]
     }
-    try:  # deploy check
+    '''try:  # deploy check
         import fromxoxo.settings.local
         can_receive = False
     except:
-        pass
+        pass'''
 
     if can_receive:
         try:

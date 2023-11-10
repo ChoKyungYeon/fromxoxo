@@ -34,7 +34,8 @@ class Letter(models.Model):
         return random.randint(1, 23)
 
     def generate_url(self):
-        return reverse('letterapp:intro', kwargs={'pk': self.pk})
+        base_url = reverse('letterapp:intro', kwargs={'pk': self.pk})
+        return f'http://13.209.69.42{base_url}'
 
     def generate_qrcode(self, url):
         qr = qrcode.QRCode(

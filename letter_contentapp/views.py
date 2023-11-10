@@ -19,7 +19,7 @@ from letter_contentapp.models import Letter_content
 class Letter_contentUpdateView(UpdateView):
     model = Letter_content
     form_class = Letter_contentCreateForm
-    template_name = 'Letter_contentapp/update.html'
+    template_name = 'letter_contentapp/update.html'
     context_object_name = 'target_content'
 
     def form_valid(self, form):

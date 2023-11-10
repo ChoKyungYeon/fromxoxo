@@ -50,7 +50,7 @@ class PhonenumberCreateView(CreateView):
                 import fromxoxo.settings.local
                 form.instance.verification_code=111111
             except:
-                form.instance.verification_code=111111 #form.instance.verification_code=random.randint(100000, 999999)
+                form.instance.verification_code=random.randint(100000, 999999)
             form.instance.save()
             to = form.instance.number
             content = f'인증번호 {form.instance.verification_code}를 3분 내에 입력해 주세요'

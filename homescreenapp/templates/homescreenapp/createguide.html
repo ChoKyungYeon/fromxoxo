@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+
+<style>
+    #letter-creatguide {
+        padding-top:4rem;
+    }
+
+    #letter-creatguide .text-title {
+        font-size: var(--fontsize-bold);
+        font-weight: var(--fontweight-index);
+    }
+
+    #letter-creatguide .spacing-title {
+        margin-bottom: 2.5rem;
+    }
+
+    #letter-creatguide  .icon-number {
+        font-size: 1.6rem;
+        color: var(--middlepink);
+        font-weight: var(--fontweight-index);
+        margin-right: 1rem;
+    }
+
+    #letter-creatguide .text-content {
+        font-size: var(--fontsize-bold);
+    }
+
+    #letter-creatguide .spacing-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-bottom: 0.7rem;
+    }
+
+    #letter-creatguide .container-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top:3rem;
+    }
+
+
+    #letter-creatguide .form-nav {
+        width: 47.5%;
+    }
+    #letter-creatguide .btn-nav {
+        width: 47.5%;
+        padding-top:1.7rem;
+        padding-bottom:1.7rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--white);
+        box-shadow: var(--shadow-container);
+        border-radius: var(--border-radius-container);
+        border:var(--border-container);
+    }
+
+
+    #letter-creatguide .item-image {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        flex-shrink: 0;
+        margin-bottom: 1rem;
+    }
+    #letter-creatguide .img-post {
+        object-fit: cover;
+        width: 2.9rem;
+        height: 2.9rem;
+        position: relative;
+        top:0.1rem;
+        left: 0.1rem;
+    }
+    #letter-creatguide .img-clock {
+        object-fit: cover;
+        position: relative;
+        top:0.1rem;
+        width: 2.9rem;
+        height: 2.9rem;
+    }
+</style>
+<header class="header-empty">
+    {% if page == 'sentmailbox' %}
+    {%  url 'accountapp:sentmailbox' pk=user.pk as url %}
+    {% else %}
+    {%  url 'homescreenapp:homescreen' as url %}
+    {% endif %}
+    {% include 'headersnippets/navback.html' with url=url %}
+</header>
+<main>
+    <div class="frame-letter " id="letter-creatguide">
+        <div class="spacing-title">
+        <span class="text-title">편지를 작성하기 전<br>
+            가이드를 확인해 주세요!</span>
+        </div>
+        <div class="spacing-content">
+            <span class="icon-number material-icons">done</span>
+            <span class="text-content">편지 작성 후 링크를 공유하고</span>
+        </div>
+        <div class="spacing-content">
+            <span class="icon-number material-icons">done</span>
+            <span class="text-content">편지 확인 전까지 삭제/수정해요!</span>
+        </div>
+        <div class="spacing-content">
+            <span class="icon-number material-icons">done</span>
+            <span class="text-content">편지는 확인하고 1일 후 사라져요!</span>
+        </div>        <div class="spacing-content">
+            <span class="icon-number material-icons">done</span>
+            <span class="text-content">편지가 사라지지 않게 저장해요</span>
+        </div>
+        <div class="container-btn">
+            {% if request.user.is_authenticated %}
+                <form class="form-nav" method="post">
+                {% csrf_token %}
+                    {% bootstrap_form letter_form %}
+                    <button type="submit" class="btn-nav" style="width: 100%">
+                        <div class="item-image">
+                            <img class="img-post" src='/static/icons/guide/post.png'>
+                        </div>
+                        <div class="text-content-bold" >
+                            새로 작성해요
+                        </div>
+                    </button>
+                </form>
+            {% else %}
+                <a href="#" onclick="handleUnauthenticatedClick();" class="btn-nav">
+                    <div class="item-image">
+                        <img class="img-post" src='/static/icons/guide/post.png'>
+                    </div>
+                    <div class="text-content-bold" >
+                        새로 작성해요
+                    </div>
+                </a>
+            {% endif %}
+            {% if undone_letter %}
+            <a href="{% url 'letter_infoapp:update' pk=undone_letter.letter_info.pk %}" class="btn-nav">
+                <div class="item-image">
+                    <img class="img-clock" src='/static/icons/guide/resume.png'>
+                </div>
+                <div class="text-content-bold" >
+                    이어서 작성하기
+                </div>
+            </a>
+            {% else %}
+                {% if request.user.is_authenticated %}
+                <a class="btn-nav" onclick="showAlert()">
+                {% else %}
+                <a class="btn-nav" onclick="handleUnauthenticatedClick();">
+                {% endif %}
+                    <div class="item-image">
+                        <img class="img-clock" src='/static/icons/guide/none.png' style="opacity: 0.7">
+                    </div>
+                    <div class="text-content-bold" style="color: var(--softgray)">
+                        이어쓰기 없음
+                    </div>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+<script>
+    function showAlert() {
+        alert('작성 중인 편지가 없습니다');
+    }
+    function handleUnauthenticatedClick() {
+        alert('로그인이 필요한 서비스입니다.');
+        window.location.href = "{% url 'accountapp:login' %}";
+    }
+</script>
+{% endblock %}
+

@@ -1,0 +1,107 @@
+<style>
+#contact {
+    background: var(--white);
+    padding-bottom: 7rem;
+}
+
+#contact .img-icon {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    margin-right: var(--padding-content);
+}
+
+
+
+#contact .container-contact{
+    padding:0;
+    display: flex;
+    flex-direction: row;
+    align-containers: center;
+    justify-content: space-between;
+    width:85%;
+    background: #f6f6f9;
+    border-radius: 0.5rem;
+    height: 5rem;
+    margin-top:2rem;
+    border:none;
+}
+#contact .btn-left {
+    display: flex;
+    flex-direction: row;
+    align-containers: center;
+    justify-content: flex-start;
+    padding-left: var(--padding-content);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    width:100%;
+    height: 5rem;
+}
+#contact .btn-sns{
+    display: flex;
+    flex-direction: row;
+    align-containers: center;
+    justify-content: center;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    font-weight: var(--fontweight-bold);
+    font-size: 1.6rem;
+    color: var(--white);
+    width:15%;
+    height: 5rem;
+    background: var(--gray);
+}
+#contact .text-index{
+    color:#626c84;
+}
+
+
+
+
+
+</style>
+
+<div class="frame-homescreen" id="contact">
+  <div class="text-title">
+        수업을 <span class="text-title-bold">시작하기 전</span> 언제나<br>
+        <span class="text-title-bold">학습 상담을 진행</span>할 수 있어요!
+    </div>
+        {% if document.kakaotalk  %}
+        <a href={{document.kakaotalk }} target="_blank" rel="noopener noreferrer" class="container container-contact" >
+        {% else %}
+        <a class="container container-contact" >
+        {% endif %}
+            <div class="btn-left" >
+                <img class="img-icon" src='/icons/contact/kakaotalk.png'>
+                <span class="text-index">카톡 고객센터</span>
+            </div>
+            <span class="btn-sns material-icons">arrow_forward_ios</span>
+        </a>
+  <div class="text-title" style="margin-top:5rem">
+        저희 코치들이 <span class="text-title-bold">직접 발행하는</span><br>
+        <span class="text-title-bold">수험생 입시 컨텐츠</span>를 만나보세요!
+    </div>
+        {% if document.instagram  %}
+        <a href={{document.instagram }} target="_blank" rel="noopener noreferrer" class="container container-contact">
+        {% else %}
+        <a class="container container-contact">
+        {% endif %}
+            <div class="btn-left" >
+                <img class="img-icon" src='/icons/contact/instagram.png'>
+                <span class="text-index">인스타그램</span>
+            </div>
+            <span class="btn-sns material-icons">arrow_forward_ios</span>
+        </a>
+            {% if document.blog  %}
+        <a href={{document.blog }} target="_blank" rel="noopener noreferrer" class="container container-contact">
+        {% else %}
+        <a class="container container-contact">
+        {% endif %}
+            <div class="btn-left" >
+                <img class="img-icon" src='/icons/contact/naver.png'>
+                <span class="text-index">네이버 블로그</span>
+            </div>
+            <span class="btn-sns material-icons">arrow_forward_ios</span>
+        </a>
+
+</div>

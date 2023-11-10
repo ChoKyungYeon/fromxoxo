@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+#letter-expire .img-crying{
+    position: relative;
+    bottom:0.1rem
+}
+</style>
+
+<header class="header-empty ">
+</header>
+
+<main class="main-centralize" id="letter-expire">
+    <div class="frame-centralize">
+        <div class="spacing-title">
+            <span class="text-title" >
+                 만료된 편지입니다!
+            </span>
+            <img class="img-title img-crying" src='/static/icons/etc/crying.png'>
+        </div>
+         <div class="item-guide text-index">
+            이 편지는 이미 저장되었거나<br>
+            존재하지 않는 편지입니다.
+        </div>
+        <a href="{% url 'homescreenapp:homescreen' %}" class="btn-nav">
+            홈으로 돌아가기
+        </a>
+    </div>
+</main>
+
+{% endblock %}

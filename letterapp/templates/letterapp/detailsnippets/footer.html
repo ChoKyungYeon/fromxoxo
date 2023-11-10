@@ -1,0 +1,73 @@
+<style>
+
+.frame-footer{
+    background: var(--blackgray);
+    width: 100%;
+    bottom:0;
+    position: fixed;
+    left: 0;
+    padding:1.7rem var(--padding-frame);
+}
+.frame-footer .container-footer{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    background: transparent;
+}
+.frame-footer .text-title{
+    color: var(--white);
+    font-size: var(--fontsize-bold);
+}
+
+.frame-footer .btn-save{
+    background: var(--black);
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    color:var(--white);
+    height: 7rem;
+    width: 7rem;
+    font-size:2.5rem;
+    border-radius: 50%;
+    font-weight:var(--fontweight-content);
+    position: absolute;
+    border:1.1rem solid var(--blackgray);
+    right: 0rem;
+    top:-3.6rem;
+}
+.block-empty{
+    height: 6rem;
+}
+</style>
+{% if not user.is_authenticated %}
+    <div class="block-empty tema-{{ letter_content.tema }}"></div>
+    <a href="{% url 'accountapp:login' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
+        <div class="container-footer">
+            <span class="text-title">
+               로그인 후 편지 저장!
+            </span>
+            <div class="btn-save material-icons">
+                cloud_download
+            </div>
+        </div>
+    </a>
+{% else %}
+    {% if user != target_letter.sender and user != target_letter.receiver %}
+    <div class="block-empty"></div>
+    <a id="tosave" href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
+        <div class="container-footer">
+            <span class="text-title">
+                편지를 저장해요!
+            </span>
+            <div class="btn-save material-icons">
+                cloud_download
+            </div>
+        </div>
+    </a>
+    {% endif %}
+{% endif %}

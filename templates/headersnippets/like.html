@@ -1,0 +1,7 @@
+{% if not like %}
+<a href="{% url 'letter_likeapp:like' %}?letter_pk={{ target_letter.pk }}"
+        class="btn-like-false material-icons">favorite</a>
+{% else %}
+<a href="{% url 'letter_likeapp:like' %}?letter_pk={{ target_letter.pk }}"
+        class="btn-like-true material-icons">favorite</a>
+{% endif %}

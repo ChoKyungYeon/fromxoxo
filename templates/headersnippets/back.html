@@ -1,0 +1,10 @@
+<button class="material-icons btn-back" onclick="navigateurlbefore()">arrow_back_ios</button>
+<script>
+function navigateurlbefore() {
+  if (history.length > 1) {
+    history.go(-1);
+  } else {
+    window.location.href = window.location.href;
+  }
+}
+</script>

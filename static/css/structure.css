@@ -1,0 +1,100 @@
+
+/* 기본 테그들 관리 */
+
+label{
+    cursor: pointer;
+}
+
+
+a {
+  text-decoration: none;
+  transition: color 0.2s;
+  color: inherit;
+  cursor:pointer;
+  display:block;
+}
+
+button{
+    background: inherit;
+    color: inherit;
+    border:none;
+    box-shadow:none;
+    border-radius:0;
+    padding:0;
+    overflow:visible;
+    cursor:pointer;
+    outline: none;
+}
+
+button:focus {
+  color: var(--gray);
+}
+
+button:active,
+a:active {
+  color:var(--gray);
+}
+
+
+.material-icons {
+  display: inline-block;
+  font-size: inherit;
+  line-height:initial;
+  vertical-align: middle;
+}
+
+
+main{
+    max-height:1000000px;
+    min-height: var(--height-body);
+    padding-bottom:var(--padding-bottom);
+}
+
+
+.main-centralize{
+    padding-bottom: 0;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+}
+
+html{
+  font-size: 11px;
+  color:var(--black);
+}
+
+form{
+    width: 100%;
+}
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('/static/font/omyupretty.regular') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    padding-top:var(--height-header);
+    font-family: 'omyu_pretty';
+    background: var(--lightpink);
+}
+
+
+
+@media screen and (min-width: 600px) {
+    html {
+      font-size: 11.5px;
+    }
+    main{
+        max-height:1000000px;
+        padding-bottom:20rem;
+    }
+
+}

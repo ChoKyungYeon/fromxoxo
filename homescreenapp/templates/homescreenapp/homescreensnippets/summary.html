@@ -1,0 +1,128 @@
+<style>
+    #homescreen-homescreen-summary{
+        background:var(--lightpink);
+    }
+
+
+    #homescreen-homescreen-summary .container{
+        padding-top:1.3rem;
+        padding-bottom:1.3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        box-shadow: none;
+        border:none;
+        margin-top:4rem;
+    }
+
+    #homescreen-homescreen-summary .spacing-item{
+        width:25rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #homescreen-homescreen-summary .text-title{
+        font-weight: var(--fontweight-index);
+    }
+
+    #homescreen-homescreen-summary .icon-arrow{
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 19px solid var(--white);
+        display: inline-block;
+        position: absolute;
+        background: transparent;
+        left:50%;
+        transform: translateX(-50%);
+        bottom:-17px;
+    }
+
+
+
+    #homescreen-homescreen-summary .item-image {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 50%;
+        background: var(--white);
+        flex-shrink: 0;
+        margin-right: 8%;
+    }
+    #homescreen-homescreen-summary .img-summary {
+        object-fit: cover;
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+    #homescreen-homescreen-summary .img-write {
+        object-fit: cover;
+        width: 2.6rem;
+        height: 2.6rem;
+        position: relative;
+        left:0.1rem
+    }
+
+
+</style>
+<style>
+    #homescreen-homescreen-summary .item-decoration-top,
+    #homescreen-homescreen-summary .item-decoration-middle{
+        position: absolute;
+        z-index: -1;
+    }
+
+    #homescreen-homescreen-summary .item-decoration-top {
+        background:var(--lightpink);
+        width: 38%;
+        height: 18%;
+        border-bottom-left-radius: 100% 100%;
+        right: 0;
+        top: 0%;
+    }
+    #homescreen-homescreen-summary .item-decoration-middle{
+        background:var(--lightpink);
+        border-top-right-radius: 100% 50%;
+        border-bottom-right-radius: 100% 50%;
+        left: 0;
+        top: 41%;
+        width: 23%;
+        height: 20%;
+    }
+
+
+
+    @media screen and (min-width: 800px) {
+
+        #homescreen-homescreen-summary .item-decoration-top {
+            width: 20%;
+            height: 21%;
+        }
+        #homescreen-homescreen-summary .item-decoration-middle {
+            width: 12%;
+            height: 40%;
+        }
+
+
+    }
+</style>
+
+<div class="frame-homescreen" id="homescreen-homescreen-summary" >
+    <div class="item-decoration-top"></div>
+    <div class="item-decoration-middle"></div>
+    <div class="text-title">
+        고민하지 말고 지금 바로 <br>
+        자유롭게 편지를 작성해요!<br>
+    </div>
+</div>
+
+
+</div>

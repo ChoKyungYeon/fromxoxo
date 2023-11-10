@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<header class="header">
+        {% url 'superuserapp:sentmailbox' as url %}
+        {% include 'headersnippets/navback.html' with url=url %}    
+        {% with title="문서/링크 등록" %}
+        {% include 'headersnippets/title.html' %}
+        {% endwith %}
+</header>
+
+<main>
+  <div class="frame">
+      <div class="container-form">
+        <form action="{% url 'documentapp:create' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}{% bootstrap_form form %}
+            <input type="submit" class="btn-submit" value="문서 등록">
+          </form>
+      </div>
+  </div>
+</main>
+{% endblock %}

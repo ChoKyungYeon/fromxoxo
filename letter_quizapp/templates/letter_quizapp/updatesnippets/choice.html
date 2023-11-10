@@ -1,0 +1,90 @@
+{% load bootstrap4 %}
+
+<style>
+
+#letter_quiz-create-choice .field-choice{
+    margin-left: auto;
+    width: 82%;
+}
+
+
+#letter_quiz-create-choice .selectmultiple {
+    position: absolute;
+    top:5rem;
+    left: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    align-items:flex-end;
+}
+
+#letter_quiz-create-choice .selectmultiple .form-check {
+    margin: 0;
+    padding:0;
+    flex-shrink: 0;
+    width: 2.6rem;
+}
+
+#letter_quiz-create-choice .selectmultiple label{
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    height:2.6rem;
+    margin: 2.7rem 0 1.2rem 0;
+    width: 100%;
+    border:1.5px solid var(--borderpink);
+    background:var(--white);
+    color:var(--gray);
+    font-weight: var(--fontweight-bold);
+    border-radius: 0.5rem;
+    font-size:1.2rem;
+    flex-shrink: 0;
+}
+
+#letter_quiz-create-choice .selectmultiple input{
+    display: none;
+}
+
+#letter_quiz-create-choice .form-group:nth-of-type(3) {
+    position: relative;
+}
+
+</style>
+<div class="frame-letter" id="letter_quiz-create-choice">
+    <form action="{% url 'letter_quizapp:update' pk=target_quiz.pk %}"
+    method="post" enctype="multipart/form-data" >
+    {% csrf_token %}{% bootstrap_form form %}
+    <input type="submit" class="btn-submit-fixed"   value="질문 수정">
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.frame-letter form');
+        var formGroups = form.querySelectorAll('.form-group');
+        var itemLetterDiv = document.getElementById('field-choiceanswer');
+        formGroups[2].appendChild(itemLetterDiv);
+    });
+
+
+    function setInitialColor(checkbox) {
+        if(checkbox.checked) {
+            checkbox.parentNode.style.backgroundColor = 'var(--black)';
+            checkbox.parentNode.style.color = 'var(--white)';
+        } else {
+            checkbox.parentNode.style.backgroundColor = 'var(--white)';
+            checkbox.parentNode.style.color = 'var(--gray)';
+        }
+    }
+    document.querySelectorAll('.selectmultiple input[type="checkbox"]').forEach(function(checkbox){
+        // Set the initial color
+        setInitialColor(checkbox);
+
+        // Add the event listener for future changes
+        checkbox.addEventListener('change', function() {
+            setInitialColor(checkbox);
+        });
+    });
+
+</script>

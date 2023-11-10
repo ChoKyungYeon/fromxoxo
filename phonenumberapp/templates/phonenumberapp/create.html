@@ -1,0 +1,14 @@
+{% extends 'base_noback.html' %}
+{% block content %}
+{% load static %}
+
+{% if type == 'signup' %}
+{% include 'phonenumberapp/createsnippets/signup.html' %}
+{% elif type == 'search' %}
+{% include 'phonenumberapp/createsnippets/search.html' %}
+{% else %}
+{% include 'phonenumberapp/createsnippets/update.html' %}
+{% endif %}
+<script src="{% static 'js/confirmPhonenumber.js' %}"></script>
+{% endblock %}
+

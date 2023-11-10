@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+</header>
+
+<main class="main-centralize tema-{{ target_letter.letter_content.tema }}">
+    <div class="frame-centralize">
+        <div class="spacing-title">
+            <span class="text-title">
+                <span class="text-emphasize">편지 저장</span>을 완료했어요
+            </span>
+            <img class="img-title img-congratulate" src='/static/icons/etc/congratulate.png'>
+        </div>
+        <div class="item-guide text-index">
+            내가 저장한 편지는 목록에서<br>
+            자유롭게 확인 할 수 있어요!
+        </div>
+        <a href="{% url 'accountapp:savedmailbox' pk=user.pk %}" class="btn-nav">
+            내 저장 목록 보기
+        </a>
+    </div>
+</main>
+
+{% endblock %}

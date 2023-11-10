@@ -1,0 +1,143 @@
+{% load bootstrap4 %}
+
+<style>
+
+#letter_quiz-create-choice {
+    width: 100%;
+}
+#letter_quiz-create-choice .container-choice{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    margin-top:2rem;
+}
+#letter_quiz-create-choice .spacing-item{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+#letter_quiz-create-choice .item-choice{
+    width:100%;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: row;
+    height: 7rem;
+    padding-left: calc(var(--padding-content) + var(--padding-content) + 2.6rem);
+    padding-right: var(--padding-content);
+    margin-bottom:2rem;
+    border-radius: var(--border-radius-container);
+    background: var(--white);
+}
+#letter_quiz-create-choice .text-choice{
+    font-size: var(--fontsize-index);
+    font-weight: var(--fontweight-content);
+    color:var(--black);
+    line-height: 2.2rem;
+
+}
+
+
+
+
+#letter_quiz-create-choice .selectmultiple {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    position: absolute;
+    left: var(--padding-content);
+    top:0;
+}
+
+#letter_quiz-create-choice .selectmultiple .form-check {
+    margin: 0;
+    padding:0;
+    flex-shrink: 0;
+    width: 2.6rem;
+}
+
+#letter_quiz-create-choice .selectmultiple label{
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    height:2.6rem;
+    margin: 2.2rem 0 4.2rem 0;
+    width: 100%;
+    border:1.5px solid var(--borderpink);
+    background:var(--white);
+    color:var(--gray);
+    font-weight: var(--fontweight-bold);
+    border-radius: 0.5rem;
+    font-size:1.2rem;
+    flex-shrink: 0;
+}
+
+#letter_quiz-create-choice .selectmultiple input{
+    display: none;
+}
+#letter_quiz-create-choice .invalid-feedback {
+    position: absolute;
+    bottom:-2.2rem;
+    left:0.3rem;
+}
+
+
+</style>
+<div id="letter_quiz-create-choice">
+    <div id="container-choice" class="container-choice">
+    <form action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}" method="post">
+        {% csrf_token %}{% bootstrap_form form %}
+        {% if quizstep == quiz_len %}
+        <input type="submit" class="btn-submit-fixed" value="편지 확인하기">
+        {% else %}
+        <input type="submit" class="btn-submit-fixed" value="다음 질문으로">
+        {% endif %}
+    </form>
+        <div class="spacing-item">
+            <div class="item-choice">
+                <span class="text-choice">{{ target_quiz.choice1 }}</span>
+            </div>
+            <div class="item-choice">
+                <span class="text-choice">{{ target_quiz.choice2 }}</span>
+            </div>
+            <div class="item-choice">
+                <span class="text-choice">{{ target_quiz.choice3 }}</span>
+            </div>
+        </div>
+    </div>
+    <div id="item-letter" class="item-letter" style="margin-top:0">
+        {% if user == target_letter.sender or user == target_letter.receiver %}
+        <span class="text-answer">* {{ target_quiz.choiceanswer_hint }}</span>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+
+    function setInitialColor(checkbox) {
+        if(checkbox.checked) {
+            checkbox.parentNode.style.backgroundColor = 'var(--black)';
+            checkbox.parentNode.style.color = 'var(--white)';
+        } else {
+            checkbox.parentNode.style.backgroundColor = 'var(--white)';
+            checkbox.parentNode.style.color = 'var(--gray)';
+        }
+    }
+    document.querySelectorAll('.selectmultiple input[type="checkbox"]').forEach(function(checkbox){
+        // Set the initial color
+        setInitialColor(checkbox);
+
+        // Add the event listener for future changes
+        checkbox.addEventListener('change', function() {
+            setInitialColor(checkbox);
+        });
+    });
+
+</script>

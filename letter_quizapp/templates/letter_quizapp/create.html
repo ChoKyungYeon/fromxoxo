@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+#letter_quiz-create .form-group{
+    margin-top:1.5rem;
+}
+
+#letter_quiz-create .form-group label{
+    margin-bottom:1.5rem;
+    font-size: var(--fontsize-title);
+}
+#letter_quiz-create .form-group:first-of-type label{
+    margin-top:0
+}
+
+</style>
+
+<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+        {%  url 'letter_quizapp:list' pk=target_letter.pk as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+</header>
+
+
+<main class="tema-{{ target_letter.letter_content.tema }}"  id="letter_quiz-create">
+    {% if type == 'choice' %}
+        {% include 'letter_quizapp/createsnippets/choice.html' %}
+    {% elif type == 'answer' %}
+        {% include 'letter_quizapp/createsnippets/answer.html' %}
+    {% else %}
+        {% include 'letter_quizapp/createsnippets/date.html' %}
+    {% endif %}
+</main>
+{% endblock %}
+

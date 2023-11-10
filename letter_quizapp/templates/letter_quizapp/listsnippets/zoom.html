@@ -1,0 +1,70 @@
+{% load static %}
+<style>
+    #frame-zoom .container-btn{
+        width: 100%;
+        padding-left: var(--padding-frame);
+        padding-right: var(--padding-frame);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #frame-zoom .btn-nav {
+        width: 31%;
+        padding-top:1.5rem;
+        padding-bottom:1.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--white);
+        border-radius: var(--border-radius-container);
+        border:var(--border-container);
+    }
+
+    #frame-zoom .item-image {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        flex-shrink: 0;
+        margin-bottom: 0.7rem;
+    }
+    #frame-zoom .img-post {
+        object-fit: cover;
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+</style>
+<button onclick="closeImage()" id="frame-zoom" class="frame-zoom">
+    <div class="btn-exit material-icons">close</div>
+    <div class="container-btn">
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=choice" class="btn-nav">
+            <div class="item-image">
+                <img class="img-post" src='/static/icons/guide/multiple.png'>
+            </div>
+            <div class="text-content-bold" >
+                객관식
+            </div>
+        </a>
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=answer" class="btn-nav">
+            <div class="item-image">
+                <img class="img-post" src='/static/icons/guide/qa.png'>
+            </div>
+            <div class="text-content-bold" >
+                단답형
+            </div>
+        </a>
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=date" class="btn-nav">
+            <div class="item-image">
+                <img class="img-post" src='/static/icons/guide/timetable.png'>
+            </div>
+            <div class="text-content-bold" >
+                날짜
+            </div>
+        </a>
+    </div>
+</button>
+<script src="{% static 'js/showimage.js' %}"></script>

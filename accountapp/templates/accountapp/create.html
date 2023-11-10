@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    
+<style>
+
+    form .form-check {
+        padding-left: 0;
+        background: none;
+    }
+
+    form .form-check .form-check-label {
+        margin-bottom: 0;
+        position: relative;
+    }
+
+    .item-terms {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        background: var(--whitegray);
+        margin-top: 1.3rem;
+        padding: 1.4rem var(--padding-content);
+        border-radius: 0.5rem;
+    }
+    .item-check {
+        position: absolute;
+        bottom: 0.4rem;
+        left: 6.5rem;
+        pointer-events: none;
+    }
+
+</style>
+    <header class="header-black">
+    {% with title="회원가입" %}
+    {% include 'headersnippets/title.html' %}
+    {% endwith %}
+    {% url 'accountapp:login' as url %}
+    {% include 'headersnippets/exit.html' with url=url %}
+</header>
+<main >
+    <div class="frame frame-form" id="account-create">
+        <div class="container">
+            <form action="{% url 'accountapp:create' pk=target_phonenumber.pk %}" method="post">
+                <div class="checkbox-unchecked item-check material-icons" id="custom-checkbox-label">
+                    <span class="material-icons icon-check">check</span>
+                </div>
+                {% csrf_token %}{% bootstrap_form form %}
+                <a href="{% url 'homescreenapp:termofuse' %}" target="_blank" rel="noopener noreferrer" class="item-terms">
+                    <span class="text-content">(필수) 서비스 이용 약관 동의</span>
+                    <span class="text-content">보기</span>
+                </a>
+                <a href="{% url 'homescreenapp:privacypolicy' %}" target="_blank" rel="noopener noreferrer" class="item-terms">
+                    <span class="text-content">(필수) 개인정보처리방침 동의</span>
+                    <span class="text-content">보기</span>
+                </a>
+                <input type="submit" class="btn-submit" value="회원가입">
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    var checkbox = document.getElementById("id_agree_terms");
+    var label = document.getElementById("custom-checkbox-label");
+
+    function updateCheckboxState() {
+        if (checkbox.checked) {
+            label.classList.remove("checkbox-unchecked");
+            label.classList.add("checkbox-checked");
+        } else {
+            label.classList.remove("checkbox-checked");
+            label.classList.add("checkbox-unchecked");
+        }
+    }
+
+    // Call the function to set the initial state
+    updateCheckboxState();
+
+    // Add the event listener for future changes
+    checkbox.addEventListener('change', updateCheckboxState);
+
+    var parentDiv = document.querySelector('.form-check-label');
+    var childDiv = document.querySelector('#custom-checkbox-label');
+
+    // Make custom-checkbox-label a child of form-check-label
+    parentDiv.appendChild(childDiv);
+</script>
+{% endblock %}

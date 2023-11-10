@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<header class="header">
+    {% include 'headersnippets/home.html' %}
+    {% include 'headersnippets/setting.html'  %}
+</header>
+
+<main>
+    {% with slide="sentletter" %}
+    {% include 'accountapp/mailboxsnippets/intro.html' %}
+        {% include 'accountapp/mailboxsnippets/navbar.html' %}
+    {% endwith %}
+    <div class="frame-slide">
+        <div class="slide page-slide1" style="display:block;">
+            {% with letters=letters %}
+            {% include 'accountapp/mailboxsnippets/list.html' %}
+            {% endwith %}
+        </div>
+        <div class="slide page-slide2" style="display:none">
+            {% with letters=letters_liked %}
+            {% include 'accountapp/mailboxsnippets/list.html' %}
+            {% endwith %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+

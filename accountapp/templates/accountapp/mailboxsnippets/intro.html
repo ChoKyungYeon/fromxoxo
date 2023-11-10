@@ -1,0 +1,101 @@
+{% load static %}
+<style>
+
+
+
+#account-mailbox-intro {
+    background: var(--black);
+    padding-bottom:3rem;
+    padding-top:2.5rem;
+}
+
+
+
+#account-mailbox-intro .icon-star1,
+#account-mailbox-intro .icon-star3,
+#account-mailbox-intro .icon-star2{
+    position: absolute;
+    font-weight: 600;
+}
+#account-mailbox-intro .icon-star1 {
+    left: 28%;
+    top:-2.5rem;
+    font-size: 1.2rem;
+    color: #fdebb4;
+    transform: rotate(-45deg);
+}
+
+#account-mailbox-intro .icon-star2 {
+    left: 50%;
+    top: 3.4rem;
+    font-size: 1.1rem;
+    color: #ffdf80;
+    transform: rotate(-25deg);
+}
+
+
+#account-mailbox-intro .icon-star3 {
+    right: 0;
+    top: -1.6rem;
+    font-size: 1rem;
+    color: #fdebb4;
+    transform: rotate(-13deg);
+}
+
+#account-mailbox-intro .container-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background: var(--black);
+    width: 100%;
+    box-shadow: 0 2px 2px var(--black);
+}
+#account-mailbox-intro  .btn-nav-disabled,
+#account-mailbox-intro  .btn-nav-abled{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: row;
+    width: 45%;
+    height: 4rem;
+    font-size: var(--fontsize-bold);;
+    font-weight: var(--fontweight-content);
+    color: var(--white);
+    flex-shrink: 0;
+    border-radius: 1rem;
+    background: var(--blackgray);
+    position: relative;
+    box-shadow: var(--shadow-btn-white);
+    border:1.5px solid #636363;
+}
+#account-mailbox-intro  .btn-nav-disabled{
+    background: transparent;
+    border:none;
+    color:var(--gray);
+    box-shadow: none;
+}
+
+
+</style>
+<div class="frame" id="account-mailbox-intro">
+    <div class="container-btn" style="position: relative">
+        <span class="icon-star1 material-icons">grade</span>
+        <span class="icon-star2 material-icons">grade</span>
+        <span class="icon-star3 material-icons">grade</span>
+        {% if slide == "sentletter" %}
+        <a  class="btn-nav-abled">
+        {% else %}
+        <a href="{% url 'accountapp:sentmailbox' pk=user.pk %}" class="btn-nav-disabled">
+        {% endif %}
+            보낸 편지
+        </a>
+        {% if slide == "savedletter" %}
+        <a  class="btn-nav-abled">
+        {% else %}
+        <a href="{% url 'accountapp:savedmailbox' pk=user.pk %}" class="btn-nav-disabled">
+        {% endif %}
+            저장한 편지
+        </a>
+    </div>
+</div>

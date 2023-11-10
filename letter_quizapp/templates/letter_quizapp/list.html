@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+
+#letter_quiz-list .btn-add{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed var(--softgray);
+        font-size: 2.2rem;
+        font-weight: var(--fontweight-content);
+        height: 3.5rem;
+        width: 3.5rem;
+        background: var(--white);
+        border-radius: 50%;
+        color: var(--softgray);
+        margin: 2.5rem auto 0 auto;
+    }
+</style>
+<header class=" tema-{{ target_letter.letter_content.tema }} header-empty">
+        {%  url 'letter_contentapp:update' pk=target_letter.letter_content.pk as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+        {% if target_letter.progress == 'done' %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% else %}
+        {%  url 'homescreenapp:createguide'  as url %}
+        {% endif %}
+        {% include 'headersnippets/exit.html' with url=url %}
+</header>
+
+
+<main class="tema-{{ target_letter.letter_content.tema }}">
+<div class="frame-letter" id="letter_quiz-list">
+    {% include 'snippets/progress.html' %}
+    {% include 'snippets/progressinfo.html' %}
+    {% include 'letter_quizapp/listsnippets/list.html' %}
+    {% if not quizs.count == 5 %}
+    <button onclick="showImage()" class="btn-add material-icons">add
+    </button>
+    {% endif %}
+    {% include 'letter_quizapp/listsnippets/zoom.html' %}
+</div>
+</main>
+
+<script>
+    function confirmtostatedone(event) {
+        event.preventDefault();
+        const quizCount = {{ quizs.count }};
+
+        if (quizCount < 1) {
+            alert('최소 한개의 질문을 추가하세요!');
+            return;
+        }
+
+        if (confirm("편지 작성을 완료하셨나요? 이제 편지가 웹에 게시됩니다.")) {
+            window.location.href = event.target.href;
+        }
+    }
+
+    const tostatedone = document.getElementById('tostatedone');
+    if (tostatedone) {
+        tostatedone.addEventListener('click', confirmtostatedone);
+    }
+</script>
+{% endblock %}
+

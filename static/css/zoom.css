@@ -1,0 +1,128 @@
+/* 이미지 관리 */
+.frame-zoom-info,
+.frame-zoom{
+    position:fixed;
+    right:0;
+    top:0;
+    z-index:101;
+    opacity:0;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background: rgba(51, 51, 51, 0.9);
+    width:100%;
+    height:100%;
+    display:none;
+}
+
+.frame-zoom .image-zoomed{
+    max-width: 83vw;
+    max-height: 83vh;
+    border-radius:var(--border-radius-container)
+}
+
+.frame-zoom .btn-exit{
+    position:fixed;
+    right:1.5rem;
+    top:1.5rem;
+    font-weight:var(--fontweight-bold);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:2.6rem;
+    height:2.6rem;
+    font-size:2rem;
+    background:var(--whitegray);
+    color:var(--black);
+    border-radius:50%;
+    border:2px solid var(--black);
+}
+
+.frame-zoom-info{
+    transition: opacity 0.7s ease;
+    display: flex;
+    opacity: 1;
+}
+.frame-zoom-info .container{
+    position: fixed;
+    width: 85vw;
+    max-width: 500px;
+    border-radius:var(--border-radius-container);
+    box-shadow: var(--shadow-container-dark);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items: flex-start;
+    padding:0rem;
+}
+
+.frame-zoom-info .item-exit{
+    width: 100%;
+    height:4rem;
+    border-top-left-radius:  var(--border-radius-container);
+    border-top-right-radius:var(--border-radius-container);
+    background:var(--whitepink);
+    display: flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    align-items: center;
+    padding-right:0.8rem;
+}
+
+.frame-zoom-info .item-content{
+    width: 100%;
+    border-bottom-left-radius: var(--border-radius-container);
+    border-bottom-right-radius: var(--border-radius-container);
+    background:var(--whitepink);
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: flex-start;
+    padding: 1.5rem 2rem 5rem 2rem;
+
+}
+.frame-zoom-info .spacing-title{
+    justify-content: center;
+    padding-right:0;
+    margin-bottom: 2.5rem;
+}
+.frame-zoom-info .img-title{
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-left: 0.7rem;
+    object-fit: cover;
+}
+
+.frame-zoom-info .text-title{
+    font-size: var(--fontsize-emphasize);
+    font-weight: var(--fontweight-index);
+}
+
+.frame-zoom-info .text-content{
+    font-size: var(--fontsize-bold);
+}
+.frame-zoom-info .interval-content{
+    margin-bottom: 1.3rem;
+}
+
+.frame-zoom-info .icon-check {
+    font-size: 1.6rem;
+    color: var(--middlepink);
+    font-weight: var(--fontweight-index);
+    margin-right: 1rem;
+}
+
+.frame-zoom-info .btn-exit{
+    display: flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    align-items: center;
+    height:100%;
+    width:5rem;
+    font-weight:400;
+    font-size:2.5rem;
+    color:var(--gray);
+}

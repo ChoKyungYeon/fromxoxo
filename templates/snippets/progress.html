@@ -1,0 +1,45 @@
+<style>
+:root {
+    --width-item: calc(100% / 3);
+}
+.container-progress {
+    width: 100%;
+    border-radius: 2rem;
+    height: 1rem;
+    background: var(--white);
+    position: relative;
+}
+
+.container-progress .item-progress{
+    width: var(--width-item);
+    height:1rem;
+    position: absolute;
+    bottom: 0;
+    background: var(--black);
+    border-radius: 2rem;
+}
+
+.container-progress .item-progress1{
+    left:0
+}
+.container-progress .item-progress2{
+    left:var(--width-item);
+}
+.container-progress .item-progress3{
+    right:0;
+}
+</style>
+<div class="container-progress">
+    {% if progress == 1 %}
+    <div class="item-progress item-progress1">
+    </div>
+    {% endif %}
+    {% if progress == 2 %}
+    <div class="item-progress item-progress2">
+    </div>
+    {% endif %}
+    {% if progress == 3 %}
+    <div class="item-progress item-progress3">
+    </div>
+    {% endif %}
+</div>

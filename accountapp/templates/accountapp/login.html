@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+
+    #account-login .btn-logo {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+    }
+    #account-login .text-logo {
+        color: var(--black);
+        font-weight: var(--fontweight-bold);
+        font-size: 3rem;
+        text-shadow: 0 0 1.3px black;
+        margin-right: 2rem;
+    }
+
+    #account-login .img-logo{
+        width: 3rem;
+        height: 3rem;
+        margin-right: 1.3rem;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    #account-login .spacing-title{
+        justify-content: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    #account-login .container{
+        justify-content: center;
+        align-items: center;
+        padding-top:3rem;
+        margin-top:0
+    }
+
+
+
+    #account-login .field-username {
+        margin-top: 0rem;
+    }
+
+
+
+    #account-login .text-login {
+        font-size: var(--fontsize-bold);
+        font-weight: var(--fontweight-bold);
+        color: var(--black);
+    }
+
+
+    @media screen and (min-width: 800px){
+        .frame-centralize{
+            padding:3rem 26% calc(var(--height-header) + 3rem) 26%;
+        }
+    }
+    @media screen and (min-width: 1100px){
+        .frame-centralize{
+            padding:3rem 32% calc(var(--height-header) + 3rem) 32%;
+        }
+    }
+</style>
+
+<header class="header-empty">
+</header>
+
+<main class="main-centralize">
+    <div class="frame-centralize frame-form" id="account-login">
+        <a class="btn-logo" href="{% url 'homescreenapp:homescreen'%}">
+            <img class="img-logo"  src='/static/icons/etc/logo.png'>
+            <span class="text-logo">From. XoXo</span>
+        </a>
+        <div class="container">
+            <div class="spacing-title">
+                <span class="text-login">다시 만나 반가워요!</span>
+            </div>
+            <form action="{% url 'accountapp:login' %}" method="post">{% csrf_token %}{% bootstrap_form form %}
+                <div class="link">
+                    <span class="text-help">계정을 잊어버리셨나요?</span>
+                    <a href="{% url 'phonenumberapp:create' %}?type=search" class="text-link">ID.PW 찾기</a>
+                </div>
+                <div class="link" style="margin-top:0.2rem;">
+                    <span class="text-help">계정이 없으신가요?</span>
+                    <a href="{% url 'phonenumberapp:create' %}?type=signup" class="text-link">회원가입</a>
+                </div>
+                <input type="submit" class="btn-submit-close" value="로그인">
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+<header class="header">
+    {% include 'headersnippets/back.html' %}
+    {% with title="개인정보처리방침" %}
+    {% include 'headersnippets/title.html' %}
+    {% endwith %}
+</header>
+
+<main class="main-centralize">
+    <div class="container-etc">
+        <span class="text-content">현재 서비스 준비중입니다</span>
+    </div>
+</main>
+
+
+{% endblock %}

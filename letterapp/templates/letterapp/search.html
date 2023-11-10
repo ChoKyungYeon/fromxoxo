@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+
+
+<header class="header-empty tema-blue" >
+    {% if page == 'savedmailbox' %}
+    {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
+    {% else %}
+    {%  url 'homescreenapp:homescreen'  as url %}
+    {% endif %}
+    {% include 'headersnippets/navback.html' with url=url %}
+</header>
+    <main class="tema-blue">
+        {% include 'letterapp/searchsnippets/guide.html' %}
+        {% include 'letterapp/searchsnippets/form.html' %}
+    </main>
+{% endblock %}
+

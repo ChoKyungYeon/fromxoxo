@@ -1,0 +1,18 @@
+{% load bootstrap4 %}
+<header class="header">
+        {% url 'accountapp:setting' pk=user.pk as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+        {% with title="전화번호 변경" %}
+        {% include 'headersnippets/title.html' %}
+        {% endwith %}
+</header>
+<main>
+  <div class="frame frame-form">
+      <div class="container">
+          <form  id="form-create-phonenumber" action="{% url 'phonenumberapp:create' %}?type=update" method="post" >
+            {% csrf_token %}{% bootstrap_form form %}
+            <input type="submit" class="btn-submit-close"  value="인증 번호 받기">
+          </form>
+      </div>
+  </div>
+</main>

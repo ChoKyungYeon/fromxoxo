@@ -1,0 +1,100 @@
+/* hedaer 관리*/
+header{
+    color:var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    width:100%;
+    height:var(--height-header);
+    position: fixed;
+    background-color:var(--black);
+    padding-left:var(--padding-header);
+    padding-right:var(--padding-header);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index:100;
+}
+
+
+.header-empty{
+    background-color:var(--lightpink);
+    color:var(--black);
+}
+.header-white{
+    background-color:var(--white);
+    color:var(--black);
+}
+
+header .text-title{
+    font-size: var(--fontsize-bold);
+    color:inherit;
+    font-weight: var(--fontweight-index);
+    margin-right: auto;
+}
+
+header .btn-like-false,
+header .btn-like-true{
+    margin-right: 1rem;
+    color:var(--softgray);
+    font-size: 2.1rem;
+    font-weight: var(--fontweight-content);
+}
+
+header .btn-like-true{
+    color:var(--softpink);
+}
+
+
+
+header .btn-back{
+    color:inherit;
+    font-size: 1.7rem;
+    height: 4rem;
+    width:2.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--fontweight-index);
+}
+
+.header-home .text-title{
+    font-weight: var(--fontweight-bold);
+}
+
+
+
+
+header .btn-home,
+header .btn-delete,
+header .btn-setting,
+header .btn-exit,
+header .btn-account,
+header .btn-mailbox,
+header .btn-download{
+    color:inherit;
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-left:auto;
+}
+header .btn-delete{
+    font-size: 2.4rem;
+    background: none;
+}
+header .btn-download{
+    margin-left: 0;
+}
+header .btn-home{
+    margin-right: auto;
+    margin-left: 0;
+    font-size: 2.3rem;
+}
+header .btn-exit{
+    font-weight: var(--fontweight-index);
+    padding:1rem;
+    position: relative;
+    left: 1rem;
+}
+

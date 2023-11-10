@@ -1,0 +1,68 @@
+<style>
+    #letter-detail-warning .img-congratulate{
+        position: relative;
+        bottom: 0.2rem;
+    }
+</style>
+{% if target_letter.is_checked and not target_letter.is_received and not user == target_letter.sender %}
+<div id="letter-detail-warning" class="frame-zoom-info">
+    <div class="container">
+        <div class="item-exit">
+            <div class="material-icons btn-exit">cancel</div>
+        </div>
+        <div class="item-content" >
+            <div class="spacing-title">
+            <span class="text-title">
+                편지의 내용을 확인했어요!
+            </span>
+            <img class="img-title img-congratulate" src='/static/icons/etc/congratulate.png'>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-check material-icons">done</span>
+                <span class="text-content">
+                확인한 편지는 24시간 후 사라져요
+                </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-check material-icons">done</span>
+                <span class="text-content">
+                편지를 저장하면 사라지지 않으며,
+                </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-check material-icons">done</span>
+                <span class="text-content">
+                나와 작성자만 볼 수 있게 돼요
+                </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-check material-icons">done</span>
+                <span class="text-content">
+                이미지로 다운 받을 수도 있습니다!
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<script>
+window.onload = function() {
+    var warning = document.getElementById('letter-detail-warning');
+
+    // This event listener will handle the click to immediately start the fade-out
+    warning.addEventListener('click', function() {
+        warning.style.opacity = "0";
+        // The CSS transition will take care of the smooth fade out, no setTimeout needed here for opacity change
+    });
+
+    // This will automatically start the fade-out after 7 seconds
+    setTimeout(function() {
+        warning.style.opacity = "0";
+    }, 7000); // time until starting to disappear in milliseconds
+
+    // This will remove the warning from the layout after the transition is complete
+    setTimeout(function() {
+        warning.style.display = "none";
+    }, 7700); // time until removal from the layout, adjusted to be shortly after the transition ends
+};
+</script>

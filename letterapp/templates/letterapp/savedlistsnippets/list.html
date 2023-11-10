@@ -1,0 +1,9 @@
+{% if letters %}
+    {% for letter in letters %}
+    {% include 'snippets/letter.html' %}
+    {% endfor %}
+{% else %}
+    <div class="container-empty" style="margin-top:2.5rem">
+        <span class="text-content">저장된 편지가 없어요! &#129402;</span>
+    </div>
+{% endif %}

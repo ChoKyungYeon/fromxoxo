@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+#letter-intro .spacing-title{
+    margin-bottom: 0;
+}
+</style>
+
+
+<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+    {% if user == target_letter.receiver %}
+        {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+    {% elif user == target_letter.sender %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+    {% else %}
+        {% include 'headersnippets/logo.html' with url=url %}
+    {% endif%}
+
+</header>
+
+<main class="main-centralize tema-{{ target_letter.letter_content.tema }}" id="letter-intro">
+    <div class="frame-centralize">
+        <div class="spacing-title">
+            <span class="text-title" style="padding-left: 0">
+                {% if user == target_letter.receiver %}
+                    <span class="text-emphasize">저장한 편지</span>를 확인할까요?
+                {% elif user == target_letter.sender %}
+                    <span class="text-emphasize">작성한 편지</span>를 확인할까요?
+                {% else %}
+                    <span class="text-emphasize">새로운 편지</span>가 도착했어요!
+                {% endif%}
+            </span>
+        </div>
+        <div class="item-guide text-index">
+            잠금을 해제하고 내용을 확인해요<br>
+        </div>
+        {% include 'snippets/introletter.html' %}
+    </div>
+</main>
+
+{% endblock %}

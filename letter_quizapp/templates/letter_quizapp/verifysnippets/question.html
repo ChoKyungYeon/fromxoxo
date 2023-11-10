@@ -1,0 +1,68 @@
+{% load static %}
+<style>
+    #letter_quiz-verify-question {
+        width: 100%;
+        padding-top:4rem;
+    }
+    #letter_quiz-verify-question .text-title{
+        font-size:  var(--fontsize-bold);
+    }
+    #letter_quiz-verify-question .text-quiz{
+        font-size: inherit;
+        font-weight: var(--fontweight-content);
+        color: var(--middlepink);
+        margin-right: 0.5rem;
+    }
+    #letter_quiz-verify-question .spacing-title {
+        margin-bottom: 2rem;
+    }
+    #letter_quiz-verify-question .item-image{
+        margin-bottom:2rem;
+        width: 100%;
+        position: relative;
+    }
+    #letter_quiz-verify-question .image-quiz {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+        border-radius: var(--border-radius-container);
+        border:1.5px solid var(--borderpink);
+        box-shadow: var(--shadow-container);
+    }
+
+    #letter_quiz-verify-question  .image-click {
+        width: 2.5rem;
+        height: 2.5rem;
+        object-fit: cover;
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        transform: scaleX(-1);
+    }
+</style>
+
+<div id="letter_quiz-verify-question">
+    {% if target_quiz.image %}
+    <div class="spacing-title" style="margin-bottom: 1.5rem">
+    {% else %}
+    <div class="spacing-title" >
+    {% endif %}
+        <span class="text-title">
+            <span class="text-quiz">({{ quizstep }}/{{ quiz_len }})</span>
+            {{ target_quiz.question }}
+        </span>
+    </div>
+    {% if target_quiz.image %}
+    <button onclick="showImage()" class="item-image">
+        <img class="image-quiz" src="{{ target_quiz.image.url }}">
+        <img class="image-click" src='/static/icons/etc/click.png'>
+    </button>
+    <button onclick="closeImage()" id="frame-zoom" class="frame-zoom">
+        <div
+            class="btn-exit material-icons">close
+        </div>
+        <img class="image-zoomed" src="{{ target_quiz.image.url }}">
+    </button>
+    {% endif %}
+</div>
+<script src="{% static 'js/showimage.js' %}"></script>

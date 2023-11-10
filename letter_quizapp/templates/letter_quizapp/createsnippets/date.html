@@ -1,0 +1,10 @@
+{% load bootstrap4 %}
+
+<div class="frame-letter" id="letter_quiz-create-answer">
+    <form action="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=date"
+    method="post" enctype="multipart/form-data" style="position:relative;">
+    {% csrf_token %}{% bootstrap_form form %}
+    <input type="submit" class="btn-submit-fixed"   value="질문 추가">
+    </form>
+</div>
+

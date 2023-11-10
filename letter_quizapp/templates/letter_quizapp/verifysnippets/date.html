@@ -1,0 +1,17 @@
+{% load bootstrap4 %}
+
+<form action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}"
+    method="post" enctype="multipart/form-data">
+    {% csrf_token %}{% bootstrap_form form %}
+    {% if quizstep == quiz_len %}
+    <input type="submit" class="btn-submit-fixed" value="편지 확인하기">
+    {% else %}
+    <input type="submit" class="btn-submit-fixed" value="다음 질문으로">
+    {% endif %}
+</form>
+<div id="item-letter" class="item-letter">
+    {% if user == target_letter.sender or user == target_letter.receiver %}
+    <span class="text-answer">* {{ target_quiz.date|date:"y년 m월 d일 " }}</span>
+    {% endif %}
+</div>
+

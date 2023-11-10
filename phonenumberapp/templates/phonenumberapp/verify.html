@@ -1,0 +1,13 @@
+{% extends 'base_noback.html' %}
+{% block content %}
+{% load static %}
+{% if type == 'signup' %}
+{% include 'phonenumberapp/verifysnippets/signup.html' %}
+{% elif type == 'search' %}
+{% include 'phonenumberapp/verifysnippets/search.html' %}
+{% else %}
+{% include 'phonenumberapp/verifysnippets/update.html' %}
+{% endif %}
+<script src="{% static 'js/countdown.js' %}"></script>
+{% endblock %}
+

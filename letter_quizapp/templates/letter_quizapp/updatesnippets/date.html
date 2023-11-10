@@ -1,0 +1,10 @@
+{% load bootstrap4 %}
+
+<div class="frame-letter" id="letter_quiz-update-answer">
+    <form action="{% url 'letter_quizapp:update' pk=target_quiz.pk %}"
+    method="post" enctype="multipart/form-data" style="position:relative;">
+    {% csrf_token %}{% bootstrap_form form %}
+    <input type="submit" class="btn-submit-fixed"   value="질문 수정">
+    </form>
+</div>
+

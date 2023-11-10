@@ -1,0 +1,18 @@
+{% load bootstrap4 %}
+<header class="header" >
+        {% url 'accountapp:login' as url %}
+        {% include 'headersnippets/navback.html' with url=url %}
+        {% with title="비밀번호 재설정" %}
+        {% include 'headersnippets/title.html' %}
+        {% endwith %}
+</header>
+<main>
+  <div class="frame frame-form">
+      <div class="container">
+          <form id="form-create-phonenumber" action="{% url 'phonenumberapp:create' %}?type=search" method="post" >
+            {% csrf_token %}{% bootstrap_form form %}
+            <input type="submit" class="btn-submit btn-submit-close"  value="인증 번호 받기">
+          </form>
+      </div>
+  </div>
+</main>

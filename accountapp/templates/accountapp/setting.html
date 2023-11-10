@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+    #account-setting .text-title{
+        font-weight: var(--fontweight-index);
+    }
+</style>
+
+<header class="header">
+    {% include 'headersnippets/home.html' %}
+    {% include 'headersnippets/mailbox.html' %}
+</header>
+
+
+<main id="account-setting">
+    {% include 'accountapp/settingsnippets/basesetting.html' %}
+    {% include 'accountapp/settingsnippets/accountsetting.html' %}
+</main>
+
+{% endblock %}
+

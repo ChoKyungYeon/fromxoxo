@@ -1,0 +1,8 @@
+{% load bootstrap4 %}
+
+<div class="frame-letter " id="letter-urlsearch">
+      <form action="{% url 'letterapp:search' %}?type=url" method="post" >
+        {% csrf_token %}{% bootstrap_form form %}
+        <input type="submit" class="btn-submit-fixed"  value="링크로 편지 찾기">
+      </form>
+</div>

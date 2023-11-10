@@ -1,0 +1,65 @@
+
+<style>
+    #letter-result-btn .spacing-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+    }
+    #letter-result-btn .container{
+        width:48.5%;
+        justify-content:center;
+        align-items: center;
+        flex-direction: column;
+        padding:1.3rem 0;
+        border-radius: 1rem;
+    }
+
+    #letter-result-btn .spacing-btn{
+        padding-left: 0.3rem;
+        width:100%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+
+</style>
+
+<div class="frame frame-sentmailbox" id="letter-result-btn">
+        <div class="spacing-title">
+        <span class="text-title">편지 수정, 삭제</span>
+    </div>
+    <div class="spacing-container">
+        <a class="container" href="{{ target_letter.qr.url }}" download  style="background: var(--red)">
+            <div class="spacing-btn">
+                <span class="text-content-bold" style="color: var(--white)">편지 삭제하기</span>
+            </div>
+        </a>
+        <a class="container" href="{{ target_letter.qr.url }}" download  style="background: var(--black)">
+            <div class="spacing-btn">
+                <span class="text-content-bold" style="color: var(--white)">편지 수정하기</span>
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+function copyUrl() {
+    // Get the URL from the data-url attribute of the clicked button
+    var url = event.currentTarget.getAttribute('data-url');  // Using the event object to get the clicked element
+
+    // Create a new temporary input element
+    var input = document.createElement('input');
+    input.setAttribute('value', url);
+    document.body.appendChild(input);
+
+    // Select and copy the URL
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+
+    // Show an alert to confirm that the URL has been copied
+    alert('편지 링크가 복사되었습니다! 자유롭게 공유해 보세요');
+}
+</script>

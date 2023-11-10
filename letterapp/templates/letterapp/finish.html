@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+#letter-finish .img-congratulate{
+    position: relative;
+    bottom:0.1rem
+}
+</style>
+<header class="header-empty tema-{{ target_letter.letter_content.tema }}" >
+</header>
+
+<main class="main-centralize tema-{{ target_letter.letter_content.tema }}" id="letter-finish">
+    <div class="frame-centralize">
+        <div class="spacing-title">
+            <span class="text-title">
+                <span class="text-emphasize">편지 작성을 </span>완료했어요
+            </span>
+            <img class="img-title img-congratulate" src='/static/icons/etc/congratulate.png'>
+        </div>
+        <div class="item-guide text-index">
+            편지는 확인 전까지 수정 및 삭제할 수<br>
+            있으며, QR코드와 링크를 공유하세요!
+        </div>
+        <a href="{% url 'letterapp:result' pk=target_letter.pk %}?page=finish" class="btn-nav">
+            내 편지 정보 확인하기
+        </a>
+    </div>
+</main>
+
+{% endblock %}

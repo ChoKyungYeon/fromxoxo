@@ -1,0 +1,45 @@
+<style>
+    #container-quiz {
+        margin-top:1.5rem;
+        padding-top:1.7rem;
+        padding-bottom:1.7rem;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+    #container-quiz .text-number{
+        font-size: var(--fontsize-detail);
+        font-weight: var(--fontweight-content);
+        color: var(--softgray);
+        margin-left: 0.7rem;
+    }
+
+    #container-quiz .icon-edit{
+        font-size: 1.5rem;
+        font-weight: var(--fontweight-index);
+        color: var(--black);
+
+    }
+
+    #container-quiz .interval-right {
+        margin-right: 0.5rem;
+    }
+</style>
+<a href="{% url 'letter_quizapp:update' pk=quiz.pk %}" class="container-snippets" id="container-quiz" >
+    <div  class="spacing-vertical">
+    <div class="spacing-horizontal">
+        <span class="text-content-bold interval-right">{{ quiz.index }}번 문제</span>
+        {% if quiz.type == 'answer' %}
+        <div class="text-number">단답형</div>
+        {% elif quiz.type == 'choice' %}
+        <div class="text-number">객관식</div>
+        {% else %}
+        <div class="text-number">날짜형</div>
+        {% endif %}
+
+    </div><span class="text-content" style="margin-top:0.3rem">{{ quiz.question|truncatechars:20}}</span>
+
+    </div>
+    <span class="icon-edit material-icons">arrow_forward_ios</span>
+</a>

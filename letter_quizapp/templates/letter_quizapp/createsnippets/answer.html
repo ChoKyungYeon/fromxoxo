@@ -1,0 +1,72 @@
+{% load bootstrap4 %}
+
+<style>
+#letter_quiz-create-answer .item-letter{
+    position: absolute;
+    top:2.65rem;
+    left: 5.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+#letter_quiz-create-answer .text-count{
+    font-size: var(--fontsize-content);
+    font-weight: var(--fontweight-content);
+    color: var(--middlepink);
+    margin-right: 0.5rem;
+}
+#letter_quiz-create-answer .icon-right{
+    font-weight: var(--fontweight-index);
+    font-size: 2.2rem;
+    color: var(--black);
+}
+#letter_quiz-create-answer .form-group:nth-of-type(3) {
+    position: relative;
+}
+
+</style>
+<div class="frame-letter" id="letter_quiz-create-answer">
+    <form action="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=answer"
+    method="post" enctype="multipart/form-data" style="position:relative;">
+    {% csrf_token %}{% bootstrap_form form %}
+    <div id="item-letter" class="item-letter"><span class="icon-right material-icons">arrow_right</span>
+        <span class="text-count" id="total-count">현재 0 글자</span>
+    </div>
+    <input type="submit" class="btn-submit-fixed"   value="질문 추가">
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.frame-letter form');
+        var formGroups = form.querySelectorAll('.form-group');
+        var itemLetterDiv = document.getElementById('item-letter');
+        formGroups[2].appendChild(itemLetterDiv);
+
+        // Function to restrict input to English and Korean characters
+        function restrictInput(event) {
+            var regex = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9]*$/;
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        }
+        // Function to count characters
+        function countCharacters() {
+            var text = document.getElementById('field-answer').value; // Get the value of the input
+            var totalCount = (text.match(/[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]/g) || []).length;
+
+            // Update the counts on the page
+            document.getElementById('total-count').textContent = '현재 ' + totalCount + '글자';
+        }
+
+        // Get the input element by ID
+        var answerInput = document.getElementById('field-answer');
+
+        // Add event listeners for the input and keypress events
+        answerInput.addEventListener('input', countCharacters);
+        answerInput.addEventListener('keypress', restrictInput);
+    });
+    countCharacters();
+</script>

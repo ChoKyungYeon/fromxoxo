@@ -1,0 +1,61 @@
+<style>
+:root {
+    --width-item: calc(100% / {{ quiz_len }});
+}
+.container-quizstep {
+    width: 100%;
+    border-radius: 2rem;
+    height: 1rem;
+    background: var(--white);
+    position: relative;
+}
+
+.container-quizstep .item-quizstep{
+    width: var(--width-item);
+    height:1rem;
+    position: absolute;
+    bottom: 0;
+    background: var(--black);
+    border-radius: 2rem;
+}
+
+.container-quizstep .item-quizstep1{
+    left:0
+}
+.container-quizstep .item-quizstep2{
+    left:var(--width-item);
+}
+.container-quizstep .item-quizstep3{
+    left:calc(var(--width-item) * 2)
+}
+.container-quizstep .item-quizstep4{
+    left:calc(var(--width-item) * 3)
+}
+.container-quizstep .item-quizstep5{
+    left:calc(var(--width-item) * 4)
+}
+
+</style>
+<div class="container-quizstep">
+    {% if quizstep == 1 %}
+    <div class="item-quizstep item-quizstep1">
+    </div>
+    {% endif %}
+    {% if quizstep == 2 %}
+    <div class="item-quizstep item-quizstep2">
+    </div>
+    {% endif %}
+    {% if quizstep == 3 %}
+    <div class="item-quizstep item-quizstep3">
+    </div>
+    {% endif %}
+    {% if quizstep == 4 %}
+    <div class="item-quizstep item-quizstep4">
+    </div>
+    {% endif %}
+    {% if quizstep == 5 %}
+    <div class="item-quizstep item-quizstep5">
+    </div>
+    {% endif %}
+
+</div>

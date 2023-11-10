@@ -20,7 +20,7 @@ from letter_infoapp.models import Letter_info
 class Letter_infoUpdateView(UpdateView):
     model = Letter_info
     form_class = Letter_infoCreateForm
-    template_name = 'Letter_infoapp/update.html'
+    template_name = 'letter_infoapp/update.html'
     context_object_name = 'target_info'
 
     def get_context_data(self, **kwargs):

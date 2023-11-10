@@ -53,7 +53,6 @@ def Send_SMS(to, contents, can_receive):
         can_receive = False
     except:
         pass'''
-
     if can_receive:
         try:
             response = requests.post(url + uri, headers=header, data=json.dumps(data))

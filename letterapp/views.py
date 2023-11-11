@@ -68,6 +68,7 @@ class LetterIntroView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
+        context['intro_page'] = True
         return context
 
 
@@ -161,7 +162,10 @@ class LetterSearchView(FormView):
         with transaction.atomic():
             self.target_letter_url = form.cleaned_data['letter_url']
             target_letter = Letter.objects.filter(url=self.target_letter_url, progress='done').first()
-            if not target_letter:
+            if not self.target_letter_url.startswith('https://tinyurl.com/'):
+                form.add_error('letter_url', '편지의 링크 형식이 아니에요!')
+                return self.form_invalid(form)
+            elif not target_letter:
                 form.add_error('letter_url', '해당 링크의 편지가 없습니다.')
                 return self.form_invalid(form)
             elif target_user == target_letter.sender:

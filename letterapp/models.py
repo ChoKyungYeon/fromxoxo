@@ -1,20 +1,17 @@
-from datetime import timedelta, datetime
-
-from django.db import models, transaction
+from datetime import timedelta
+from django.db import models
 from accountapp.models import CustomUser
 from fromxoxo.choice import progresschoice, statechoice
 import random
-import string
 from io import BytesIO
-from django.core.files.base import ContentFile
 from django.urls import reverse
 import qrcode
 from fromxoxo.utils import time_before, time_after
-import secrets
-import string
-import uuid
 
-# Create your models here.
+import uuid
+import pyshorteners
+
+type_tiny = pyshorteners.Shortener()
 class Letter(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sender = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_sender', null=True)
@@ -38,7 +35,9 @@ class Letter(models.Model):
 
     def generate_url(self):
         base_url = reverse('letterapp:intro', kwargs={'pk': self.pk})
-        return f'http://13.209.69.42{base_url}'
+        full_url = f'http://13.209.69.42{base_url}'
+        return type_tiny.tinyurl.short(full_url)
+
 
     def generate_qrcode(self, url):
         qr = qrcode.QRCode(

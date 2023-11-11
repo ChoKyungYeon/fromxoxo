@@ -15,24 +15,4 @@
     {% include 'homescreenapp/homescreensnippets/summary.html' %}
 </main>
 {% include 'homescreenapp/homescreensnippets/footer.html' %}
-<script>
-    function showloopimage(imageId) {
-        var element = document.getElementById(imageId + "-fullscreen");
-        element.style.display = "flex";
-        element.style.opacity = 0;
-        setTimeout(function () {
-            element.style.transition = 'opacity 0.2s ease-in-out';
-            element.style.opacity = 1;
-        }, 10);
-    }
-
-    function closeImage(imageId) {
-        var element = document.getElementById(imageId + "-fullscreen");
-        element.style.transition = 'opacity 0.4s ease-in-out';
-        element.style.opacity = 0;
-        setTimeout(function () {
-            element.style.display = "none";
-        }, 400);
-    }
-</script>
 {% endblock %}

@@ -1,9 +1,5 @@
 from datetime import datetime, timedelta
-from django.db import transaction
-from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
-
-from accountapp.models import CustomUser
 from phonenumberapp.models import Phonenumber
 
 class Decorators:

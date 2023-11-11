@@ -1,11 +1,13 @@
+{% load static %}
 <style>
-    #letter-detail-warning .img-congratulate{
+    #frame-zoom-warning .img-congratulate{
         position: relative;
         bottom: 0.2rem;
     }
 </style>
+
 {% if target_letter.state == 'checked' and not user == target_letter.sender %}
-<div id="letter-detail-warning" class="frame-zoom-info">
+<button onclick="closeWarning()" id="frame-zoom-warning" class="frame-zoom-warning">
     <div class="container">
         <div class="item-exit">
             <div class="material-icons btn-exit">cancel</div>
@@ -43,27 +45,8 @@
             </div>
         </div>
     </div>
-</div>
+</button>
+<button onclick="showWarning()" class="item-image">
+</button>
 {% endif %}
-<script>
-window.onload = function() {
-    var warning = document.getElementById('letter-detail-warning');
-
-    // This event listener will handle the click to immediately start the fade-out
-    warning.addEventListener('click', function() {
-        warning.style.opacity = "0";
-        warning.style.display = "none";
-        // The CSS transition will take care of the smooth fade out, no setTimeout needed here for opacity change
-    });
-
-    // This will automatically start the fade-out after 7 seconds
-    setTimeout(function() {
-        warning.style.opacity = "0";
-    }, 7000); // time until starting to disappear in milliseconds
-
-    // This will remove the warning from the layout after the transition is complete
-    setTimeout(function() {
-        warning.style.display = "none";
-    }, 7700); // time until removal from the layout, adjusted to be shortly after the transition ends
-};
-</script>
+<script src="{% static 'js/showWarning.js' %}"></script>

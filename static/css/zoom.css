@@ -1,5 +1,5 @@
 /* 이미지 관리 */
-.frame-zoom-info,
+.frame-zoom-warning,
 .frame-zoom{
     position:fixed;
     right:0;
@@ -38,12 +38,12 @@
     border:2px solid var(--black);
 }
 
-.frame-zoom-info{
-    transition: opacity 0.7s ease;
+.frame-zoom-warning{
+    transition: opacity 2s ease;
     display: flex;
     opacity: 1;
 }
-.frame-zoom-info .container{
+.frame-zoom-warning .container{
     position: fixed;
     width: 85vw;
     max-width: 500px;
@@ -59,7 +59,7 @@
     padding:0rem;
 }
 
-.frame-zoom-info .item-exit{
+.frame-zoom-warning .item-exit{
     width: 100%;
     height:4.2rem;
     border-top-left-radius:  var(--border-radius-container);
@@ -72,7 +72,7 @@
     padding-right:0.8rem;
 }
 
-.frame-zoom-info .item-content{
+.frame-zoom-warning .item-content{
     width: fit-content;
     border-bottom-left-radius: var(--border-radius-container);
     border-bottom-right-radius: var(--border-radius-container);
@@ -84,39 +84,39 @@
     padding: 2.5rem 2rem 3.5rem 2rem;
 
 }
-.frame-zoom-info .spacing-title{
+.frame-zoom-warning .spacing-title{
     justify-content: center;
     padding-right:0;
     margin-bottom: 2rem;
 }
-.frame-zoom-info .img-title{
-    width: 1.8rem;
-    height: 1.8rem;
+.frame-zoom-warning .img-title{
+    width: 1.9rem;
+    height: 1.9rem;
     margin-left: 0.7rem;
     object-fit: cover;
 }
 
-.frame-zoom-info .text-title{
+.frame-zoom-warning .text-title{
     font-size: var(--fontsize-emphasize);
     font-weight: var(--fontweight-index);
 }
 
-.frame-zoom-info .text-content{
+.frame-zoom-warning .text-content{
     width: fit-content;
     font-size: var(--fontsize-bold);
 }
-.frame-zoom-info .interval-content{
+.frame-zoom-warning .interval-content{
     margin-bottom: 1rem;
 }
 
-.frame-zoom-info .icon-check {
+.frame-zoom-warning .icon-check {
     font-size: 1.6rem;
     color: var(--middlepink);
     font-weight: var(--fontweight-index);
     margin-right: 1rem;
 }
 
-.frame-zoom-info .btn-exit{
+.frame-zoom-warning .btn-exit{
     display: flex;
     flex-direction:row;
     justify-content:flex-end;

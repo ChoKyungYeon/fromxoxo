@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-{% block content %}
+
+<!DOCTYPE html>
+<html lang="ko">
+{%  include 'head.html' %}
+<body >
+    {% load bootstrap4 %}
+    {% block content %}
 <style>
 #letter-intro .spacing-title{
     margin-bottom: 0;
@@ -42,3 +46,5 @@
 </main>
 
 {% endblock %}
+</body>
+</html>

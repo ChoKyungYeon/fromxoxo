@@ -27,6 +27,7 @@ class LetterResultView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = self.request.GET.get('page', None)
+        context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
         return context
 
 @method_decorator(never_cache, name='dispatch')
@@ -61,6 +62,8 @@ class LetterIntroView(DetailView):
         except:
             return redirect(reverse('letterapp:expire') + '?type=none')
         target_user = request.user
+        if target_letter.sender == target_user:
+            return redirect('letterapp:result', pk=target_letter.pk)
         if target_letter.state == 'received' and not target_user in [target_letter.receiver, target_letter.sender]:
             return redirect(reverse('letterapp:expire') + '?type=saved')
         return super().get(request, *args, **kwargs)
@@ -121,7 +124,6 @@ class LetterStateUpdateView(RedirectView):
                 letter.save()
             letter.finished_at = datetime.now()
             letter.save()
-
             return super(LetterStateUpdateView, self).get(request, *args, **kwargs)
 
 @method_decorator(login_required, name='dispatch')

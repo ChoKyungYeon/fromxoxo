@@ -1,14 +1,48 @@
-
-<!DOCTYPE html>
-<html lang="ko">
-{%  include 'head.html' %}
-<body >
-    {% load bootstrap4 %}
-    {% block content %}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
 <style>
-#letter-intro .spacing-title{
-    margin-bottom: 0;
-}
+    #letter-intro {
+        padding-top:5rem;
+    }
+    #letter-intro .text-title {
+        font-weight: var(--fontweight-index);
+    }
+
+    #letter-intro .spacing-title {
+        margin-bottom: 2.2rem;
+        position: relative;
+    }
+   #letter-intro  .img-intro{
+        width: 4.5rem;
+        flex-shrink: 0;
+        object-fit: cover;
+       position: absolute;
+       right: 2rem;
+       transform: rotate(-10deg);
+       bottom:1.3rem;
+    }
+    #letter-intro  .img-key{
+        width: 2.3rem;
+        flex-shrink: 0;
+        object-fit: cover;
+       position: absolute;
+       right: 0;
+        bottom:0.7rem;
+       transform: rotate(-5deg);
+    }
+
+    #letter-intro .text-content {
+       font-size: var(--fontsize-title);
+    }
+
+    #letter-intro .spacing-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 0.5rem;
+    }
 </style>
 
 
@@ -16,35 +50,27 @@
     {% if user == target_letter.receiver %}
         {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
         {% include 'headersnippets/navback.html' with url=url %}
-    {% elif user == target_letter.sender %}
-        {%  url 'letterapp:result' pk=target_letter.pk as url %}
-        {% include 'headersnippets/navback.html' with url=url %}
     {% else %}
         {% include 'headersnippets/logo.html' with url=url %}
     {% endif%}
-
 </header>
 
-<main class="main-centralize tema-{{ target_letter.letter_content.tema }}" id="letter-intro">
-    <div class="frame-centralize">
+<main class="tema-{{ target_letter.letter_content.tema }}">
+    <div class="frame-letter" id="letter-intro">
         <div class="spacing-title">
             <span class="text-title" style="padding-left: 0">
-                {% if user == target_letter.receiver %}
-                    <span class="text-emphasize">저장한 편지</span>를 확인할까요?
-                {% elif user == target_letter.sender %}
-                    <span class="text-emphasize">작성한 편지</span>를 확인할까요?
-                {% else %}
-                    <span class="text-emphasize">새로운 편지</span>가 도착했어요!
-                {% endif%}
+                {{ target_letter.letter_info.receiver_name }} 님에게<br>
+                새로운 편지가 도착했어요!
             </span>
+            <img class="img-intro" src='/static/icons/etc/card.png'>
+            <img class="img-key" src='/static/icons/etc/key.png'>
         </div>
-        <div class="item-guide text-index">
-            잠금을 해제하고 내용을 확인해요<br>
+        <div class="spacing-content">
+            <span class="text-content">{{ target_letter.letter_info.sender_name }} 님이 작성한 질문 {{ target_letter.letter_quiz.all|length }}개를 <br>
+                해결하고 내용을 확인할까요?</span>
         </div>
         {% include 'snippets/introletter.html' %}
     </div>
 </main>
 
 {% endblock %}
-</body>
-</html>

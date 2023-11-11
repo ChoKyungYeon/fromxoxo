@@ -9,7 +9,6 @@ from django.urls import reverse_lazy, reverse
 from django.views.decorators.cache import never_cache
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, RedirectView
 import re
-from django.contrib import messages
 from accountapp.forms import *
 from accountapp.models import CustomUser
 from letterapp.models import Letter
@@ -26,22 +25,6 @@ class AccountLoginView(LoginView):
         if request.user.is_authenticated:
             return redirect('homescreenapp:homescreen')
         return super().get(request, *args, **kwargs)
-
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        letter_pk = self.request.session.get("letter_pk", False)
-        if letter_pk:
-            try:
-                letter_uuid = uuid.UUID(letter_pk)
-                letter = Letter.objects.filter(pk=letter_uuid).first()
-                if letter:
-                    self.request.session["letter_pk"] = None
-                    return redirect('letterapp:detail', pk=letter_uuid)
-            except:
-                pass
-        return response
-
 
 
 @method_decorator(never_cache, name='dispatch')
@@ -78,17 +61,6 @@ class AccountCreateView(CreateView):
             form.instance.phonenumber = phonenumber.number
             form.instance.save()
             phonenumber.delete()
-
-            letter_pk=self.request.session.get("letter_pk", False)
-            if letter_pk:
-                letter_uuid = uuid.UUID(letter_pk)
-                if Letter.objects.filter(pk=letter_uuid).first():
-                    user = form.instance
-                    user.set_password(form.cleaned_data["password1"])
-                    user.save()
-                    login(self.request, user)
-                    self.request.session["redirection_letter"] = None
-                    return redirect('letterapp:detail', pk=letter_uuid)
             return super().form_valid(form)
 
 @method_decorator(never_cache, name='dispatch')

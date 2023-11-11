@@ -29,7 +29,11 @@
 }
 </style>
 <header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+        {% if target_letter.sender %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
+        {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
 

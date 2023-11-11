@@ -15,7 +15,11 @@
         {% else %}
         {% include 'headersnippets/guide.html' %}
         {% endif %}
+        {% if target_letter.sender %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
+        {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
 <main class="tema-{{ letter_content.tema }}" id="letter-detail">

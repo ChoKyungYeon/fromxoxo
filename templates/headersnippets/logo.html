@@ -7,18 +7,18 @@
     flex-direction: row;
 }
 .img-logo{
-    width: 2rem;
-    height: 2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     flex-shrink: 0;
     object-fit: cover;
-    margin-right: auto;
+    margin-right: 0.7rem;
 }
 .text-logo{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    font-size: 1.95rem;
+    font-size: 1.9rem;
     color:inherit;
     font-weight: var(--fontweight-index);
     margin-left: 0.5rem;
@@ -35,5 +35,5 @@
 </style>
 <a class="btn-logo" href="{% url 'homescreenapp:homescreen'%}">
 <span class="text-logo">
-    <span class="text-logo-bold">From.</span>XoXo</span>
+    <img class="img-logo" src='/static/icons/etc/logo.png'>
 </a>

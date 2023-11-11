@@ -1,32 +1,24 @@
 <style>
     #snippet-introletter{
-        width:90%;
-        margin: 1.5rem auto 0 auto;
+        width:100%;
         box-shadow: none;
-        border:none
+        border:none;
+        margin-top:2rem;
+        padding-top:1.7rem;
+        padding-bottom: 1.7rem;
     }
 
-    #snippet-introletter .btn-id{
-        background: var(--softgray);
-        font-size: 1.23rem;
-        color: var(--white);
-        padding:0.15rem 0.5rem;
-        border-radius: 0.5rem;
-        margin-left: auto
-    }
     #snippet-introletter .spacing-horizontal{
         justify-content: space-between;
     }
     #snippet-introletter .text-date{
         color: var(--softgray);
-        font-size: var(--fontsize-detail)
+        font-size: var(--fontsize-detail);
     }
 
 
 
     #snippet-introletter .interval-tile {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
     }
 
 
@@ -57,16 +49,12 @@
 </style>
 <a href="{% url 'letter_quizapp:verify' pk=initial_letter.pk %}" class="container-snippets container-right" id="snippet-introletter">
     <div class="item-arrow-right"></div>
-        <div class="spacing-horizontal" >
-            <span class="text-content-bold interval-name" >To. {{ target_letter.letter_info.receiver_name }}</span>
-        </div>
     <div class="text-content interval-tile" style="color: var(--black)">
         {{ target_letter.letter_info.title|truncatechars:23 }}
     </div>
     <div class="spacing-horizontal">
         <div class="text-content text-date" >
-            {{ target_letter.finished_before }}
+            {{ target_letter.letter_info.written_at|date:"m월 d일"  }}
         </div>
-        <span class="text-content-bold interval-name">{{ target_letter.letter_info.sender_name }}</span>
     </div>
 </a>

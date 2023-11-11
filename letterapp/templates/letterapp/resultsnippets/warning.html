@@ -1,0 +1,55 @@
+
+<style>
+.frame-warning{
+    background: var(--blackgray);
+    width: 100%;
+    bottom:0;
+    position: fixed;
+    left: 0;
+    padding:1.7rem var(--padding-frame);
+}
+.frame-warning .container-warning{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    background: transparent;
+}
+.frame-warning .text-title{
+    color: var(--white);
+    font-size: var(--fontsize-bold);
+}
+
+.frame-warning .btn-save{
+    background: var(--black);
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    color:var(--white);
+    height: 7rem;
+    width: 7rem;
+    font-size:2.5rem;
+    border-radius: 50%;
+    font-weight:var(--fontweight-content);
+    position: absolute;
+    border:1.1rem solid var(--blackgray);
+    right: 0rem;
+    top:-3.6rem;
+}
+</style>
+{% if target_letter.delete_after %}
+    <button id="btn-download" class="frame-warning">
+        <div class="container-warning">
+            <span class="text-title">
+                {{ target_letter.delete_after }} 편지가 사라져요!
+            </span>
+            <div class="btn-save material-icons">
+                lock_reset
+            </div>
+        </div>
+    </button>
+{% endif %}

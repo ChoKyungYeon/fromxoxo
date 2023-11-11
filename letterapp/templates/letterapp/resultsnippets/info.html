@@ -7,16 +7,20 @@
         padding-top:2rem;
         padding-bottom:2rem;
     }
-    #letter-result-info .text-title{
-        font-weight: var(--fontweight-index);
-    }
-    #letter-result-info .text-date{
+
+    #letter-result-info .text-time{
+        color: var(--softgray);
         font-weight: var(--fontweight-content);
+        font-size: var(--fontsize-detail);
+        margin-right: 0.5rem;
+    }
+    #letter-result-info .text-content{
+        margin-right: auto;
     }
 
     #letter-result-info .item{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         flex-direction: row;
         width: 100%;
@@ -27,6 +31,10 @@
 <div class="frame" id="letter-result-info">
     <div  class="container" >
         <div class="item" >
+            <span class="text-content" >작성 시간</span>
+            <span class="text-content-bold" >{{ target_letter.finished_before }}</span>
+        </div>
+        <div class="item" >
             <span class="text-content" >작성자</span>
             <span class="text-content-bold" >{{ target_letter.letter_info.sender_name }}</span>
         </div>
@@ -35,20 +43,12 @@
             <span class="text-content-bold" >{{ target_letter.letter_info.receiver_name }}</span>
         </div>
         <div class="item" >
-            <span class="text-content" >작성 시간</span>
-            <span class="text-content-bold" >{{ target_letter.finished_before }}</span>
-        </div>
-        <div class="item" >
-            <span class="text-content" >등록 질문</span>
-            <span class="text-content-bold" >{{ target_letter.letter_quiz.all|length }}개</span>
+            <span class="text-content" >편지 날짜</span>
+            <span class="text-content-bold" >{{ target_letter.letter_info.written_at|date:"m월 d일" }}</span>
         </div>
         <div class="item" style="margin-bottom: 0">
             <span class="text-content" >편지 확인</span>
-            {% if target_letter.is_checked %}
-                <span class="text-content-bold" >확인 완료</span>
-            {% else %}
-                <span class="text-content-bold" >미확인</span>
-            {% endif %}
+            <span class="text-content-bold" >{{ target_letter.get_state_display }}</span>
         </div>
     </div>
 </div>

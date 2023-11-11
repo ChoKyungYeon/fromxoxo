@@ -123,7 +123,7 @@ class Letter_quizListView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
-        context['quizs'] = target_letter.letter_quiz.all()
+        context['quizs'] = target_letter.letter_quiz.all().order_by('created_at')
         context['progress'] = 3
         return context
 
@@ -187,19 +187,33 @@ class Letter_quizVerifyView(FormView):
                 compare_answer = form.cleaned_data['compare_answer'].replace(" ", "").lower()
                 quiz_answer = letter_quiz.answer.replace(" ", "").lower()
                 if compare_answer != quiz_answer:
-                    form.add_error('compare_answer', '정답이 정확하지 않습니다!')
+                    if len(compare_answer) != len(quiz_answer):
+                        form.add_error('compare_answer', '정답의 단어 수가 달라요!')
+                    else:
+                        letter_difference = 0
+                        for a, b in zip(compare_answer, quiz_answer):
+                            if a != b:
+                                letter_difference += 1
+                        form.add_error('compare_answer', f'{letter_difference}개의 단어가 일치하지 않아요!')
                     return self.form_invalid(form)
+
             elif type_param == 'choice':
                 compare_choice = set(form.cleaned_data['compare_choice'])
                 quiz_choice = set(letter_quiz.choiceanswer)
                 if compare_choice != quiz_choice:
-                    form.add_error('compare_choice', '정답이 정확하지 않습니다!')
+                    if len(compare_choice) == 1 and len(quiz_choice) > 1:
+                        form.add_error('compare_choice', '모든 정답을 선택해 주세요!')
+                    else:    
+                        form.add_error('compare_choice', '정답이 정확하지 않습니다!')
                     return self.form_invalid(form)
             else:
                 compare_date = form.cleaned_data['compare_date']
                 quiz_date = letter_quiz.date
                 if compare_date != quiz_date:
-                    form.add_error('compare_choice', '정답이 정확하지 않습니다!')
+                    if compare_date > quiz_date:
+                       form.add_error('compare_date', '더 과거의 날짜를 선택해 주세요!')
+                    else:
+                       form.add_error('compare_date', '더 미래의 날짜를 선택해 주세요!')
                     return self.form_invalid(form)
 
             self.next_quiz = letter_quiz.letter.letter_quiz.all().order_by('created_at').filter(
@@ -209,10 +223,10 @@ class Letter_quizVerifyView(FormView):
             else:
                 is_user_related = target_user in [target_letter.receiver, target_letter.sender]
                 if not is_user_related:
-                    target_letter.is_checked = True
+                    target_letter.state = 'checked'
                     target_letter.checked_at = datetime.now()
                     target_letter.save()
-                    self.request.session[session_key] = 'done'
+                self.request.session[session_key] = 'done'
             return super().form_valid(form)
 
     def get_success_url(self):

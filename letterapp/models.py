@@ -1,15 +1,15 @@
-import datetime
+from datetime import timedelta, datetime
 
 from django.db import models, transaction
 from accountapp.models import CustomUser
-from fromxoxo.choice import progresschoice
+from fromxoxo.choice import progresschoice, statechoice
 import random
 import string
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.urls import reverse
 import qrcode
-from fromxoxo.utils import time_before
+from fromxoxo.utils import time_before, time_after
 import secrets
 import string
 import uuid
@@ -19,16 +19,19 @@ class Letter(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sender = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_sender', null=True)
     receiver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_receiver', null=True)
-    is_checked = models.BooleanField(default=False)
-    is_received = models.BooleanField(default=False)
     checked_at = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
+    received_at = models.DateTimeField(null=True)
     progress = models.CharField(max_length=20, choices=progresschoice, default='progress1')
+    state = models.CharField(max_length=20, choices=statechoice, default='unchecked')
     qr = models.ImageField(upload_to='letter/')
     url = models.CharField(max_length=100)
 
     def finished_before(self):
         return time_before(self.finished_at)
+
+    def delete_after(self):
+        return time_after(self.checked_at, timedelta(hours=24)) if self.state == 'checked' else None
 
     def character_number(self):
         return random.randint(1, 23)

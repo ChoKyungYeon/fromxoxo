@@ -82,6 +82,7 @@ header .btn-download{
 header .btn-delete{
     font-size: 2.4rem;
     background: none;
+    color: var(--red);
 }
 header .btn-download{
     margin-left: 0;
@@ -96,5 +97,19 @@ header .btn-exit{
     padding:1rem;
     position: relative;
     left: 1rem;
+}
+
+header .btn-download{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    height: 2.7rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    background: var(--softgray);
+    color: var(--white);
+    font-size: var(--fontsize-content);
+    border-radius: 0.5rem;
 }
 

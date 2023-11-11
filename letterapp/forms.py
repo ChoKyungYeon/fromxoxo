@@ -7,15 +7,15 @@ from letterapp.models import Letter
 class LetterCreateForm(forms.ModelForm):
     class Meta:
         model = Letter
-        fields = ('is_checked',)
+        fields = ('state',)
         labels = {
         }
         widgets = {
-            'is_checked': forms.HiddenInput(),
+            'state': forms.HiddenInput(),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['is_checked'].required = False
+        self.fields['state'].required = False
 
 
 

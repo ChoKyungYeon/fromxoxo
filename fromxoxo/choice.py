@@ -18,6 +18,11 @@ progresschoice=(
     ('progress3', 'progress3'),
     ('done', 'done'),
 )
+statechoice=(
+    ('unchecked', '미확인'),
+    ('checked', '확인 완료'),
+    ('received', '저장 완료')
+)
 quiztypechoice=(
     ('choice', '객관식'),
     ('word', '단답형'),

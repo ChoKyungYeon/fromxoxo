@@ -197,8 +197,6 @@ class AccountSentMailboxView(DetailView):
         context = super().get_context_data(**kwargs)
         letters=self.object.letter_sender.filter(progress='done').order_by('-finished_at')
         context['letters'] = letters
-        context['letters_unchecked'] = letters.filter(is_checked=False)
-        context['letters_checked'] = letters.filter(is_checked=True)
         context['letters_liked'] = letters.filter(letter_like__customuser=self.object)
         return context
 

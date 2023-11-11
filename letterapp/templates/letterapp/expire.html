@@ -15,13 +15,22 @@
     <div class="frame-centralize">
         <div class="spacing-title">
             <span class="text-title" >
-                 만료된 편지입니다!
+                {% if type == 'saved' %}
+                    저장된 편지입니다!
+                {% else %}
+                    존재하지 않는 편지입니다!
+                {% endif %}
             </span>
             <img class="img-title img-crying" src='/static/icons/etc/crying.png'>
         </div>
          <div class="item-guide text-index">
-            이 편지는 이미 저장되었거나<br>
-            존재하지 않는 편지입니다.
+            {% if type == 'saved' %}
+            이 편지는 이미 저장되었어요!<br>
+            새로운 편지를 작성해 볼까요?
+             {% else %}
+            더 이상 존재하지 않는 편지에요<br>
+            새로운 편지를 작성해 볼까요?
+             {% endif %}
         </div>
         <a href="{% url 'homescreenapp:homescreen' %}" class="btn-nav">
             홈으로 돌아가기

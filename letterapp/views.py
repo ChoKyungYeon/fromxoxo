@@ -56,10 +56,13 @@ class LetterIntroView(DetailView):
     context_object_name = 'target_letter'
 
     def get(self, request, *args, **kwargs):
-        target_letter = self.get_object()
+        try:
+            target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
+        except:
+            return redirect(reverse('letterapp:expire') + '?type=none')
         target_user = request.user
-        if target_letter.is_received and not target_user in [target_letter.receiver, target_letter.sender]:
-            return redirect('letterapp:expire')
+        if target_letter.state == 'received' and not target_user in [target_letter.receiver, target_letter.sender]:
+            return redirect(reverse('letterapp:expire') + '?type=saved')
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -86,6 +89,11 @@ class LetterDetailView(DetailView):
 
 class LetterExpireView(TemplateView):
     template_name = 'letterapp/expire.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['type'] = self.request.GET.get('type', None)
+        return context
 
 
 
@@ -126,8 +134,8 @@ class LetterSaveView(RedirectView):
         letter = Letter.objects.get(pk=self.request.GET.get('letter_pk'))
         with transaction.atomic():
             letter.receiver = self.request.user
-            letter.is_received = True
-            print('sdsd')
+            letter.state = 'received'
+            letter.received_at = datetime.now()
             letter.save()
             return super(LetterSaveView, self).get(request, *args, **kwargs)
 

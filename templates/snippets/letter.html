@@ -111,15 +111,7 @@
             <div class="spacing-horizontal " >
                 <span class="text-content-bold interval-name" >{{ letter.letter_info.receiver_name }}</span>
                 <div class="btn-id">
-                    {% if user == letter.is_received %}
-                        저장됨
-                    {% else %}
-                        {% if letter.is_checked %}
-                        확인 완료
-                        {% else %}
-                        미확인
-                        {% endif %}
-                    {% endif %}
+                    {{ letter.get_state_display }}
                 </div>
             </div>
         <div class="text-content interval-tile" style="color: var(--black)">

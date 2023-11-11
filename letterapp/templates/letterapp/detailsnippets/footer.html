@@ -1,5 +1,7 @@
-<style>
+{% load static %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<style>
 .frame-footer{
     background: var(--blackgray);
     width: 100%;
@@ -40,12 +42,8 @@
     right: 0rem;
     top:-3.6rem;
 }
-.block-empty{
-    height: 6rem;
-}
 </style>
 {% if not user.is_authenticated %}
-    <div class="block-empty tema-{{ letter_content.tema }}"></div>
     <a href="{% url 'accountapp:login' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
@@ -58,7 +56,6 @@
     </a>
 {% else %}
     {% if user != target_letter.sender and user != target_letter.receiver %}
-    <div class="block-empty"></div>
     <a id="tosave" href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
@@ -69,5 +66,37 @@
             </div>
         </div>
     </a>
+    {% else %}
+    <button id="btn-download" class="frame-footer">
+        <div class="container-footer">
+            <span class="text-title">
+                편지 스크린샷
+            </span>
+            <div class="btn-save material-icons">
+                photo_camera
+            </div>
+        </div>
+    </button>
     {% endif %}
 {% endif %}
+
+<script>
+document.getElementById('btn-download').addEventListener('click', function() {
+    html2canvas(document.querySelector('#letter-detail')).then(canvas => {
+        // Convert the canvas to a data URL
+        let imageURL = canvas.toDataURL('image/png');
+
+        // Create a temporary link to trigger the download
+        let downloadLink = document.createElement('a');
+        downloadLink.href = imageURL;
+        downloadLink.download = '편지-이미지.png';
+
+        // Append the link to the document and trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        // Clean up
+        document.body.removeChild(downloadLink);
+    });
+});
+</script>

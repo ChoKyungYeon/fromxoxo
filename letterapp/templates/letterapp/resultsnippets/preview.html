@@ -18,8 +18,8 @@
         <div class="item">
         <span class="text-content-bold" >{{ target_letter.letter_info.title|truncatechars:23 }}</span>
         <div class="spacing-horizontal" style="margin-top:0.4rem;">
-                <span class="text-content" style="margin-right: 0.7rem">편지 날짜</span>
-                <span class="text-content-bold">{{ target_letter.letter_info.written_at|date:"m월 d일" }}</span>
+                <span class="text-content" style="margin-right: 0.7rem">등록 질문</span>
+                <span class="text-content-bold">{{ target_letter.letter_quiz.all|length }}개</span>
             </div>
         </div>
         <div class="icon-nav material-icons" >

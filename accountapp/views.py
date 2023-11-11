@@ -23,9 +23,6 @@ class AccountLoginView(LoginView):
 
 
     def get(self, request, *args, **kwargs):
-        letter_pk=self.request.GET.get('letter_pk', None)
-        if letter_pk:
-            self.request.session["letter_pk"] = letter_pk
         if request.user.is_authenticated:
             return redirect('homescreenapp:homescreen')
         return super().get(request, *args, **kwargs)

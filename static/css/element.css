@@ -128,7 +128,27 @@
     margin-left:0.7rem;
     background:var(--red);
 }
-
+.btn-guide-unclicked,
+.btn-guide-clicked{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: var(--white);
+    background: var(--blackgray);
+    font-size: 1.35rem;
+    font-weight: var(--fontweight-bold);
+    border-radius: 50%;
+    border: 2px dashed var(--softgray);
+    flex-shrink: 0;
+}
+.btn-guide-clicked{
+    border: 2px dashed var(--white);
+    background: #808080;
+    box-shadow: 0 0 8px var(--white);
+}
 .btn-submit-fixed,
 .btn-submit-close,
 .btn-submit{

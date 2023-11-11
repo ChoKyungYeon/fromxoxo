@@ -99,17 +99,3 @@ header .btn-exit{
     left: 1rem;
 }
 
-header .btn-download{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    height: 2.7rem;
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
-    background: var(--softgray);
-    color: var(--white);
-    font-size: var(--fontsize-content);
-    border-radius: 0.5rem;
-}
-

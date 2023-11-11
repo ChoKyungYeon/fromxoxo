@@ -43,6 +43,7 @@
     display: flex;
     opacity: 1;
 }
+
 .frame-zoom-warning .container{
     position: fixed;
     width: 85vw;
@@ -86,24 +87,20 @@
 }
 .frame-zoom-warning .spacing-title{
     justify-content: center;
-    padding-right:0;
-    margin-bottom: 2rem;
-}
-.frame-zoom-warning .img-title{
-    width: 1.9rem;
-    height: 1.9rem;
-    margin-left: 0.7rem;
-    object-fit: cover;
+    padding:0;
+    margin-bottom: 1.7rem;
 }
 
+
+
 .frame-zoom-warning .text-title{
-    font-size: var(--fontsize-emphasize);
+    font-size: var(--fontsize-bold);
     font-weight: var(--fontweight-index);
 }
 
 .frame-zoom-warning .text-content{
     width: fit-content;
-    font-size: var(--fontsize-bold);
+    font-size: var(--fontsize-title);
 }
 .frame-zoom-warning .interval-content{
     margin-bottom: 1rem;

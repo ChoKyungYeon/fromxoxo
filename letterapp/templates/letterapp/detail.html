@@ -12,6 +12,8 @@
 <header id="header-letter-detail">
         {% if user == target_letter.sender or user == target_letter.receiver %}
         {% include 'headersnippets/like.html' %}
+        {% else %}
+        {% include 'headersnippets/guide.html' %}
         {% endif %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% include 'headersnippets/exit.html' with url=url %}

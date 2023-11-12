@@ -1,7 +1,7 @@
 {% load static %}
 <style>
 
-    #frame-zoom-warning .item-btn{
+    #frame-warning .item-btn{
         height: var(--height-header);
         width: 6rem;
         padding-left: var(--padding-header);
@@ -18,8 +18,8 @@
 </style>
 
 {% if target_letter.state == 'checked' and not user == target_letter.sender %}
-<button onclick="closeWarning()" id="frame-zoom-warning" class="frame-zoom-warning">
-    <div class="item-btn"><span class="btn-guide-clicked material-icons">question_mark</span></div>
+<button onclick="closeWarning()" id="frame-warning" class="frame-zoom-info">
+    <div class="item-btn"><span class="btn-warning-clicked material-icons">question_mark</span></div>
     <div class="container">
         <div class="item-exit">
             <div class="material-icons btn-exit">cancel</div>

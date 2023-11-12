@@ -23,9 +23,15 @@
 <main class="tema-{{ target_letter.letter_content.tema }}">
     {% include 'letterapp/resultsnippets/preview.html' %}
     {% include 'letterapp/resultsnippets/info.html' %}
-    {% include 'letterapp/resultsnippets/link.html' %}
-    {% if not page == 'finish' %}
-    {% include 'letterapp/resultsnippets/btn.html' %}
+    {% if user == target_letter.sender %}
+        {% if target_letter.state == 'received' %}
+            {% include 'letterapp/resultsnippets/received.html' %}
+        {% else %}
+            {% include 'letterapp/resultsnippets/link.html' %}
+            {% if not page == 'finish' %}
+            {% include 'letterapp/resultsnippets/btn.html' %}
+            {% endif %}
+        {% endif %}
     {% endif %}
 </main>
 

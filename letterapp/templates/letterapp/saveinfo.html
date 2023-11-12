@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+
+
+</style>
+<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+        {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
+        {% if page == 'saved' %}
+        {% include 'headersnippets/exit.html' with url=url %}
+        {% else %}
+        {% include 'headersnippets/navback.html' with url=url %}
+        {% endif %}
+</header>
+
+<main class="tema-{{ target_letter.letter_content.tema }}">
+    {% include 'letterapp/resultsnippets/preview.html' %}
+    {% include 'letterapp/resultsnippets/info.html' %}
+</main>
+
+{% endblock %}

@@ -18,21 +18,17 @@
 <div class="frame-letter " id="letter-urlsearch-form">
       <form action="{% url 'letterapp:search' %}?type=url" method="post" style="position: relative">
         {% csrf_token %}{% bootstrap_form form %}
-          <button type="button" id="pasteButton" onclick="pasteClipboard()" class="icon-paste material-icons">content_paste</button>
+          <button type="button" onclick="pasteClipboard()" class="icon-paste material-icons">content_paste</button>
         <input type="submit" class="btn-submit-fixed"  value="링크로 편지 찾기">
       </form>
 </div>
 <script>
-    function pasteClipboard() {
-        navigator.clipboard.readText().then(clipText => {
-            // Check if clipText starts with the required URL
-            if (clipText.startsWith('https://tinyurl.com/')) {
-                document.querySelector('.field-letter_url').value = clipText;
-            } else {
-                // Optionally, clear the field or leave it unchanged
-                document.querySelector('.field-letter_url').value = '';
-                // Or, if you prefer to leave the field unchanged, remove the line above
-            }
-        });
+ function pasteClipboard() {
+    var pasteText = prompt("복사한 링크를 입력해 주세요!", "");
+    if (pasteText != null && pasteText.startsWith('https://tinyurl.com/')) {
+        document.querySelector('.field-letter_url').value = pasteText;
+    } else {
+        document.querySelector('.field-letter_url').value = '';
     }
+}
 </script>

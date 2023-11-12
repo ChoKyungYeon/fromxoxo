@@ -3,45 +3,47 @@
 {% block content %}
 <style>
     #letter-intro {
-        padding-top:5rem;
+        padding-bottom:7rem;
     }
-    #letter-intro .text-title {
+    #letter-intro .text-intro {
         font-weight: var(--fontweight-index);
+    }    #letter-intro .text-emphasize {
+        font-weight: inherit;
+        color: var(--middlepink);
+        font-size: inherit;
     }
 
     #letter-intro .spacing-title {
-        margin-bottom: 2.2rem;
+        margin-bottom: 2.5em;
         position: relative;
     }
-   #letter-intro  .img-intro{
-        width: 4.5rem;
+#letter-intro .img-intro {
+        width: 8rem;
         flex-shrink: 0;
         object-fit: cover;
-       position: absolute;
-       right: 2rem;
-       transform: rotate(-10deg);
-       bottom:1.3rem;
+        position: relative;
+        right: 8%;
+        transform: rotate(15deg);
+        bottom: 1.2rem;
     }
-    #letter-intro  .img-key{
-        width: 2.3rem;
+
+    #letter-intro .img-qna {
+        width: 6rem;
         flex-shrink: 0;
         object-fit: cover;
-       position: absolute;
-       right: 0;
-        bottom:0.7rem;
-       transform: rotate(-5deg);
+        position: relative;
+        left: 15%;
+        bottom: 0.5rem;
+        transform: rotate(-10deg);
     }
-
-    #letter-intro .text-content {
-       font-size: var(--fontsize-title);
-    }
-
-    #letter-intro .spacing-content {
+    #letter-intro .container-image {
         display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
-        padding-left: 0.5rem;
+        flex-direction: row;
+        height: 7rem;
+        margin-top:5rem;
+        width: 100%;
     }
 </style>
 
@@ -51,25 +53,21 @@
         {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
         {% include 'headersnippets/navback.html' with url=url %}
     {% else %}
-        {% include 'headersnippets/logo.html' with url=url %}
+        {%  url 'homescreenapp:homescreen' as url %}
+        {% include 'headersnippets/exit.html' with url=url %}
     {% endif%}
 </header>
 
-<main class="tema-{{ target_letter.letter_content.tema }}">
-    <div class="frame-letter" id="letter-intro">
+<main class="main-centralize tema-{{ target_letter.letter_content.tema }}">
+    <div class="frame-letter" id="letter-intro" style="width: 100%">
         <div class="spacing-title">
-            <span class="text-title" style="padding-left: 0">
-                {{ target_letter.letter_info.receiver_name }} 님에게<br>
-                새로운 편지가 도착했어요!
+            <span class="text-title text-intro">
+                <span class="text-emphasize">새로운 편지</span>가 도착했어요!<br>
+                퀴즈를 풀고 내용을 확인할까요?
             </span>
-            <img class="img-intro" src='/static/icons/etc/card.png'>
-            <img class="img-key" src='/static/icons/etc/key.png'>
         </div>
-        <div class="spacing-content">
-            <span class="text-content">{{ target_letter.letter_info.sender_name }} 님이 작성한 질문 {{ target_letter.letter_quiz.all|length }}개를 <br>
-                해결하고 내용을 확인할까요?</span>
-        </div>
-        {% include 'snippets/introletter.html' %}
+{% include 'snippets/introletter.html' %}
+
     </div>
 </main>
 

@@ -1,6 +1,6 @@
 
-function showWarning() {
-    var element = document.getElementById("frame-warning");
+function showGuide() {
+    var element = document.getElementById("frame-guide");
     element.style.display = "flex";
     element.style.opacity = 0;
     setTimeout(function() {
@@ -9,8 +9,8 @@ function showWarning() {
     }, 10);
 }
 
-function closeWarning() {
-    var element = document.getElementById("frame-warning");
+function closeGuide() {
+    var element = document.getElementById("frame-guide");
     element.style.transition = 'opacity 0.4s ease-in-out';
     element.style.opacity = 0;
     setTimeout(function() {

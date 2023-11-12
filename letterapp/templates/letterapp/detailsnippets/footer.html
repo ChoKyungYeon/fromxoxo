@@ -32,19 +32,19 @@
     justify-content:center;
     align-items:center;
     color:var(--white);
-    height: 7rem;
-    width: 7rem;
+    height: 6.7rem;
+    width: 6.7rem;
     font-size:2.5rem;
     border-radius: 50%;
     font-weight:var(--fontweight-content);
     position: absolute;
     border:1.1rem solid var(--blackgray);
     right: 0rem;
-    top:-3.6rem;
+    top:-3.2rem;
 }
 </style>
 {% if not user.is_authenticated %}
-    <a href="{% url 'accountapp:login' %}" class="frame-footer">
+    <button onclick="showGuide()" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
                로그인 후 편지 저장!
@@ -53,10 +53,10 @@
                 cloud_download
             </div>
         </div>
-    </a>
+    </button>
 {% else %}
     {% if user != target_letter.sender and user != target_letter.receiver %}
-    <a id="tosave" href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
+    <a href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
                 편지를 저장해요!
@@ -82,21 +82,15 @@
 
 <script>
 document.getElementById('btn-download').addEventListener('click', function() {
-    html2canvas(document.querySelector('#letter-detail')).then(canvas => {
-        // Convert the canvas to a data URL
-        let imageURL = canvas.toDataURL('image/png');
+    html2canvas(document.querySelector("#letter-detail")).then(canvas => {
+        // Create an image
+        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
-        // Create a temporary link to trigger the download
-        let downloadLink = document.createElement('a');
-        downloadLink.href = imageURL;
-        downloadLink.download = '편지-이미지.png';
-
-        // Append the link to the document and trigger the download
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-
-        // Clean up
-        document.body.removeChild(downloadLink);
+        // Create a link to download
+        var link = document.createElement('a');
+        link.download = 'letterimage.png';
+        link.href = image;
+        link.click();
     });
 });
 </script>

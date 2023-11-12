@@ -17,8 +17,8 @@
             내가 저장한 편지는 목록에서<br>
             자유롭게 확인 할 수 있어요!
         </div>
-        <a href="{% url 'accountapp:savedmailbox' pk=user.pk %}" class="btn-nav">
-            내 저장 목록 보기
+        <a href="{% url 'letterapp:saveinfo' pk=target_letter.pk %}?page=saved" class="btn-nav">
+            저장한 편지 보기
         </a>
     </div>
 </main>

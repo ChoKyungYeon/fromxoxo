@@ -13,10 +13,12 @@
         {% if user == target_letter.sender or user == target_letter.receiver %}
         {% include 'headersnippets/like.html' %}
         {% else %}
-        {% include 'headersnippets/guide.html' %}
+        {% include 'headersnippets/warning.html' %}
         {% endif %}
         {% if target_letter.sender %}
         {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% elif target_letter.receiver %}
+        {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% endif %}
@@ -26,6 +28,7 @@
     {% include 'letterapp/detailsnippets/intro.html' %}
     {% include 'letterapp/detailsnippets/content.html' %}
     {% include 'letterapp/detailsnippets/warning.html' %}
+    {% include 'letterapp/detailsnippets/saveguide.html' %}
 </main>
 <div style="height: 6rem" class="tema-{{ letter_content.tema }} "></div>
 {% include 'letterapp/detailsnippets/footer.html' %}

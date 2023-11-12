@@ -48,7 +48,15 @@
         </div>
         <div class="item" style="margin-bottom: 0">
             <span class="text-content" >편지 확인</span>
-            <span class="text-content-bold" >{{ target_letter.get_state_display }}</span>
+            {% if target_letter.state == 'unchecked' %}
+            <span class="text-content-bold" style="color: var(--red)">
+            {% elif target_letter.state == 'checked' %}
+            <span class="text-content-bold" style="color: var(--blue)">
+            {% else %}
+            <span class="text-content-bold" style="color: var(--orange)">
+            {% endif %}
+                {{ target_letter.get_state_display }}
+            </span>
         </div>
     </div>
 </div>

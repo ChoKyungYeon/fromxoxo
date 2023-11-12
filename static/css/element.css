@@ -128,8 +128,8 @@
     margin-left:0.7rem;
     background:var(--red);
 }
-.btn-guide-unclicked,
-.btn-guide-clicked{
+.btn-warning-unclicked,
+.btn-warning-clicked{
     display: flex;
     flex-direction: row;
     justify-content:center;
@@ -144,10 +144,10 @@
     border: 2px dashed var(--softgray);
     flex-shrink: 0;
 }
-.btn-guide-clicked{
+.btn-warning-clicked{
     border: 2px dashed var(--white);
     background: #808080;
-    box-shadow: 0 0 8px var(--white);
+    box-shadow: 0 0 10px var(--white);
 }
 .btn-submit-fixed,
 .btn-submit-close,

@@ -1,5 +1,5 @@
 /* 이미지 관리 */
-.frame-zoom-warning,
+.frame-zoom-info,
 .frame-zoom{
     position:fixed;
     right:0;
@@ -38,13 +38,13 @@
     border:2px solid var(--black);
 }
 
-.frame-zoom-warning{
+.frame-zoom-info{
     transition: opacity 2s ease;
     display: flex;
     opacity: 1;
 }
 
-.frame-zoom-warning .container{
+.frame-zoom-info .container{
     position: fixed;
     width: 85vw;
     max-width: 500px;
@@ -57,10 +57,11 @@
     flex-direction:column;
     justify-content:space-between;
     align-items: center;
-    padding:0rem;
+    background:var(--whitepink);
+    padding:0 0 3.5rem 0;
 }
 
-.frame-zoom-warning .item-exit{
+.frame-zoom-info .item-exit{
     width: 100%;
     height:4.2rem;
     border-top-left-radius:  var(--border-radius-container);
@@ -73,7 +74,7 @@
     padding-right:0.8rem;
 }
 
-.frame-zoom-warning .item-content{
+.frame-zoom-info .item-content{
     width: fit-content;
     border-bottom-left-radius: var(--border-radius-container);
     border-bottom-right-radius: var(--border-radius-container);
@@ -82,38 +83,57 @@
     flex-direction:column;
     justify-content:flex-start;
     align-items: flex-start;
-    padding: 2.5rem 2rem 3.5rem 2rem;
+    padding: 2.5rem 0 0 0 ;
 
 }
-.frame-zoom-warning .spacing-title{
+.frame-zoom-info .spacing-title{
     justify-content: center;
     padding:0;
     margin-bottom: 1.7rem;
 }
 
+.frame-zoom-info .btn-nav{
+    margin-top:1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    width:75%;
+    background:var(--black);
+    color:var(--white);
+    height: 4.7rem;
+    font-size: var(--fontsize-bold);
+    border-radius: 2.5rem;
+    border:1.5px solid #636363;
+    box-shadow: 0 3px 10px #c7c8cc;
+    font-weight:var(--fontweight-content);
+    margin-right: auto;
+    margin-left: auto;
+}
 
 
-.frame-zoom-warning .text-title{
+
+.frame-zoom-info .text-title{
     font-size: var(--fontsize-bold);
     font-weight: var(--fontweight-index);
 }
 
-.frame-zoom-warning .text-content{
+.frame-zoom-info .text-content{
     width: fit-content;
     font-size: var(--fontsize-title);
 }
-.frame-zoom-warning .interval-content{
+.frame-zoom-info .interval-content{
     margin-bottom: 1rem;
 }
 
-.frame-zoom-warning .icon-check {
+.frame-zoom-info .icon-check {
     font-size: 1.6rem;
     color: var(--middlepink);
     font-weight: var(--fontweight-index);
     margin-right: 1rem;
 }
 
-.frame-zoom-warning .btn-exit{
+.frame-zoom-info .btn-exit{
     display: flex;
     flex-direction:row;
     justify-content:flex-end;

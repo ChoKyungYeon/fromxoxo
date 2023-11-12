@@ -95,7 +95,7 @@
 
     {% if forloop.counter|divisibleby:2 %}
         {% if user == letter.receiver %}
-        <a href="{% url 'letterapp:intro' pk=letter.pk %}" class="container-snippets container-right" >
+        <a href="{% url 'letterapp:saveinfo' pk=letter.pk %}" class="container-snippets container-right" >
         {% else %}
         <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-right" >
         {% endif %}

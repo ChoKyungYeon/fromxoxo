@@ -22,10 +22,13 @@ class AccountLoginView(LoginView):
 
 
     def get(self, request, *args, **kwargs):
+        redirect_letter = self.request.GET.get('redirect_letter', None)
+        if redirect_letter:
+            self.request.session['redirect_letter'] = redirect_letter
+            print('1',self.request.session['redirect_letter'])
         if request.user.is_authenticated:
             return redirect('homescreenapp:homescreen')
         return super().get(request, *args, **kwargs)
-
 
 @method_decorator(never_cache, name='dispatch')
 class AccountCreateView(CreateView):

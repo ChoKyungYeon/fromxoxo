@@ -1,5 +1,5 @@
 
-{% if target_letter.state == 'unchecked' %}
+
 <a href="{% url 'letter_infoapp:update' pk=target_letter.letter_info.pk %}" class="btn-edit-fixed material-icons">edit</a>
 <form action="{% url 'letterapp:delete' pk=target_letter.pk %}" method="post"
       id="letter-delete-form">
@@ -10,7 +10,6 @@
         delete_forever
     </button>
 </form>
-{% endif %}
 <script>
 function confirmLetterDelete() {
     if (confirm("현재 편지를 삭제하시겠습니까?")) {

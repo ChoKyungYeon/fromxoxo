@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import transaction
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
@@ -8,6 +10,7 @@ from documentapp.models import Document
 from letter_contentapp.models import Letter_content
 from letter_infoapp.models import Letter_info
 from letterapp.forms import LetterCreateForm
+from letterapp.models import Letter
 
 
 class HomescreenView(TemplateView):
@@ -15,7 +18,22 @@ class HomescreenView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        target_user=self.request.user
+        temp_letter_pk = self.request.session.get("redirect_letter", False)
         context['document'] = Document.objects.all().first()
+        if target_user.is_authenticated and temp_letter_pk:
+            print('2')
+            try:
+                letter_uuid = uuid.UUID(temp_letter_pk)
+                letter = Letter.objects.filter(pk=letter_uuid).first()
+                print(letter)
+                if letter and (target_user not in [letter.receiver, letter.sender]) and letter.state == 'checked':
+                    print('3')
+                    context['redirect_letter'] = letter
+                    self.request.session["redirect_letter"] = None
+            except:
+                pass
+
         return context
 
 

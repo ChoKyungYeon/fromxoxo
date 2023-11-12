@@ -1,0 +1,51 @@
+{% load static %}
+<style>
+
+    #frame-guide{
+        display: none;
+        opacity: 0;
+    }
+#frame-guide .icon-down {
+    font-size: 2rem;
+    color: var(--middlepink);
+    font-weight: var(--fontweight-index);
+    margin-right: 1rem;
+}
+</style>
+
+<button onclick="closeGuide()" id="frame-guide" class="frame-zoom-info">
+    <div class="container">
+        <div class="item-exit">
+            <div class="material-icons btn-exit">cancel</div>
+        </div>
+        <div class="item-content" >
+            <div class="spacing-title">
+            <span class="text-title">
+                편지를 저장하고 싶으신가요?
+            </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-down material-icons">arrow_drop_down</span>
+                <span class="text-content">
+                    From.XoXo에 로그인하고,
+                </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-down material-icons">arrow_drop_down</span>
+                <span class="text-content">
+                홈 화면 또는 링크로 다시 접속!
+                </span>
+            </div>
+            <div class="spacing-horizontal interval-content">
+                <span class="icon-down material-icons">arrow_drop_down</span>
+                <span class="text-content">
+                편지를 저장하고 확인해요
+                </span>
+            </div>
+
+        </div>
+        <a href="{% url 'accountapp:login' %}?redirect_letter={{target_letter.pk}}" class="btn-nav">이해했어요!</a>
+    </div>
+</button>
+
+<script src="{% static 'js/showGuide.js' %}"></script>

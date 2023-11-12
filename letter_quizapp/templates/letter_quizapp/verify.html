@@ -31,6 +31,8 @@
 <header class="header-empty tema-{{ target_letter.letter_content.tema }}">
         {% if target_letter.sender %}
         {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {% elif target_letter.receiver %}
+        {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% endif %}

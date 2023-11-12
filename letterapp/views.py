@@ -30,6 +30,19 @@ class LetterResultView(DetailView):
         context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
         return context
 
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class LetterSaveinfoView(DetailView):
+    model = Letter
+    template_name = 'letterapp/saveinfo.html'
+    context_object_name = 'target_letter'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = self.request.GET.get('page', None)
+        context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
+        return context
+
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class LetterFinishView(DetailView):
@@ -60,10 +73,12 @@ class LetterIntroView(DetailView):
         try:
             target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
         except:
-            return redirect(reverse('letterapp:expire') + '?type=none')
+            return redirect(reverse('letterapp:expiare') + '?type=none')
         target_user = request.user
         if target_letter.sender == target_user:
             return redirect('letterapp:result', pk=target_letter.pk)
+        elif target_letter.receiver == target_user:
+            return redirect('letterapp:saveinfo', pk=target_letter.pk)
         if target_letter.state == 'received' and not target_user in [target_letter.receiver, target_letter.sender]:
             return redirect(reverse('letterapp:expire') + '?type=saved')
         return super().get(request, *args, **kwargs)

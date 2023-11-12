@@ -7,6 +7,7 @@ app_name = 'letterapp'
 urlpatterns = [
     path('detail/<uuid:pk>', LetterDetailView.as_view(), name='detail'),
     path('result/<uuid:pk>', LetterResultView.as_view(), name='result'),
+    path('saveinfo/<uuid:pk>', LetterSaveinfoView.as_view(), name='saveinfo'),
     path('intro/<uuid:pk>', LetterIntroView.as_view(), name='intro'),
     path('finish/<uuid:pk>', LetterFinishView.as_view(), name='finish'),
     path('saved/<uuid:pk>', LetterSavedView.as_view(), name='saved'),

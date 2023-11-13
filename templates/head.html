@@ -5,7 +5,11 @@
     <meta property="og:type" content="website">
     {% if intro_page %}
     <meta property="og:image" content="/static/images/letter.png">
-    <meta property="og:description" content="새로운 편지가 도착했어요!">
+        {% if target_letter.letter_info.sender_name %}
+            <meta property="og:description" content="{{ target_letter.letter_info.sender_name }}님께 편지가 도착했어요!">
+        {% else %}
+            <meta property="og:description" content="새로운 편지가 도착했어요!">
+        {% endif %}
     {% else %}
     <meta property="og:image" content="/static/images/logo.png">
     <meta property="og:description" content="나만의 재밌는 편지를 선물해요">

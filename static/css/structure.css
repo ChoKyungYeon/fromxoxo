@@ -60,7 +60,7 @@ main{
 }
 
 html{
-  font-size: 11.4px;
+  font-size: 11.6px;
   color:var(--black);
 }
 
@@ -90,7 +90,7 @@ body {
 
 @media screen and (min-width: 600px) {
     html {
-      font-size: 11.5px;
+      font-size: 11.8px;
     }
     main{
         max-height:1000000px;

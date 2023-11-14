@@ -35,6 +35,7 @@ class Letter_quizCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
         context['target_letter'] = target_letter
+        context['tema'] = target_letter.letter_content.tema
         context['type'] = self.request.GET.get('type', None)
         return context
 
@@ -75,7 +76,9 @@ class Letter_quizUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['target_letter'] = self.object.letter
+        target_letter=self.object.letter
+        context['target_letter'] =target_letter
+        context['tema'] = target_letter.letter_content.tema
         context['type'] = self.object.type
         return context
 
@@ -95,24 +98,6 @@ class Letter_quizUpdateView(UpdateView):
 
 
 
-
-@method_decorator(never_cache, name='dispatch')
-@method_decorator(login_required, name='dispatch')
-class Letter_quizDetailView(DetailView):
-    model = Letter_quiz
-    template_name = 'letter_quizapp/detail.html'
-    context_object_name = 'target_letter_quiz'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['target_letter'] = self.object.letter
-        return context
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class Letter_quizListView(DetailView):
@@ -124,23 +109,9 @@ class Letter_quizListView(DetailView):
         context = super().get_context_data(**kwargs)
         target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
         context['quizs'] = target_letter.letter_quiz.all().order_by('created_at')
+        context['tema'] = target_letter.letter_content.tema
         context['progress'] = 3
         return context
-
-
-@method_decorator(never_cache, name='dispatch')
-@method_decorator(login_required, name='dispatch')
-class Letter_quizGuideView(DetailView):
-    model = Letter
-    template_name = 'letter_quizapp/guide.html'
-    context_object_name = 'target_letter'
-
-
-
-
-
-class Letter_quizExpireView(TemplateView):
-    template_name = 'letter_quizapp/expire.html'
 
 
 
@@ -169,7 +140,9 @@ class Letter_quizVerifyView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         letter_quiz= get_object_or_404(Letter_quiz, pk=self.kwargs['pk'])
-        context['target_letter'] = letter_quiz.letter
+        target_letter= letter_quiz.letter
+        context['target_letter'] = target_letter
+        context['tema'] = target_letter.letter_content.tema
         context['target_quiz'] = letter_quiz
         context['quizstep'] = letter_quiz.index()
         context['type'] = letter_quiz.type

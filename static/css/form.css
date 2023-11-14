@@ -27,7 +27,7 @@
 
 .form-group label{
     margin-top:2.5rem;
-    font-size:var(--fontsize-index);
+    font-size:var(--fontsize-content);
     color:var(--black);
     margin-left: 0.3rem;
     margin-bottom: 0.7rem;
@@ -163,46 +163,62 @@
     justify-content:flex-start;
 }
 
+
 input[type="file"]::-webkit-file-upload-button {
-  color: var(--gray);
-  background:#ecedee;
-  border: none;
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
-  width:7rem;
-  height: var(--height-form);
-  cursor: pointer;
-  font-size: var(--fontsize-content);
-  font-weight: var(--fontsize-content);
-  margin-right:1rem;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    background:#ecedee;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+    width:6.5rem;
+    height:calc(var(--height-form) - 3px);
+    cursor: pointer;
+    color: var(--black);
+    font-size: var(--fontsize-detail);
+    font-weight: var(--fontsize-content);
+    margin-right:1rem;
 }
 
 input[type="file"]::file-selector-button {
-  color: var(--gray);
-  background:#ecedee;
-  border: none;
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
-  width:7rem;
-  height: var(--height-form);
-  cursor: pointer;
-  font-size: var(--fontsize-content);
-  font-weight: var(--fontsize-content);
-  margin-right:1rem;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    background:#ecedee;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+    width:6.5rem;
+    height: var(--height-form);
+    cursor: pointer;
+    color: var(--black);
+    font-size: var(--fontsize-detail);
+    font-weight: var(--fontsize-content);
+    margin-right:1rem;
 }
 
-input[type="file"]::-ms-browse {
-  color: var(--gray);
-  background:#ecedee;
-  border: none;
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
-  width:7rem;
-  height: var(--height-form);
-  cursor: pointer;
-  font-size: var(--fontsize-content);
-  font-weight: var(--fontsize-content);
-  margin-right:1rem;
+ input[type="file"]::-ms-browse {
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    background:#ecedee;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+    width:6.5rem;
+    height: var(--height-form);
+    cursor: pointer;
+    color: var(--black);
+    font-size: var(--fontsize-detail);
+    font-weight: var(--fontsize-content);
+    margin-right:1rem;
 }
 
 

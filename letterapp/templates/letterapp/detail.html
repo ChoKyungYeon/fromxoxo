@@ -4,7 +4,7 @@
 
 <style>
 #letter-detail{
-    padding-bottom:6rem;
+    padding-bottom:10rem;
 }
 
 </style>
@@ -15,21 +15,22 @@
         {% else %}
         {% include 'headersnippets/warning.html' %}
         {% endif %}
-        {% if target_letter.sender %}
+
+        {% if user == target_letter.sender %}
         {%  url 'letterapp:result' pk=target_letter.pk as url %}
-        {% elif target_letter.receiver %}
+        {% elif user == target_letter.receiver %}
         {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
-<main class="tema-{{ letter_content.tema }}" id="letter-detail">
+
+<main id="letter-detail">
     {% include 'letterapp/detailsnippets/intro.html' %}
     {% include 'letterapp/detailsnippets/content.html' %}
     {% include 'letterapp/detailsnippets/warning.html' %}
     {% include 'letterapp/detailsnippets/saveguide.html' %}
 </main>
-<div style="height: 6rem" class="tema-{{ letter_content.tema }} "></div>
 {% include 'letterapp/detailsnippets/footer.html' %}
 {% endblock %}

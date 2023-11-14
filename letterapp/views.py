@@ -27,6 +27,7 @@ class LetterResultView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = self.request.GET.get('page', None)
+        context['tema'] = self.object.letter_content.tema
         context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
         return context
 
@@ -39,6 +40,7 @@ class LetterSaveinfoView(DetailView):
     context_object_name = 'target_letter'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tema'] = self.object.letter_content.tema
         context['page'] = self.request.GET.get('page', None)
         context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
         return context
@@ -51,6 +53,7 @@ class LetterFinishView(DetailView):
     context_object_name = 'target_letter'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tema'] = self.object.letter_content.tema
         return context
 
 @method_decorator(never_cache, name='dispatch')
@@ -61,6 +64,7 @@ class LetterSavedView(DetailView):
     context_object_name = 'target_letter'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tema'] = self.object.letter_content.tema
         return context
 
 
@@ -73,7 +77,7 @@ class LetterIntroView(DetailView):
         try:
             target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
         except:
-            return redirect(reverse('letterapp:expiare') + '?type=none')
+            return redirect(reverse('letterapp:expire') + '?type=none')
         target_user = request.user
         if target_letter.sender == target_user:
             return redirect('letterapp:result', pk=target_letter.pk)
@@ -86,6 +90,7 @@ class LetterIntroView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['initial_letter'] = self.object.letter_quiz.all().order_by('created_at').first()
+        context['tema'] = self.object.letter_content.tema
         context['intro_page'] = True
         return context
 
@@ -95,11 +100,20 @@ class LetterDetailView(DetailView):
     template_name = 'letterapp/detail.html'
     context_object_name = 'target_letter'
 
+    def get(self, request, *args, **kwargs):
+        try:
+            target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
+        except:
+            return redirect(reverse('letterapp:expire') + '?type=none')
+        if target_letter.state == 'unchecked' and self.request.user != target_letter.sender:
+            return redirect('letterapp:intro', pk=target_letter.pk)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['letter_content'] = self.object.letter_content
         context['letter_info'] = self.object.letter_info
+        context['tema'] = self.object.letter_content.tema
         if self.request.user.is_authenticated:
             like = Letter_like.objects.filter(customuser=self.request.user, letter=self.object).first()
             context['like'] = like
@@ -146,16 +160,27 @@ class LetterSaveView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         letter = Letter.objects.get(pk=self.request.GET.get('letter_pk'))
         return reverse('letterapp:saved', kwargs={'pk': letter.pk})
-
-
     def get(self, request, *args, **kwargs):
         letter = Letter.objects.get(pk=self.request.GET.get('letter_pk'))
         with transaction.atomic():
             letter.receiver = self.request.user
             letter.state = 'received'
-            letter.received_at = datetime.now()
             letter.save()
             return super(LetterSaveView, self).get(request, *args, **kwargs)
+
+@method_decorator(login_required, name='dispatch')
+class LetterResetView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        letter = Letter.objects.get(pk=self.request.GET.get('letter_pk'))
+        return reverse('letterapp:result', kwargs={'pk': letter.pk})
+    def get(self, request, *args, **kwargs):
+
+        letter = Letter.objects.get(pk=self.request.GET.get('letter_pk'))
+        with transaction.atomic():
+            letter.checked_at = None
+            letter.state = 'unchecked'
+            letter.save()
+            return super(LetterResetView, self).get(request, *args, **kwargs)
 
 
 class LetterSearchView(FormView):
@@ -172,6 +197,7 @@ class LetterSearchView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = self.request.session["search_page"]
+        context['tema'] = 'blue'
         return context
 
     def form_valid(self, form):

@@ -26,7 +26,6 @@ urlpatterns = [
     path('accounts/', include('accountapp.urls')),
     path('homescreens/', include('homescreenapp.urls')),
     path('phonenumbers/', include('phonenumberapp.urls')),
-    path('documents/', include('documentapp.urls')),
     path('letters/', include('letterapp.urls')),
     path('letter_quizs/', include('letter_quizapp.urls')),
     path('letter_contents/', include('letter_contentapp.urls')),

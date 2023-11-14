@@ -15,7 +15,7 @@
 }
 </style>
 
-<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+<header class="header-empty">
         {%  url 'letter_quizapp:list' pk=target_letter.pk as url %}
         {% include 'headersnippets/navback.html' with url=url %}
         <form style="margin-left: auto" action="{% url 'letter_quizapp:delete' pk=target_quiz.pk %}" method="post"
@@ -30,7 +30,7 @@
 </header>
 
 
-<main class="tema-{{ target_letter.letter_content.tema }}"  id="letter_quiz-update">
+<main id="letter_quiz-update">
     {% if type == 'choice' %}
         {% include 'letter_quizapp/updatesnippets/choice.html' %}
     {% elif type == 'answer' %}

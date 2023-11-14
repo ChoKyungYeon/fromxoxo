@@ -9,26 +9,22 @@
         justify-content: space-between;
     }
 
-    #snippet-introletter .text-content {
-        color: var(--black);
+    #snippet-introletter .text-lettertitle {
+        font-weight: var(--fontweight-content);
     }
 
-    #snippet-introletter .text-name {
-        color: var(--black);
-        font-weight: var(--fontweight-index);
-    }
 
     #snippet-introletter .text-date {
         background: var(--gray);
-        font-size: 1.37rem;
+        font-size: var(--fontsize-small);
         color: var(--white);
         padding:0.15rem 1rem;
         border-radius: 0.5rem;
     }
 
-    #snippet-introletter .interval-tile {
+    #snippet-introletter .interval-title {
         margin-top: 0.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
 
 
@@ -79,22 +75,20 @@
     }
 
 </style>
-<a href="{% url 'letter_quizapp:verify' pk=initial_letter.pk %}" class="container-snippets container-right"
-   id="snippet-introletter">
+<a href="{% url 'letter_quizapp:verify' pk=initial_letter.pk %}" class="container-snippets container-right"  id="snippet-introletter">
     <div class="item-arrow-right"></div>
     <span class="icon-star1 material-icons">grade</span>
-        <span class="icon-star2 material-icons">grade</span>
-        <span class="icon-star3 material-icons">grade</span>
-    <div class="spacing-horizontal ">
-        <span class="text-content text-name">{{ target_letter.letter_info.receiver_name }}</span>
+    <span class="icon-star2 material-icons">grade</span>
+    <div class="spacing-horizontal">
+        <span class="text-index">{{ target_letter.letter_info.receiver_name }}</span>
     </div>
-    <div class="text-content interval-tile">
+    <div class="text-index text-lettertitle interval-title">
         {{ target_letter.letter_info.title|truncatechars:23 }}
     </div>
     <div class="spacing-horizontal">
         <div class="text-content text-date">
             {{ target_letter.letter_info.written_at|date:"m월 d일"  }}
         </div>
-        <span class="text-content text-name">{{ target_letter.letter_info.sender_name }}</span>
+        <span class="text-index">{{ target_letter.letter_info.sender_name }}</span>
     </div>
 </a>

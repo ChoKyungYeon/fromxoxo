@@ -16,5 +16,6 @@ urlpatterns = [
     path('delete/<uuid:pk>', LetterDeleteView.as_view(), name='delete'),
     path('stateupdate/', LetterStateUpdateView.as_view(), name='stateupdate'),
     path('save/', LetterSaveView.as_view(), name='save'),
+    path('reset/', LetterResetView.as_view(), name='reset'),
     path('search/', LetterSearchView.as_view(), name='search'),
 ]

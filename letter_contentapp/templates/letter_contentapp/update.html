@@ -52,7 +52,7 @@
     }
 </style>
 
-<header class="tema-{{ target_content.tema }} header-empty" id="headerTema">
+<header class="header-empty">
     {% url 'letter_infoapp:update' pk=target_letter.letter_info.pk as url %}
     {% include 'headersnippets/navback.html' with url=url %}
     {% if target_letter.progress == 'done' %}
@@ -66,7 +66,7 @@
 
 
 
-<main class="tema-{{ target_content.tema }}" id="mainTema">
+<main >
     <div class="frame-letter" id="letter_content-create">
         {% include 'snippets/progress.html' %}
         {% include 'snippets/progressinfo.html' %}

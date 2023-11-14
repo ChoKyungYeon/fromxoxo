@@ -1,5 +1,4 @@
 {% load static %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
 .frame-footer{
@@ -42,6 +41,7 @@
     right: 0rem;
     top:-3.2rem;
 }
+
 </style>
 {% if not user.is_authenticated %}
     <button onclick="showGuide()" class="frame-footer">
@@ -56,7 +56,7 @@
     </button>
 {% else %}
     {% if user != target_letter.sender and user != target_letter.receiver %}
-    <a href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer">
+    <a href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer" id="btn-loading">
         <div class="container-footer">
             <span class="text-title">
                 편지를 저장해요!
@@ -66,31 +66,26 @@
             </div>
         </div>
     </a>
-    {% else %}
-    <button id="btn-download" class="frame-footer">
-        <div class="container-footer">
-            <span class="text-title">
-                편지 스크린샷
-            </span>
-            <div class="btn-save material-icons">
-                photo_camera
-            </div>
-        </div>
-    </button>
+    <div id="loading-save" class="loading-indicator">
+      <div class="spinner"></div>
+    </div>
     {% endif %}
 {% endif %}
-
 <script>
-document.getElementById('btn-download').addEventListener('click', function() {
-    html2canvas(document.querySelector("#letter-detail")).then(canvas => {
-        // Create an image
-        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+document.addEventListener("DOMContentLoaded", function() {
+  const saveButton = document.getElementById("btn-loading");
+  const loadingIndicator = document.getElementById("loading-save");
 
-        // Create a link to download
-        var link = document.createElement('a');
-        link.download = 'letterimage.png';
-        link.href = image;
-        link.click();
-    });
+  saveButton.addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+
+    // Show the loading indicator
+    loadingIndicator.style.display = "block";
+
+    // Delay the actual link navigation by 1 second (1000 milliseconds)
+    setTimeout(function() {
+      window.location.href = saveButton.href; // Navigate to the link URL
+    }, 1500);
+  });
 });
 </script>

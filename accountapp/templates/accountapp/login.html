@@ -17,35 +17,16 @@
         text-shadow: 0 0 1.3px black;
         margin-right: 2rem;
     }
-    #account-login .text-xoxo {
-        color: var(--middlepink);
-        font-weight: inherit;
-        font-size: inherit;
-        text-shadow: 0 0 1.3px var(--middlepink);
 
-    }
 
     #account-login .img-logo{
-        width: 3rem;
-        height: 3rem;
+        width: 2.7rem;
+        height: 2.7rem;
         margin-right: 1rem;
         flex-shrink: 0;
         object-fit: cover;
         transform: rotate(17deg);
     }
-
-    #account-login .spacing-title{
-        justify-content: flex-start;
-        margin-bottom: 1.5rem;
-    }
-
-    #account-login .container{
-        justify-content: center;
-        align-items: center;
-        padding-top:3rem;
-        margin-top:0
-    }
-
 
 
     #account-login .field-username {
@@ -59,16 +40,27 @@
         font-weight: var(--fontweight-bold);
         color: var(--black);
     }
+    #account-login .spacing-title{
+        justify-content: flex-start;
+        margin-bottom: 1.3rem;
+    }
+
+    #account-login .container{
+        justify-content: center;
+        align-items: center;
+        padding-top:3rem;
+        margin-top:0
+    }
 
 
 
     @media screen and (min-width: 800px){
-        .frame-centralize{
+        #account-login{
             padding:3rem 26% calc(var(--height-header) + 3rem) 26%;
         }
     }
     @media screen and (min-width: 1100px){
-        .frame-centralize{
+        #account-login{
             padding:3rem 32% calc(var(--height-header) + 3rem) 32%;
         }
     }

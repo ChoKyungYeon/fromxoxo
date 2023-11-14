@@ -37,8 +37,8 @@ class HomescreenView(TemplateView):
         return context
 
 
-class ContactView(TemplateView):
-    template_name = 'homescreenapp/contact.html'
+class BugreportView(TemplateView):
+    template_name = 'homescreenapp/bugreport.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,10 +64,6 @@ class AnnouncementView(TemplateView):
         if document.announcement:
             return redirect(document.announcement)
         return super().get(request, *args, **kwargs)
-
-class RefundView(TemplateView):
-    template_name = 'homescreenapp/refund.html'
-
 
 class PrivacypolicyView(TemplateView):
     template_name = 'homescreenapp/privacypolicy.html'

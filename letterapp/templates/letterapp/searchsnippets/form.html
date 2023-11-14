@@ -18,10 +18,11 @@
 <div class="frame-letter " id="letter-urlsearch-form">
       <form action="{% url 'letterapp:search' %}?type=url" method="post" style="position: relative">
         {% csrf_token %}{% bootstrap_form form %}
-          <button type="button" onclick="pasteClipboard()" class="icon-paste material-icons">content_paste</button>
+          <button onclick="pasteClipboard()" class="icon-paste material-icons">content_paste</button>
         <input type="submit" class="btn-submit-fixed"  value="링크로 편지 찾기">
       </form>
 </div>
+
 <script>
  function pasteClipboard() {
     var pasteText = prompt("복사한 링크를 입력해 주세요!", "");

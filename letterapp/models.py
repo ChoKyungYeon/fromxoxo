@@ -18,7 +18,6 @@ class Letter(models.Model):
     receiver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_receiver', null=True)
     checked_at = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
-    received_at = models.DateTimeField(null=True)
     progress = models.CharField(max_length=20, choices=progresschoice, default='progress1')
     state = models.CharField(max_length=20, choices=statechoice, default='unchecked')
     qr = models.ImageField(upload_to='letter/')
@@ -35,7 +34,7 @@ class Letter(models.Model):
 
     def generate_url(self):
         base_url = reverse('letterapp:intro', kwargs={'pk': self.pk})
-        full_url = f'http://13.209.69.42{base_url}'
+        full_url = f'https://www.fromxoxo.com{base_url}'
         return type_tiny.tinyurl.short(full_url)
 
 

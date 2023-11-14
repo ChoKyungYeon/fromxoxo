@@ -4,7 +4,7 @@
 {% load static %}
 
 
-<header class="header-empty tema-blue" >
+<header class="header-empty" >
     {% if page == 'savedmailbox' %}
     {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
     {% else %}
@@ -12,7 +12,7 @@
     {% endif %}
     {% include 'headersnippets/navback.html' with url=url %}
 </header>
-    <main class="tema-blue">
+    <main>
         {% include 'letterapp/searchsnippets/guide.html' %}
         {% include 'letterapp/searchsnippets/form.html' %}
     </main>

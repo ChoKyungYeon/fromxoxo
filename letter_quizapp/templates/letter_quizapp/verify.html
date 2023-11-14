@@ -1,4 +1,4 @@
-{% extends 'base_noback.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <style>
 #letter_quiz-verify .item-letter{
@@ -28,10 +28,10 @@
     margin-left: auto;
 }
 </style>
-<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
-        {% if target_letter.sender %}
+<header class="header-empty">
+        {% if user == target_letter.sender %}
         {%  url 'letterapp:result' pk=target_letter.pk as url %}
-        {% elif target_letter.receiver %}
+        {% elif user == target_letter.receiver %}
         {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
@@ -40,7 +40,7 @@
 </header>
 
 
-<main class="tema-{{ target_letter.letter_content.tema }}">
+<main>
     <div class="frame-letter" id="letter_quiz-verify">
         {% include 'letter_quizapp/verifysnippets/question.html' %}
         {% if type == 'choice' %}
@@ -52,5 +52,7 @@
         {% endif %}
     </div>
 </main>
+
+
 {% endblock %}
 

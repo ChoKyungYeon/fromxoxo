@@ -34,11 +34,11 @@
 }
 .frame-centralize .text-title{
     font-weight: var(--fontweight-index);
-    font-size: 2rem;
+    font-size: var(--fontsize-emphasize);
     padding-left: 0.7rem;
 }
 .frame-centralize .text-index{
-    font-size: 1.8rem;
+    font-size: var(--fontsize-title);
     font-weight: var(--fontweight-content);
 }
 

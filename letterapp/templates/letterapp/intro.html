@@ -7,14 +7,16 @@
     }
     #letter-intro .text-intro {
         font-weight: var(--fontweight-index);
-    }    #letter-intro .text-emphasize {
+        font-size: var(--fontsize-bold);
+    }
+    #letter-intro .text-emphasize {
         font-weight: inherit;
         color: var(--middlepink);
         font-size: inherit;
     }
 
     #letter-intro .spacing-title {
-        margin-bottom: 2.5em;
+        margin-bottom: 2em;
         position: relative;
     }
 #letter-intro .img-intro {
@@ -48,17 +50,12 @@
 </style>
 
 
-<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
-    {% if user == target_letter.receiver %}
-        {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
-        {% include 'headersnippets/navback.html' with url=url %}
-    {% else %}
-        {%  url 'homescreenapp:homescreen' as url %}
-        {% include 'headersnippets/exit.html' with url=url %}
-    {% endif%}
+<header class="header-empty">
+    {%  url 'homescreenapp:homescreen' as url %}
+    {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
-<main class="main-centralize tema-{{ target_letter.letter_content.tema }}">
+<main class="main-centralize">
     <div class="frame-letter" id="letter-intro" style="width: 100%">
         <div class="spacing-title">
             <span class="text-title text-intro">

@@ -15,7 +15,7 @@
               <span id="redirectUrl" style="display:none;">{{ redirect_url }}</span>
             {% csrf_token %}{% bootstrap_form form %}
               <div class="link">
-                <span class="text-help">* 인증 메시지가 도착하지 않나요?</span>
+                <span class="text-help">* 인증 번호가 도착하지 않나요?</span>
                 <a href="{% url 'phonenumberapp:create' %}?type=signup" class="text-link">재인증</a>
               </div>
             <input type="submit" class="btn-submit-close"  value="휴대폰 인증">

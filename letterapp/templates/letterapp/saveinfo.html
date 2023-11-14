@@ -6,7 +6,7 @@
 
 
 </style>
-<header class="header-empty tema-{{ target_letter.letter_content.tema }}">
+<header class="header-empty">
         {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
         {% if page == 'saved' %}
         {% include 'headersnippets/exit.html' with url=url %}
@@ -15,7 +15,7 @@
         {% endif %}
 </header>
 
-<main class="tema-{{ target_letter.letter_content.tema }}">
+<main>
     {% include 'letterapp/resultsnippets/preview.html' %}
     {% include 'letterapp/resultsnippets/info.html' %}
 </main>

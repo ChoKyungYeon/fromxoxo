@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var mainTema = document.getElementById('mainTema');
-    var headerTema = document.getElementById('headerTema'); // Get the headerTema element
+    var bodyTema = document.getElementById('bodyTema');
     var temaField = document.getElementById('temaField');
 
     temaField.addEventListener('change', function() {
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update classes for both elements
-        updateTemaClasses(mainTema);
-        updateTemaClasses(headerTema);
+        updateTemaClasses(bodyTema);
     });
 });

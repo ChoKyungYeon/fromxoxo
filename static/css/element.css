@@ -171,6 +171,7 @@
 
 .btn-submit-close{
     margin-top:2.5rem;
+    height: 4.8rem;
 }
 
 .btn-submit-fixed{
@@ -220,4 +221,32 @@
 /* slide 관리 */
 .slide{
     width: 100%;
+}
+.loading-indicator{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width: 4.5rem;
+    height: 4.5rem;
+    z-index: 100;
+    display: none;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 7px solid var(--black);
+  border-top: 7px solid var(--middlepink);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: rotate 1.5s linear infinite;
 }

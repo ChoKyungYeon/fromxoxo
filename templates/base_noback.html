@@ -2,25 +2,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 {%  include 'head.html' %}
-<body >
+<body class="tema-{{ tema }}" id="bodyTema" >
     {% block content %}
     {% endblock %}
-<script>
-window.addEventListener('load', function() {
-  history.pushState({}, '');
-});
-
-window.addEventListener('popstate', function(event) {
-  history.pushState({}, '');
-});
-
-function noBack(){
-    window.history.forward();
-}
-
-window.onload = noBack;
-window.onpageshow = function(event) { if(event.persisted) noBack() };
-
-</script>
 </body>
+<script>
+    window.addEventListener('load', function() {
+      history.pushState({}, '');
+    });
+    window.addEventListener('popstate', function(event) {
+      history.pushState({}, '');
+    });
+    function noBack(){
+        window.history.forward();
+    }
+    window.onload = noBack;
+    window.onpageshow = function(event) { if(event.persisted) noBack() };
+</script>
 </html>

@@ -3,9 +3,48 @@
 {% load bootstrap4 %}
 {% block content %}
 
+<style>
+    #account-delete .text-alert {
+        font-size: var(--fontsize-bold);
+        font-weight: var(--fontweight-bold);
+        color: var(--black);
+    }
+    #account-delete .spacing-title{
+        justify-content: center;
+        margin-bottom: 1.3rem;
+    }
+    #account-delete .text-content{
+        font-size: var(--fontsize-index);
+        text-align: center;
+    }
+
+    #account-delete .container{
+        justify-content: center;
+        align-items: center;
+        padding-top:3rem;
+        margin-top:0
+    }
+
+    #account-delete .btn-submit-close{
+        background: var(--red);
+    }
+    @media screen and (min-width: 800px){
+        #account-delete{
+            padding-left: 26%;
+            padding-right: 26%;
+        }
+    }
+    @media screen and (min-width: 1100px){
+        #account-delete{
+            padding-left: 32%;
+            padding-right: 32%;
+        }
+    }
+
+</style>
 
 
-<header class="header">
+<header >
     {% url 'accountapp:setting' pk=user.pk as url %}
     {% include 'headersnippets/navback.html' with url=url %}
     {% with title="계정 삭제" %}
@@ -13,31 +52,17 @@
     {% endwith %}
 </header>
 
-<main class="consult-create ">
-    <div class="frame">
-        <div class="text-title-guideform">* 계정 삭제 주의사항</div>
-        <div class="container-guideform">
-            <div class="item-guide">
-                <span class="text-content">현재 진행 중인 컨설팅 및 매칭이 있을 경우, 계정을 삭제할 수 없습니다.</span>
+<main>
+    <div class="frame frame-form" id="account-delete">
+        <div class="container" >
+            <div class="spacing-title">
+                <span class="text-alert">From.XoXo를 떠나시나요?</span>
             </div>
-            <div class="item-guide">
-                <span class="text-content">계정을 삭제하면 현재까지 저장된 정보 및 기록이 모두 사라집니다.</span>
-            </div>
-            <div class="item-guide">
-                <span class="text-content">이후 계정을 복구할 수 없습니다.</span>
-            </div>
-        </div>
-
-    </div>
-    <div class="frame" style="padding-top:1rem;">
-        <div class="container-guideform" >
+                <span class="text-content">더 이상 새로운 편지를 작성하고<br>
+                저장한 편지를 확인할 수 없어요!</span>
         <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="post" onsubmit="return confirmDeleteAccount()">
             {% csrf_token %}
-            {% if user.can_delete %}
-            <input type="submit" class="btn-submit" style="background: var(--red); margin-top:0" value="계정 삭제">
-            {% else %}
-            <div class="btn-submit" style="background:#6c7084; margin-top:0; color: var(--white)" >계정 삭제 불가</div>
-            {% endif %}
+            <input type="submit" class="btn-submit-close" value="계정 삭제">
         </form>
         </div>
     </div>

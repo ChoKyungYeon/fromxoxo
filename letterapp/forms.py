@@ -26,5 +26,6 @@ class LetterSearchForm(forms.Form):
             'placeholder': '복사한 링크를 입력해 주세요!',
             'class': 'textinput field-letter_url',
             'autofocus': True,
+            'id':'field-letter_url'
         })
     )

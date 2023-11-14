@@ -35,6 +35,7 @@ class Letter_contentUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = self.object.letter
         context['progress'] = 2
+        context['tema'] = self.object.tema
         return context
 
 

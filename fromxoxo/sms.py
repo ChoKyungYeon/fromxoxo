@@ -48,11 +48,6 @@ def Send_SMS(to, contents, can_receive):
             }
         ]
     }
-    try:  # deploy check
-        import fromxoxo.settings.local
-        can_receive = False
-    except:
-        pass
     if can_receive:
         try:
             response = requests.post(url + uri, headers=header, data=json.dumps(data))

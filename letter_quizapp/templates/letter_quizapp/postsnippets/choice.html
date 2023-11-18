@@ -1,0 +1,52 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<style>
+#letter_quiz-form-choice .field-choice{
+    margin-left: auto;
+    width: 82%;
+}
+
+#letter_quiz-form-choice .selectmultiple {
+    position: absolute;
+    top:5rem;
+    left: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    align-items:flex-end;
+}
+
+#letter_quiz-form-choice .selectmultiple label{
+    font-size:1.2rem;
+}
+
+#letter_quiz-form-choice .selectmultiple input{
+    display: none;
+}
+
+#letter_quiz-form-choice .form-group:nth-of-type(3) {
+    position: relative;
+}
+</style>
+
+<div class="frame-quiz" id="letter_quiz-form-choice">
+    {% if page == 'create' %}
+    <form action="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=choice" method="post" enctype="multipart/form-data" >
+    {% else %}
+    <form action="{% url 'letter_quizapp:update' pk=target_quiz.pk %}" method="post" enctype="multipart/form-data" >
+    {% endif %}
+        {% csrf_token %}{% bootstrap_form form %}
+        <input type="submit" class="btn-submit-fixed" {% if page == 'create' %} value="질문 추가" {% else %} value="질문 수정" {% endif %}>
+    </form>
+</div>
+
+<script src="{% static 'js/handleSelectMultiple.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.frame-quiz form');
+        var formGroups = form.querySelectorAll('.form-group');
+        var itemLetterDiv = document.getElementById('field-choiceanswer');
+        formGroups[2].appendChild(itemLetterDiv);
+    });
+</script>

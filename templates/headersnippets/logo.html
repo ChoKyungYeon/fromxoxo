@@ -20,7 +20,7 @@
     flex-direction: row;
     font-size: 2rem;
     color:inherit;
-    font-weight: var(--fontweight-index);
+    font-weight: var(--fontweight-bold);
     margin-left: 0.5rem;
     text-shadow: 0 0 1px black;
 }
@@ -33,7 +33,7 @@
 }
 
 </style>
-<a class="btn-logo" href="{% url 'homescreenapp:homescreen'%}">
-<span class="text-logo tema-{{ target_letter.letter_content.tema }}" style="background: none">
+<a class="btn-logo" href="{% url 'homescreenapp:intro'%}">
+<span class="text-logo" style="background: none">
     From.<span class="text-logo-bold">XoXo</span></span>
 </a>

@@ -1,0 +1,4 @@
+<header class="header-empty">
+        {%  url 'letter_quizapp:list' pk=target_letter.pk as url %}
+        {% include 'headersnippets/back.html' with url=url %}
+</header>

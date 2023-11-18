@@ -1,0 +1,13 @@
+<header class="header-empty">
+        {%  url 'letter_quizapp:list' pk=target_letter.pk as url %}
+        {% include 'headersnippets/back.html' with url=url %}
+        <form style="margin-left: auto;width: fit-content" action="{% url 'letter_quizapp:delete' pk=target_quiz.pk %}" method="post"
+              id="form-delete-quiz" >
+            {% csrf_token %}
+            <input style="display:none" type="submit" name="next"
+                   value="{% url 'letter_quizapp:list' pk=target_letter.pk %}">
+            <button type="button" onclick="confirmAction('form-delete-quiz', '선택한 질문을 삭제하시겠습니까?')" class="btn-delete-header material-icons">
+                delete_forever
+            </button>
+        </form>
+</header>

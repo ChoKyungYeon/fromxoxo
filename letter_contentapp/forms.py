@@ -16,8 +16,8 @@ class Letter_contentCreateForm(ModelForm):
         }
 
         widgets = {
-            'tema': forms.Select(attrs={'class': 'select field-tema', 'id': 'temaField'}),
+            'tema': forms.Select(attrs={'class': 'select field-tema', 'id': 'field-tema'}),
             'content': forms.Textarea(attrs={'placeholder': '내용을 작성해 주세요! 언제든 조정할 수 있습니다',
-                                          'class': 'textarea-wide field-content',}),
-            'image': forms.FileInput(attrs={'class': 'fileinput field-image'}),
+                                          'class': 'textarea', 'id': 'field-content'}),
+            'image': forms.FileInput(attrs={'class': 'fileinput', 'id': 'field-image'}),
         }

@@ -1,0 +1,93 @@
+{% load bootstrap4 %}
+{% load static %}
+<style>
+    #letter-create-post{
+        padding-top:3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    #letter-create-post .form-nav {
+        width: 47.5%;
+    }
+    #letter-create-post .container {
+        width: 47.5%;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    #letter-create-post .item-image {
+        margin-bottom: 1rem;
+    }
+    #letter-create-post .img{
+        width: 2.9rem;
+        position: relative;
+        top:0.1rem;
+        left: 0.1rem;
+    }
+
+</style>
+<div class="frame-letter" id="letter-create-post">
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'letterapp:create' %}" id="letterForm" method="post" class="form-nav">
+        {% csrf_token %}{% bootstrap_form form %}
+        <button type="submit" class="container" style="width: 100%"  id="submitBtn" onclick="return confirmCreate()"
+                data-undone-letter="{% if undone_letter %}true{% else %}false{% endif %}">
+            <div class="item-image">
+                <img class="img" src='/static/icons/guide/post.png'>
+            </div>
+            <div class="text-content-bold" >
+                새로 작성해요
+            </div>
+        </button>
+        </form>
+    {% else %}
+        <a  href="{% url 'accountapp:login' %}" onclick="alertAuthentication();" class="container">
+            <div class="item-image">
+                <img class="img" src='/static/icons/guide/post.png'>
+            </div>
+            <div class="text-content-bold" >
+                새로 작성해요
+            </div>
+        </a>
+    {% endif %}
+    {% if undone_letter %}
+    <a href="{% url 'letter_infoapp:update' pk=undone_letter.letter_info.pk %}" class="container">
+        <div class="item-image">
+            <img class="img" src='/static/icons/guide/resume.png' style="left:0">
+        </div>
+        <div class="text-content-bold" >
+            이어서 작성
+        </div>
+    </a>
+    {% else %}
+        {% if request.user.is_authenticated %}
+        <a class="container" onclick="alertMessage('작성 중인 편지가 없습니다')">
+        {% else %}
+        <a  href="{% url 'accountapp:login' %}" onclick="alertAuthentication();" class="container" >
+        {% endif %}
+            <div class="item-image">
+                <img class="img" src='/static/icons/guide/none.png' style="opacity: 0.7; left:0">
+            </div>
+            <div class="text-content-bold" style="color: var(--softgray)">
+                이어쓰기 없음
+            </div>
+        </a>
+    {% endif %}
+</div>
+<script>
+    function confirmCreate() {
+        var submitBtn = document.getElementById('submitBtn');
+        var hasUndoneLetter = submitBtn.getAttribute('data-undone-letter') === 'true';
+        if (hasUndoneLetter) {
+            return confirm('편지를 새로 작성하시면 작성 중인 편지가 사라져요!');
+        }
+        return true;
+    }
+</script>
+<script src="{% static 'js/alertAuthentication.js' %}"></script>
+<script src="{% static 'js/alertMessage.js' %}"></script>

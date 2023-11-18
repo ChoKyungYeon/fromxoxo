@@ -1,15 +1,27 @@
 {% load static %}
 <style>
-    #frame-zoom .container-btn{
-        width: 100%;
+    .btn-add{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed var(--softgray);
+        font-size: 2.2rem;
+        font-weight: var(--fontweight-content);
+        height: 3.5rem;
+        width: 3.5rem;
+        background: var(--white);
+        border-radius: 50%;
+        color: var(--softgray);
+        margin: 2.5rem auto 0 auto;
+    }
+    
+    #frame-zoom1 .spacing-horizontal-stretch{
         padding-left: var(--padding-frame);
         padding-right: var(--padding-frame);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
     }
-    #frame-zoom .btn-nav {
+
+    #frame-zoom1 .container-nav {
         width: 31%;
         padding-top:1.5rem;
         padding-bottom:1.3rem;
@@ -17,49 +29,45 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        box-shadow: none;
         background: var(--white);
         border-radius: var(--border-radius-container);
         border:var(--border-container);
+        flex-shrink: 0;
     }
 
-    #frame-zoom .item-image {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 3.5rem;
-        height: 3.5rem;
-        flex-shrink: 0;
+    #frame-zoom1 .item-image {
         margin-bottom: 0.7rem;
     }
-    #frame-zoom .img-post {
-        object-fit: cover;
+    #frame-zoom1 .item-image .img{
         width: 2.8rem;
-        height: 2.8rem;
     }
+
 </style>
-<button onclick="closeImage()" id="frame-zoom" class="frame-zoom">
-    <div class="btn-exit material-icons">close</div>
-    <div class="container-btn">
-        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=choice" class="btn-nav">
+{% if not quizs.count == 5 %}
+<button onclick="showZoom(1)" class="btn-add material-icons">add</button>
+<button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom">
+    <div class="icon-exit material-icons">close</div>
+    <div class="spacing-horizontal-stretch">
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=choice" class="container-nav">
             <div class="item-image">
-                <img class="img-post" src='/static/icons/guide/multiple.png'>
+                <img class="img" src='/static/icons/guide/multiple.png'>
             </div>
             <div class="text-content-bold" >
                 객관식
             </div>
         </a>
-        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=answer" class="btn-nav">
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=word" class="container-nav">
             <div class="item-image">
-                <img class="img-post" src='/static/icons/guide/qa.png'>
+                <img class="img" src='/static/icons/guide/qa.png'>
             </div>
             <div class="text-content-bold" >
                 단답형
             </div>
         </a>
-        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=date" class="btn-nav">
+        <a href="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=date" class="container-nav">
             <div class="item-image">
-                <img class="img-post" src='/static/icons/guide/timetable.png'>
+                <img class="img" src='/static/icons/guide/timetable.png'>
             </div>
             <div class="text-content-bold" >
                 날짜
@@ -67,4 +75,5 @@
         </a>
     </div>
 </button>
-<script src="{% static 'js/showImage.js' %}"></script>
+<script src="{% static 'js/showZoom.js' %}"></script>
+{% endif %}

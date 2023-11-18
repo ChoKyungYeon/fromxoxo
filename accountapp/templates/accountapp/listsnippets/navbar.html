@@ -1,0 +1,90 @@
+{% load static %}
+<style>
+
+
+
+#account-mailbox-intro {
+    background: var(--black);
+    padding-bottom:3rem;
+    padding-top:2.5rem;
+}
+
+
+
+#account-mailbox-intro .icon-star1,
+#account-mailbox-intro .icon-star3,
+#account-mailbox-intro .icon-star2{
+    position: absolute;
+    font-weight: 600;
+}
+#account-mailbox-intro .icon-star1 {
+    left: 28%;
+    top:-2.5rem;
+    font-size: 1.2rem;
+    color: #fdebb4;
+    transform: rotate(-45deg);
+}
+
+#account-mailbox-intro .icon-star2 {
+    left: 49%;
+    top: 3.7rem;
+    font-size: 1.1rem;
+    color: #ffdf80;
+    transform: rotate(-25deg);
+}
+
+
+#account-mailbox-intro .icon-star3 {
+    right: 0;
+    top: -1.3rem;
+    font-size: 1rem;
+    color: #fdebb4;
+    transform: rotate(-13deg);
+}
+
+#account-mailbox-intro .container-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+#account-mailbox-intro  .btn-untouched,
+#account-mailbox-intro  .btn-touched{
+    z-index:99;
+    width: 45%;
+    height: 4rem;
+    border-radius: var(--border-radius-btn);
+    background: var(--blackgray);
+    box-shadow: var(--shadow-btn-white);
+}
+#account-mailbox-intro  .btn-untouched{
+    background: transparent;
+    border:none;
+    color:var(--gray);
+    box-shadow: none;
+}
+
+
+</style>
+<div class="frame" id="account-mailbox-intro">
+    <div class="container-btn" style="position: relative">
+        <span class="icon-star1 material-icons">grade</span>
+        <span class="icon-star2 material-icons">grade</span>
+        <span class="icon-star3 material-icons">grade</span>
+        {% if slide == "writelist" %}
+        <a  class="btn-nav btn-touched">
+        {% else %}
+        <a href="{% url 'accountapp:writelist' pk=user.pk %}" class="btn-nav btn-untouched">
+        {% endif %}
+            작성한 편지
+        </a>
+        {% if slide == "savelist" %}
+        <a  class="btn-nav btn-touched">
+        {% else %}
+        <a href="{% url 'accountapp:savelist' pk=user.pk %}" class="btn-nav btn-untouched">
+        {% endif %}
+            저장한 편지
+        </a>
+    </div>
+</div>

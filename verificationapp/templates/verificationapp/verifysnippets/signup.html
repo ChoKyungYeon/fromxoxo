@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+<header>
+        {% with title="휴대폰 인증" %}
+        {% include 'headersnippets/title.html' %}
+        {% endwith %}
+        {% url 'accountapp:login' as url %}
+        {% include 'headersnippets/exit.html' with url=url %}
+</header>
+<main>
+  <div class="frame">
+      <div class="container-form">
+          <form action="{% url 'verificationapp:verify' pk=target_verification.pk  %}?type=signup" method="post"  class="form-verify">
+              <div id="countdown" class="text-countdown">{{remaining_time}}</div>
+              <span id="remainingTime" style="display:none;">{{ remaining_time }}</span>
+              <span id="redirectUrl" style="display:none;">{{ redirect_url }}</span>
+            {% csrf_token %}{% bootstrap_form form %}
+              <div class="link">
+                <span class="text-content">* 인증 번호가 도착하지 않나요?</span>
+                <a href="{% url 'verificationapp:create' %}?type=signup" class="text-link">재인증</a>
+              </div>
+            <input type="submit" class="btn-submit-close"  value="휴대폰 인증">
+          </form>
+      </div>
+
+  </div>
+</main>

@@ -1,0 +1,90 @@
+
+<style>
+
+footer{
+    display: flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items: center;
+    padding: 5.5rem var(--padding-frame) 8rem var(--padding-frame);
+    background:var(--black);
+}
+
+footer .spacing-horizontal-stretch{
+    align-items:flex-start;
+    width: 100%;
+}
+footer .container-footer{
+    display: flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    width: 50%;
+}
+
+footer .text-buisinessinfo{
+      font-weight:var(--fontweight-content);
+      font-size:var(--fontsize-detail);
+      color:var(--white);
+      margin-bottom:0.5rem;
+}
+footer .link-etc{
+      font-weight:var(--fontweight-content);
+      font-size:var(--fontsize-detail);
+      color:var(--white);
+      margin-bottom:0.7rem;
+}
+
+
+footer .text-buisinessdetail{
+      width:100%;
+      color:#e0e0eb;
+      font-size:var(--fontsize-small);
+      font-weight:300;
+
+}
+footer .text-copyright{
+      font-weight:var(--fontweight-content);
+      margin-top:3rem;
+      font-size:var(--fontsize-content);
+      width: 100%;
+      display: flex;
+      flex-direction:row;
+      justify-content:center;
+      align-items: center;
+      color:var(--white);
+}
+@media screen and (min-width: 600px) {
+      footer{
+          padding: 4rem 28% 8rem 28%;
+      }
+}
+
+@media screen and (min-width: 1100px) {
+      footer{
+          padding: 4rem 36% 8rem 36%;
+      }
+}
+
+</style>
+<footer>
+  <div class="spacing-horizontal-stretch">
+        <div class="container-footer">
+              <a href="{% url 'documentapp:open' %}?type=privacypolicy" target="_blank" rel="noopener noreferrer"
+                 class="link-etc">개인정보처리방침</a>
+              <a href="{% url 'documentapp:open' %}?type=announcement" target="_blank" rel="noopener noreferrer"
+                 class="link-etc">공지사항</a>
+              <a href="{% url 'documentapp:open' %}?type=termofuse" target="_blank" rel="noopener noreferrer"
+                 class="link-etc">서비스이용약관</a>
+              <a href="{% url 'documentapp:open' %}?type=bugreport" target="_blank" rel="noopener noreferrer"
+                 class="link-etc">버그제보</a>
+        </div>
+        <div class="container-footer">
+              <div class="text-buisinessinfo">From.XoXo 사업자 정보</div>
+              <div class="text-buisinessdetail">
+                    fromxoxo1352@gmail.com / 상호명 : 프롬쏘쏘 / 대표자명 : 조경연 / 책임자 : 조경연, 김재욱 / 0507-0178-1539
+              </div>
+        </div>
+  </div>
+  <div class="text-copyright">ⓒ 2023 All rights reserved by From.XoXo</div>
+</footer>

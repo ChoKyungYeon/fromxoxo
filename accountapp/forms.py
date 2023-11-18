@@ -1,10 +1,8 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django import forms
 from django.core.validators import MaxLengthValidator
-from django.forms import ModelForm
 from accountapp.models import CustomUser
-from fromxoxo.widgets import NullSelect
 
 
 class AccountLoginForm(AuthenticationForm):
@@ -12,13 +10,14 @@ class AccountLoginForm(AuthenticationForm):
         label=(""),
         widget=forms.TextInput(attrs={
             'placeholder': '사용자 아이디',
-            'class': 'textinput textinput-username',
+            'class': 'textinput',
             'autofocus': True,
             'oninput': 'this.value = this.value.slice(0, 12);'
         }),
         validators=[MaxLengthValidator(12)],
         max_length=12
     )
+
     password = forms.CharField(
         label=(""),
         strip=False,
@@ -35,8 +34,8 @@ class AccountLoginForm(AuthenticationForm):
         if username is not None and password:
             self.user_cache = authenticate(self.request, username=username, password=password)
             if self.user_cache is None:
-                self.add_error('username', '')  # Add field-level error.
-                self.add_error('password', '잘못된 아이디 또는 비밀번호입니다.')  # Add field-level error.
+                self.add_error('username', '')
+                self.add_error('password', '잘못된 아이디 또는 비밀번호입니다.')
             else:
                 self.confirm_login_allowed(self.user_cache)
         return self.cleaned_data
@@ -44,7 +43,7 @@ class AccountLoginForm(AuthenticationForm):
 
 class AccountCreateForm(UserCreationForm):
     password1 = forms.CharField(
-        label=("비밀번호 "),
+        label=("비밀번호"),
         strip=False,
         widget=forms.PasswordInput(attrs={
             'placeholder': '영문/숫자/특수문자 혼합 8~20자',
@@ -71,7 +70,7 @@ class AccountCreateForm(UserCreationForm):
         }
 
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문, 숫자, 기호', 'class': 'textinput'}),
+            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문/숫자/기호', 'class': 'textinput'}),
             'agree_terms': forms.CheckboxInput(attrs={'class': 'checkbox'}),
         }
 
@@ -85,7 +84,7 @@ class AccountUsernameUpdateForm(forms.ModelForm):
             'username': '사용자 아이디',
         }
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문, 숫자, 기호', 'class': 'textinput'}),
+            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문/숫자/기호', 'class': 'textinput'}),
         }
 
 class AccountPasswordUpdateForm(UserCreationForm):
@@ -103,7 +102,7 @@ class AccountPasswordUpdateForm(UserCreationForm):
         label=(""),
         strip=False,
         widget=forms.PasswordInput(attrs={
-            'placeholder': "위와 동일한 비밀번호를 입력해 주세요",
+            'placeholder': "동일한 비밀번호를 입력해 주세요",
             'class': 'textinput-nolabel',
             'autocomplete': 'new-password'
         }),
@@ -114,7 +113,7 @@ class AccountPasswordUpdateForm(UserCreationForm):
         self.fields.pop('username')
 
 
-class AccountResetForm(UserCreationForm):
+class AccountPasswordResetForm(UserCreationForm):
     password1 = forms.CharField(
         label=("새 비밀번호 "),
         strip=False,
@@ -129,7 +128,7 @@ class AccountResetForm(UserCreationForm):
         label=("비밀번호 확인"),
         strip=False,
         widget=forms.PasswordInput(attrs={
-            'placeholder': "위와 동일한 비밀번호를 입력해 주세요",
+            'placeholder': "동일한 비밀번호를 입력해 주세요",
             'class': 'textinput',
             'autocomplete': 'new-password',
         }),
@@ -143,5 +142,5 @@ class AccountResetForm(UserCreationForm):
         }
 
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문, 숫자, 기호', 'value': 'defaultUsername','class': 'textinput'}),
+            'username': forms.TextInput(attrs={'placeholder': '6-12자의 영문/숫자/기호', 'value': 'defaultUsername','class': 'textinput'}),
         }

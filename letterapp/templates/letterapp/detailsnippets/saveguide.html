@@ -1,51 +1,22 @@
 {% load static %}
-<style>
-
-    #frame-guide{
-        display: none;
-        opacity: 0;
-    }
-#frame-guide .icon-down {
-    font-size: 2rem;
-    color: var(--middlepink);
-    font-weight: var(--fontweight-index);
-    margin-right: 1rem;
-}
-</style>
-
-<button onclick="closeGuide()" id="frame-guide" class="frame-zoom-info">
+<button onclick="closeZoom(2)" id="frame-zoom2" class="frame-zoom">
     <div class="container">
-        <div class="item-exit">
-            <div class="material-icons btn-exit">cancel</div>
+        <div class="item-exit material-icons">
+            cancel
         </div>
-        <div class="item-content" >
-            <div class="spacing-title">
-            <span class="text-title">
-                편지를 저장하고 싶으신가요?
+        <span class="text-title-bold" >
+            편지를 저장하고 싶으신가요?
+        </span>
+        <span class="text-title" style="text-align: center">
+            로그인/ 회원가입하고 홈 화면 또는 <br>
+            링크로 다시 접속해서 저장해요
             </span>
-            </div>
-            <div class="spacing-horizontal interval-content">
-                <span class="icon-down material-icons">arrow_drop_down</span>
-                <span class="text-content">
-                    From.XoXo에 로그인하고,
-                </span>
-            </div>
-            <div class="spacing-horizontal interval-content">
-                <span class="icon-down material-icons">arrow_drop_down</span>
-                <span class="text-content">
-                홈 화면 또는 링크로 다시 접속!
-                </span>
-            </div>
-            <div class="spacing-horizontal interval-content">
-                <span class="icon-down material-icons">arrow_drop_down</span>
-                <span class="text-content">
-                편지를 저장하고 확인해요
-                </span>
-            </div>
-
-        </div>
-        <a href="{% url 'accountapp:login' %}?redirect_letter={{target_letter.pk}}" class="btn-nav">이해했어요!</a>
+        <a href="{% url 'accountapp:login' %}?letter_pk={{target_letter.pk}}"  id="btn-loading1"
+           onclick="startLoading(1, event)" class="btn-nav">이해했어요!</a>
     </div>
 </button>
-
-<script src="{% static 'js/showGuide.js' %}"></script>
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+<script src="{% static 'js/showZoom.js' %}"></script>
+<script src="{% static 'js/startLoading.js' %}"></script>

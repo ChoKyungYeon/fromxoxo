@@ -20,12 +20,12 @@ class LetterCreateForm(forms.ModelForm):
 
 
 class LetterSearchForm(forms.Form):
-    letter_url = forms.CharField(
+    url = forms.CharField(
         label=(""),
         widget=forms.TextInput(attrs={
             'placeholder': '복사한 링크를 입력해 주세요!',
-            'class': 'textinput field-letter_url',
+            'class': 'textinput',
             'autofocus': True,
-            'id':'field-letter_url'
+            'id':'field-url'
         })
     )

@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'accountapp',
     'homescreenapp',
-    'phonenumberapp',
+    'verificationapp',
     'documentapp',
     'letterapp',
     'letter_quizapp',
@@ -124,7 +124,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('homescreenapp:homescreen')
+LOGIN_REDIRECT_URL = reverse_lazy('homescreenapp:intro')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
 
 MEDIA_URL = '/media/'

@@ -4,13 +4,15 @@
 <style>
 
     #account-login .btn-logo {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         display: flex;
         justify-content: center;
         flex-direction: row;
         align-items: center;
+        width: 100%;
     }
-    #account-login .text-logo {
+
+    #account-login .btn-logo .text {
         color: var(--black);
         font-weight: var(--fontweight-bold);
         font-size: 3rem;
@@ -18,8 +20,7 @@
         margin-right: 2rem;
     }
 
-
-    #account-login .img-logo{
+    #account-login .btn-logo .img {
         width: 2.7rem;
         height: 2.7rem;
         margin-right: 1rem;
@@ -27,29 +28,18 @@
         object-fit: cover;
         transform: rotate(17deg);
     }
-
-
-    #account-login .field-username {
-        margin-top: 0rem;
-    }
-
-
-
-    #account-login .text-login {
-        font-size: var(--fontsize-bold);
+    #account-login .text-login{
+        font-size: var(--fontsize-title);
         font-weight: var(--fontweight-bold);
         color: var(--black);
     }
-    #account-login .spacing-title{
-        justify-content: flex-start;
-        margin-bottom: 1.3rem;
-    }
 
-    #account-login .container{
-        justify-content: center;
-        align-items: center;
+
+    #account-login .container-form{
         padding-top:3rem;
-        margin-top:0
+    }
+    #account-login .spacing-title{
+        margin-bottom: 1.7rem;
     }
 
 
@@ -69,24 +59,24 @@
 <header class="header-empty">
 </header>
 
-<main class="main-centralize">
-    <div class="frame-centralize frame-form" id="account-login">
-        <a class="btn-logo" href="{% url 'homescreenapp:homescreen'%}">
-            <img class="img-logo"  src='/static/icons/etc/logo.png'>
-            <span class="text-logo">From. XoXo</span>
+<main class="main-centered">
+    <div class="frame-centered" id="account-login">
+        <a class="btn-logo" href="{% url 'homescreenapp:intro'%}">
+            <img class="img"  src='/static/icons/etc/logo.png'>
+            <span class="text">From. XoXo</span>
         </a>
-        <div class="container">
-            <div class="spacing-title">
+        <div class="container-form">
+            <div class="spacing-title" style="justify-content: flex-start">
                 <span class="text-login">다시 만나 반가워요!</span>
             </div>
             <form action="{% url 'accountapp:login' %}" method="post">{% csrf_token %}{% bootstrap_form form %}
                 <div class="link">
-                    <span class="text-help">계정을 잊어버리셨나요?</span>
-                    <a href="{% url 'phonenumberapp:create' %}?type=search" class="text-link">ID.PW 찾기</a>
+                    <span class="text-content">계정을 잊어버리셨나요?</span>
+                    <a href="{% url 'verificationapp:create' %}?type=search" class="text-link">ID.PW 찾기</a>
                 </div>
                 <div class="link" style="margin-top:0.2rem;">
-                    <span class="text-help">계정이 없으신가요?</span>
-                    <a href="{% url 'phonenumberapp:create' %}?type=signup" class="text-link">회원가입</a>
+                    <span class="text-content">계정이 없으신가요?</span>
+                    <a href="{% url 'verificationapp:create' %}?type=signup" class="text-link">회원가입</a>
                 </div>
                 <input type="submit" class="btn-submit-close" value="로그인">
             </form>

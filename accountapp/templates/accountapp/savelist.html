@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<header>
+    {% include 'headersnippets/home.html' %}
+    {% include 'headersnippets/setting.html'  %}
+</header>
+
+<main>
+    {% with slide="savelist" %}
+    {% include 'accountapp/listsnippets/navbar.html' %}
+    {% include 'accountapp/listsnippets/footer.html' %}
+    {% endwith %}
+    <div class="frame frame-top">
+        <div class="slide" style="display:block;" id="slide1">
+            {% with letters=letters %}
+            {% include 'accountapp/listsnippets/list.html' %}
+            {% endwith %}
+        </div>
+        <div class="slide" id="slide2">
+            {% with letters=letters_liked %}
+            {% include 'accountapp/listsnippets/list.html' %}
+            {% endwith %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+

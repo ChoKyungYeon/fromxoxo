@@ -23,38 +23,34 @@
     --fontsize-detail:1.5rem;
     --fontsize-content:1.6rem;
     --fontsize-index:1.65rem;
-    --fontsize-title:1.7rem;
-    --fontsize-bold:1.73rem;
-    --fontsize-emphasize:1.85rem;
+    --fontsize-title:1.72rem;
 
 
-    --fontweight-content:500;
-    --fontweight-index:600;
-    --fontweight-title:700;
-    --fontweight-bold:900;
+    --fontweight-content:400;
+    --fontweight-bold:600;
 
 
     --border-container:1.5px solid var(--borderpink);
+    --border-btn:1.5px solid #636363;
+
     --shadow-container:0px 3px 13px var(--borderpink);
     --shadow-container-dark:0px 3px 13px var(--blackgray);
     --shadow-btn-dark:0px 3px 10px #c7c8cc;
     --shadow-btn-white:0px 3px 10px #404040;
 
     --padding-frame:7%;
-    --padding-header:6%;
     --padding-content:7%;
-    --padding-footer:20%;
+    --padding-header:6%;
 
     --height-header:5.4rem;
     --height-body:calc(100vh - var(--height-header));
     --height-form:4.7rem;
-    --padding-bottom:12rem;
-
     --border-radius-container:1.5rem;
+    --border-radius-btn:1rem;
 }
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   :root {
     --padding-frame:22%;
     --padding-header:21.5%;
@@ -64,7 +60,7 @@
 @media screen and (min-width: 1100px) {
   :root {
     --padding-frame:30%;
-    --padding-header:29.5%;
+    --padding-header:29%;
     --padding-content:11%;
   }
 }

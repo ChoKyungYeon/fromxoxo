@@ -1,0 +1,43 @@
+{% load static %}
+<style>
+    #account-list-footer .btn-untouched,
+    #account-list-footer .btn-touched {
+        position: fixed;
+        left: 1.5rem;
+        bottom: 1.5rem;
+        border-radius: var(--border-radius-btn);
+        padding-left: 2.2rem;
+        padding-right: 1.6rem;
+        height: 4rem;
+        width: fit-content;
+        display: none;
+    }
+
+    #account-list-footer .btn-untouched {
+        display: flex;
+    }
+
+    #account-list-footer .btn-touched .icon,
+    #account-list-footer .btn-untouched .icon {
+        font-weight: var(--fontweight-bold);
+        font-size: 2rem;
+        margin-left: 0.1rem;
+        color: var(--white);
+    }
+</style>
+
+
+<div id="account-list-footer">
+    <button onclick="showSlide(1)" id="btn-slide1" class="btn-nav btn-touched">
+        전체 <span class="icon material-icons">arrow_drop_down</span>
+    </button>
+    <button onclick="showSlide(2)" id="btn-slide2" class="btn-nav btn-untouched">
+        좋아요<span class="icon material-icons">arrow_drop_down</span>
+    </button>
+    {% if slide == "writelist" %}
+        <a href="{% url 'letterapp:create' %}?from=writelist" class="btn-etc material-icons">outgoing_mail</a>
+    {% else %}
+        <a href="{% url 'letterapp:search' %}?from=savelist" class="btn-etc material-icons" style="font-size: 2rem">save_as</a>
+    {% endif %}
+</div>
+<script src="{% static 'js/showSlide.js' %}"></script>

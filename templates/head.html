@@ -3,9 +3,9 @@
     <meta charset="UTF-8">
     <meta property="og:title" content="From.XoXo">
     <meta property="og:type" content="website">
-    {% if intro_page %}
+    {% if page == 'intro' %}
         <meta property="og:image" content="/static/images/letter.png">
-        <meta property="og:description" content="{{ target_letter.letter_info.sender_name }}님께 편지가 도착했어요!">
+        <meta property="og:description" content="{{ target_letter.letter_info.receiver }}님께 편지가 도착했어요!">
     {% else %}
         <meta property="og:image" content="/static/images/logo.png">
         <meta property="og:description" content="소중한 사람에게 전달하는 나만의 편지와 퀴즈">
@@ -51,7 +51,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/element.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/homescreen.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/frame.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/tema.css' %}">
 </head>

@@ -1,25 +1,25 @@
 <style>
-    #snippet-letter{
-        margin-bottom:3rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+    #snippet-letter {
+        margin-bottom: 3rem;
     }
 
-    #snippet-letter .container-snippets{
+    #snippet-letter .container-snippets {
         width: 76%;
     }
-    #snippet-letter .btn-id{
+
+    #snippet-letter .item-id {
         background: var(--softgray);
-        font-size: 1.25rem;
-        color: var(--white);
-        padding:0.13rem 0.5rem;
+        padding: 0.15rem 0.7rem;
         border-radius: 0.5rem;
         margin-left: auto;
     }
-    #snippet-letter .text-date{
+    #snippet-letter .item-id .text{
+        font-weight: var(--fontweight-content);
+        font-size: 1.3rem;
+        color: var(--white);
+    }
+
+    #snippet-letter .text-date {
         color: var(--softgray);
         font-size: var(--fontsize-detail)
     }
@@ -28,18 +28,20 @@
     #snippet-letter .container-right {
         margin-left: auto;
     }
+
     #snippet-letter .container-left {
         margin-right: auto;
     }
 
-    #snippet-letter .interval-tile {
+    #snippet-letter .text-letter{
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
+        color: var(--black);
     }
 
 
-    #snippet-letter .item-arrow-right,
-    #snippet-letter .item-arrow-left{
+    #snippet-letter .icon-right,
+    #snippet-letter .icon-left {
         width: 0;
         height: 0;
         border-top: 10px solid transparent;
@@ -47,20 +49,22 @@
         display: inline-block;
         position: absolute;
         background: transparent;
-        top:50%;
+        top: 50%;
         transform: translateY(-50%);
     }
-    #snippet-letter .item-arrow-right{
+
+    #snippet-letter .icon-right {
         border-left: 14px solid var(--white);
         right: -13px;
     }
-    #snippet-letter .item-arrow-left{
+
+    #snippet-letter .icon-left {
         border-right: 14px solid var(--white);
         left: -13px;
     }
 
 
-    #snippet-letter .item-face {
+    #snippet-letter .item-face{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -70,64 +74,65 @@
         border-radius: 50%;
         flex-shrink: 0;
     }
-    #snippet-letter .img-face {
+
+    #snippet-letter .item-face .img{
         object-fit: cover;
         width: 3.5rem;
         height: 3.5rem;
         position: relative;
-        top:0.1rem;
+        top: 0.1rem;
     }
 
     @media screen and (min-width: 800px) {
-        #snippet-letter .container-snippets{
+        #snippet-letter .container-snippets {
             width: 85%;
             padding-left: 8%;
             padding-right: 8%;
         }
-    }    
+    }
 </style>
-<div id="snippet-letter">
+<div class="spacing-horizontal-stretch" id="snippet-letter">
     {% if forloop.counter|divisibleby:2 %}
-    <div class="item-face">
-        <img class="img-face" src='/static/icons/character/face{{ letter.character_number }}.png'>
-    </div>
+        <div class="item-face">
+            <img class="img" src='/static/icons/character/face{{ letter.character_number }}.png'>
+        </div>
     {% endif %}
 
     {% if forloop.counter|divisibleby:2 %}
-        {% if user == letter.receiver %}
-        <a href="{% url 'letterapp:saveinfo' pk=letter.pk %}" class="container-snippets container-right" >
+        {% if user == letter.saver %}
+            <a href="{% url 'letterapp:saveinfo' pk=letter.pk %}" class="container-snippets container-right">
         {% else %}
-        <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-right" >
+            <a href="{% url 'letterapp:writeinfo' pk=letter.pk %}" class="container-snippets container-right">
         {% endif %}
-        <div class="item-arrow-left"></div>
+        <div class="icon-left"></div>
     {% else %}
-        {% if user == letter.receiver %}
-        <a href="{% url 'letterapp:intro' pk=letter.pk %}" class="container-snippets container-left" >
+        {% if user == letter.saver %}
+            <a href="{% url 'letterapp:intro' pk=letter.pk %}" class="container-snippets container-left">
         {% else %}
-        <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-left" >
+            <a href="{% url 'letterapp:writeinfo' pk=letter.pk %}" class="container-snippets container-left">
         {% endif %}
-        <div class="item-arrow-right"></div>
+        <div class="icon-right"></div>
     {% endif %}
-            <div class="spacing-horizontal " >
-                <span class="text-content-bold interval-name" >{{ letter.letter_info.receiver_name }}</span>
-                <div class="btn-id">
-                    {{ letter.get_state_display }}
-                </div>
-            </div>
-        <div class="text-content interval-tile" style="color: var(--black)">
-            {{ letter.letter_info.title|truncatechars:23 }}
+    <div class="spacing-horizontal-stretch">
+        <span class="text-content-bold">{{ letter.letter_info.receiver }}</span>
+        <div class="item-id">
+            <span class="text">{{ letter.state_text }}</span>
         </div>
-        <div class="spacing-horizontal" style="justify-content: space-between">
-            <div class="text-content text-date" >
-                {{ letter.finished_before }}
-            </div>
-            <span class="text-content-bold interval-name">{{ letter.letter_info.sender_name }}</span>
+    </div>
+    <div class="text-content text-letter">
+        {{ letter.letter_info.title|truncatechars:23 }}
+    </div>
+    <div class="spacing-horizontal-stretch">
+        <div class="text-content text-date">
+            {{ letter.finished_before }}
         </div>
+        <span class="text-content">{{ letter.letter_info.sender }}</span>
+    </div>
     </a>
 
     {% if not forloop.counter|divisibleby:2 %}
-    <div class="item-face">
-        <img class="img-face" src='/static/icons/character/face{{ letter.character_number }}.png'>
-    </div>
+        <div class="item-face">
+            <img class="img" src='/static/icons/character/face{{ letter.character_number }}.png'>
+        </div>
     {% endif %}
 </div>

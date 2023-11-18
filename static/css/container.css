@@ -1,4 +1,5 @@
 /* snippets */
+.container-form,
 .container-empty,
 .container-snippets,
 .container{
@@ -17,6 +18,12 @@
     margin:0;
 }
 
+.container-form{
+    border:none;
+    box-shadow: none;
+    padding:0 var(--padding-content) 3rem var(--padding-content);
+}
+
 .container-empty{
     display: flex;
     flex-direction:row;
@@ -33,14 +40,5 @@
     padding-bottom:1.5rem;
 }
 
-
-
-.container-snippets .item-btn{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    flex-direction: row;
-}
 
 

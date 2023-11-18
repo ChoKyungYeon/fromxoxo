@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-
+<style>
+#letter-saved .img-congratulate{
+    position: relative;
+    bottom:0.1rem
+}
+</style>
 <header class="header-empty">
 </header>
 
-<main class="main-centralize">
-    <div class="frame-centralize">
+<main class="main-centered">
+    <div class="frame-centered" id="letter-saved">
         <div class="spacing-title">
-            <span class="text-title">
-                <span class="text-emphasize">편지 저장</span>을 완료했어요
+            <span class="text-title-bold">
+                <span class="text-emp">편지 저장</span>을 완료했어요
             </span>
             <img class="img-title img-congratulate" src='/static/icons/etc/congratulate.png'>
         </div>
-        <div class="item-guide text-index">
-            내가 저장한 편지는 목록에서<br>
-            자유롭게 확인 할 수 있어요!
+        <div class="text-title">
+            저장한 목록에서 확인 가능하며<br>
+            언제든 저장 해제할 수 있어요!
         </div>
-        <a href="{% url 'letterapp:saveinfo' pk=target_letter.pk %}?page=saved" class="btn-nav">
+        <a href="{% url 'letterapp:saveinfo' pk=target_letter.pk %}?from=saved" class="btn-nav">
             저장한 편지 보기
         </a>
     </div>

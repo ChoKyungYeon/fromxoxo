@@ -6,30 +6,27 @@
 #letter-detail{
     padding-bottom:10rem;
 }
-
 </style>
 
-<header id="header-letter-detail">
-        {% if user == target_letter.sender or user == target_letter.receiver %}
-        {% include 'headersnippets/like.html' %}
+<header>
+        {% if is_user_related %}
+            {% include 'headersnippets/like.html' %}
         {% else %}
-        {% include 'headersnippets/warning.html' %}
+            {% include 'letterapp/detailsnippets/checkguide.html' %}
         {% endif %}
-
-        {% if user == target_letter.sender %}
-        {%  url 'letterapp:result' pk=target_letter.pk as url %}
-        {% elif user == target_letter.receiver %}
-        {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
+        {% if user == target_letter.writer %}
+            {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
+        {% elif user == target_letter.saver %}
+            {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
-        {%  url 'letterapp:intro' pk=target_letter.pk as url %}
+            {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
 <main id="letter-detail">
-    {% include 'letterapp/detailsnippets/intro.html' %}
+    {% include 'letterapp/detailsnippets/info.html' %}
     {% include 'letterapp/detailsnippets/content.html' %}
-    {% include 'letterapp/detailsnippets/warning.html' %}
     {% include 'letterapp/detailsnippets/saveguide.html' %}
 </main>
 {% include 'letterapp/detailsnippets/footer.html' %}

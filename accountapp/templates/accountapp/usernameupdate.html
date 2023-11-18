@@ -2,17 +2,17 @@
 {% load bootstrap4 %}
 {% block content %}
 
-<header class="header">
+<header>
     {% url 'accountapp:setting' pk=user.pk as url %}
-    {% include 'headersnippets/navback.html' with url=url %}
+    {% include 'headersnippets/back.html' with url=url %}
     {% with title="아이디 변경" %}
     {% include 'headersnippets/title.html' %}
     {% endwith %}
 </header>
 
 <main>
-    <div class="frame frame-form">
-        <div class="container">
+    <div class="frame">
+        <div class="container-form">
             <form action="{% url 'accountapp:usernameupdate' pk=user.pk %}" method="post">
                 {% csrf_token %}{% bootstrap_form form %}
                 <input type="submit" class="btn-submit-close" value="아이디 변경">

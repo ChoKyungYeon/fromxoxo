@@ -1,0 +1,104 @@
+<style>
+
+
+    #homescreen-intro-step{
+        background: #fbe9ef;
+    }
+    #homescreen-intro-step .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top:4rem;
+        padding-left: 11%;
+    }
+
+    #homescreen-intro-step .icon-arrow{
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 19px solid var(--white);
+        display: inline-block;
+        position: absolute;
+        background: transparent;
+        left:50%;
+        transform: translateX(-50%);
+        bottom:-17px;
+    }
+
+
+    #homescreen-intro-step .item-image {
+        margin-right:var(--padding-content);
+    }
+
+</style>
+<style>
+    
+    #homescreen-intro-step .decoration-top {
+        background:#fdf2f5;
+        width: 34%;
+        height: 23%;
+        border-bottom-left-radius: 100% 100%;
+        right: 0;
+        top: 0%;
+    }
+    #homescreen-intro-step .decoration-bottom{
+        background:#fdf2f5;
+        border-top-right-radius: 100% 100%;
+        left: 0;
+        bottom: 0%;
+        width: 33%;
+        height: 23%;
+    }
+
+
+
+    @media screen and (min-width: 800px) {
+
+        #homescreen-intro-step .decoration-top {
+            width: 20%;
+            height: 21%;
+        }
+        #homescreen-intro-step .decoration-bottom {
+            width: 12%;
+            height: 40%;
+        }
+        #homescreen-intro-step .item-image {
+            margin-right: 12%;
+        }
+
+    }
+</style>
+
+<div class="frame-homescreen" id="homescreen-intro-step" >
+    <div class="decoration decoration-top"></div>
+    <div class="decoration decoration-bottom"></div>
+    <span class="text-title-bold">소중한 사람에게 센스있는<br>나만의 편지를 선물해 보세요</span>
+    <div class="container" style="margin-top:3rem">
+        <div class="icon-arrow"></div>
+        <div class="item-image">
+            <img class="img img-letter" src='/static/icons/homescreen/mail.png'>
+        </div>
+        <div class="text-index" >
+            편지 정보와 내용을 작성하고
+        </div>
+    </div>
+    <div class="container" >
+    <div class="icon-arrow"></div>
+        <div class="item-image">
+            <img class="img img-lock" src='/static/icons/homescreen/lock.png' style="width:3rem">
+        </div>
+        <div class="text-index" >
+            둘만의 질문으로 편지를 잠금!
+        </div>
+    </div>
+    <div class="container" >
+        <div class="item-image">
+            <img class="img img-chat" src='/static/icons/homescreen/share.png' style="width:2.8rem">
+        </div>
+        <div class="text-index" >
+            qr 코드와 링크를 공유합니다
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+{% load static %}
+<style>
+    #homescreen-intro-save{
+        background:#fbf5e9;
+    }
+
+    #homescreen-intro-save .container{
+        justify-content: center;
+        align-items: center;
+        width: 47.5%;
+        margin-top:3rem;
+    }
+
+    #homescreen-intro-save .item-image {
+        margin-bottom: 1rem;
+    }
+    #homescreen-intro-save .item-image .img {
+        position: relative;
+        left: 0.2rem;
+    }
+
+    #homescreen-intro-save .btn-nav{
+        box-shadow: var(--shadow-btn-dark);
+        background: var(--black);
+        justify-content: center;
+        height: 5.5rem;
+    }
+
+    #homescreen-intro-save .btn-nav .img{
+        width: 2rem;
+        margin-left: 2rem;
+    }
+
+
+</style>
+<style>
+
+    #homescreen-intro-save .decoration-top {
+        background:#fdf9f2;
+        width: 33%;
+        height: 27%;
+        border-bottom-right-radius: 100% 100%;
+        left: 0;
+        top: 0;
+    }
+    #homescreen-intro-save .decoration-bottom{
+        background:#fdf9f2;
+        border-top-left-radius: 100% 100%;
+        right: 0;
+        bottom: 0;
+        width: 27%;
+        height: 23%;
+    }
+
+
+
+    @media screen and (min-width: 800px) {
+
+        #homescreen-intro-save .decoration-top {
+            width: 20%;
+            height: 21%;
+        }
+        #homescreen-intro-save .decoration-bottom {
+            width: 12%;
+            height: 40%;
+        }
+
+
+    }
+</style>
+
+<div class="frame-homescreen tema-yellow" id="homescreen-intro-save" >
+    <div class="decoration decoration-top"></div>
+    <div class="decoration decoration-bottom"></div>
+    <span class="text-title-bold">새로운 편지를 받으셨나요?<br>삭제되지 않게 저장하세요!</span>
+    <div class="spacing-horizontal-stretch">
+        <div class="container">
+            <div class="item-image">
+                <img class="img" style="width: 3rem; bottom:0.2rem" src='/static/icons/homescreen/unlock.png'>
+            </div>
+            <div class="text-index" >
+                질문을 해결하고
+            </div>
+        </div>
+        <div class="container" >
+            <div class="item-image">
+                <img class="img" src='/static/icons/homescreen/save.png'>
+            </div>
+            <div class="text-index" >
+                편지를 저장해요
+            </div>
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'accountapp:writelist' pk=user.pk %}" class="btn-nav">
+        편지를 확인해 볼까요?
+        <img class="img" src='/static/icons/homescreen/point.png'>
+    </a>
+    {% else %}
+        <a href="{% url 'accountapp:login' %}" onclick="alertAuthentication();" class="btn-nav">
+        로그인 후 시작해 볼까요?
+        <img class="img" src='/static/icons/homescreen/point.png'>
+        </a>
+    {% endif %}
+</div>
+<script src="{% static 'js/alertAuthentication.js' %}"></script>
+

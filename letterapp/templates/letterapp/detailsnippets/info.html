@@ -1,0 +1,70 @@
+{% load static %}
+<style>
+
+#letter-detail-info {
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-end;
+    align-items:center;
+    padding-bottom:3rem;
+    padding-top:3rem;
+    background: var(--black);
+}
+#letter-detail-info .item-title{
+    display: flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items: flex-start;
+    padding-left: 0.5rem;
+    width: fit-content;
+}
+#letter-detail-info .btn-url{
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    background:var(--blackgray);
+    border-radius: 0.5rem;
+    padding:0.3rem 0.8rem 0.3rem 1rem;
+    margin-left: auto;
+}
+
+#letter-detail-info .line-title{
+    background: var(--softgray);
+    border-radius: 1.5rem;
+    height: 0.3rem;
+    width: 100%;
+    margin-top:0.5rem;
+}
+#letter-detail-info .text-title{
+    color: var(--white);
+}
+#letter-detail-info .text-id{
+    color: var(--white);
+}
+#letter-detail-info .icon-copy {
+    color: var(--softgray);
+    font-weight: 600;
+    margin-left:0.5rem;
+    font-size: 1.2rem;
+}
+
+</style>
+
+<div class="frame" id="letter-detail-info">
+    <div class="spacing-horizontal">
+        <div class="item-title">
+            <span class="text-title">To. {{ letter_info.receiver }}</span>
+            <div class="line-title"></div>
+        </div>
+
+        {% if target_letter.state != 'saved' %}
+        <button onclick="copyLetterUrl('편지 링크가 복사되었습니다! 자유롭게 공유해 보세요')" class="btn-url" data-url="{{ target_letter.url }}">
+            <div class="text-content text-id">편지 링크</div>
+            <span class="icon-copy material-icons">content_copy</span>
+        </button>
+        {% endif %}
+    </div>
+</div>
+
+<script src="{% static 'js/copyLetterUrl.js' %}"></script>

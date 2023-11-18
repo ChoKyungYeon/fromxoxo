@@ -1,0 +1,66 @@
+{% load static %}
+<style>
+    #letter-info-info{
+        padding-top:1rem
+    }
+    #letter-info-info .container{
+        padding-top:2rem;
+        padding-bottom:2rem;
+    }
+
+
+    #letter-info-info .item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom:0.7rem;
+    }
+    #letter-info-info .text-unchecked{
+        color: var(--red)
+    }
+    #letter-info-info .text-checked{
+        color: var(--blue)
+    }
+    #letter-info-info .text-saved{
+        color: var(--orange)
+    }
+
+</style>
+<div class="frame" id="letter-info-info">
+    <div  class="container" >
+        <div class="item" >
+            <span class="text-content" >작성 시간</span>
+            <span class="text-content-bold" >{{ target_letter.finished_before }}</span>
+        </div>
+        <div class="item" >
+            <span class="text-content" >작성자</span>
+            <span class="text-content-bold" >{{ target_letter.letter_info.sender }}</span>
+        </div>
+        <div class="item" >
+            <span class="text-content" >수신자</span>
+            <span class="text-content-bold" >{{ target_letter.letter_info.receiver }}</span>
+        </div>
+        <div class="item" >
+            <span class="text-content" >편지 날짜</span>
+            <span class="text-content-bold" >{{ target_letter.letter_info.written_at|date:"m월 d일" }}</span>
+        </div>
+        <div class="item" style="margin-bottom: 0">
+            <span class="text-content" >편지 확인</span>
+            {% if target_letter.state == 'unchecked' %}
+            <span class="text-content-bold text-unchecked">
+            {% elif target_letter.state == 'checked' %}
+                {% if target_letter.is_unsaved %}
+                <span class="text-content-bold text-checked">
+                {% else %}
+                <span class="text-content-bold text-checked">
+                {% endif %}
+            {% else %}
+            <span class="text-content-bold text-saved">
+            {% endif %}
+                {{ target_letter.state_text }}
+            </span>
+        </div>
+    </div>
+</div>

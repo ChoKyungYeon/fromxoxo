@@ -1,23 +1,22 @@
 {% load static %}
 <style>
     #letter_quiz-verify-question {
-        width: 100%;
         padding-top:3rem;
     }
     #letter_quiz-verify-question .text-title{
-        font-size:  var(--fontsize-bold);
+        font-size:  var(--fontsize-title);
     }
     #letter_quiz-verify-question .text-quiz{
         font-size: inherit;
-        font-weight: var(--fontweight-index);
+        font-weight: var(--fontweight-bold);
         color: var(--middlepink);
         margin-right: 0.5rem;
     }
     #letter_quiz-verify-question .spacing-title {
-        margin-bottom: 2rem;
+        margin-bottom: 0;
     }
-    #letter_quiz-verify-question .item-image{
-        margin-bottom:2rem;
+    #letter_quiz-verify-question .item-questionimage{
+        margin-top: 1.5rem;
         width: 100%;
         position: relative;
     }
@@ -40,29 +39,24 @@
         transform: scaleX(-1);
     }
 </style>
-
-<div id="letter_quiz-verify-question">
-    {% if target_quiz.image %}
-    <div class="spacing-title" style="margin-bottom: 1.5rem">
-    {% else %}
+<div class="frame-letter" id="letter_quiz-verify-question">
     <div class="spacing-title" >
-    {% endif %}
         <span class="text-title">
-            <span class="text-quiz">({{ quizstep }}/{{ quiz_len }})</span>
+            <span class="text-quiz">({{ target_quiz.index }}/{{ target_letter.quiz_len }})</span>
             {{ target_quiz.question }}
         </span>
     </div>
     {% if target_quiz.image %}
-    <button onclick="showImage()" class="item-image">
+    <button onclick="showZoom(1)" class="item-questionimage">
         <img class="image-quiz" src="{{ target_quiz.image.url }}">
         <img class="image-click" src='/static/icons/etc/click.png'>
     </button>
-    <button onclick="closeImage()" id="frame-zoom" class="frame-zoom">
+    <button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom">
         <div
-            class="btn-exit material-icons">close
+            class="icon-exit material-icons">close
         </div>
         <img class="image-zoomed" src="{{ target_quiz.image.url }}">
     </button>
     {% endif %}
 </div>
-<script src="{% static 'js/showImage.js' %}"></script>
+<script src="{% static 'js/showZoom.js' %}"></script>

@@ -2,69 +2,115 @@
 {% load bootstrap4 %}
 {% block content %}
 <style>
-    #letter-intro {
-        padding-bottom:7rem;
-    }
-    #letter-intro .text-intro {
-        font-weight: var(--fontweight-index);
-        font-size: var(--fontsize-bold);
-    }
-    #letter-intro .text-emphasize {
-        font-weight: inherit;
-        color: var(--middlepink);
-        font-size: inherit;
+    #letter-intro{
+        padding-left: calc(var(--padding-frame) + 5%);
+        padding-right: calc(var(--padding-frame) + 5%);
     }
 
     #letter-intro .spacing-title {
-        margin-bottom: 2em;
-        position: relative;
+        justify-content: flex-start;
+        margin-bottom: 2rem;
     }
-#letter-intro .img-intro {
-        width: 8rem;
-        flex-shrink: 0;
-        object-fit: cover;
-        position: relative;
-        right: 8%;
-        transform: rotate(15deg);
-        bottom: 1.2rem;
+    #letter-intro .text-intro{
+        color: var(--black);
+        font-size: var(--fontsize-title);
+        font-weight:var(--fontweight-bold);
     }
 
-    #letter-intro .img-qna {
-        width: 6rem;
-        flex-shrink: 0;
-        object-fit: cover;
-        position: relative;
-        left: 15%;
-        bottom: 0.5rem;
-        transform: rotate(-10deg);
-    }
-    #letter-intro .container-image {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-        height: 7rem;
-        margin-top:5rem;
+
+    #letter-intro .container-letter{
         width: 100%;
+        padding-top: 1.9rem;
+        padding-bottom: 1.7rem;
     }
+
+
+    #letter-intro .text-date {
+        background: var(--gray);
+        font-size: var(--fontsize-small);
+        color: var(--white);
+        padding:0.2rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    #letter-intro .interval-title {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+
+    #letter-intro .item-arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        display: inline-block;
+        position: absolute;
+        background: transparent;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #letter-intro .item-arrow-right {
+        border-left: 14px solid var(--white);
+        right: -13px;
+    }
+
+
+    #letter-intro .icon-star2,
+    #letter-intro .icon-star1 {
+        position: absolute;
+        font-weight: 600;
+    }
+    #letter-intro .icon-star1 {
+        right: 8%;
+        top:3rem;
+        font-size: 1.3rem;
+        color: var(--middlepink);
+        transform: rotate(-45deg);
+    }
+    #letter-intro .icon-star2 {
+        right: 18%;
+        top:2rem;
+        font-size: 1.4rem;
+        color:var(--borderpink);
+        transform: rotate(-25deg);
+    }
+
 </style>
 
 
 <header class="header-empty">
-    {%  url 'homescreenapp:homescreen' as url %}
+    {%  url 'homescreenapp:intro' as url %}
     {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
-<main class="main-centralize">
-    <div class="frame-letter" id="letter-intro" style="width: 100%">
+<main class="main-centered">
+    <div class="frame-centered" id="letter-intro" >
         <div class="spacing-title">
-            <span class="text-title text-intro">
-                <span class="text-emphasize">새로운 편지</span>가 도착했어요!<br>
-                퀴즈를 풀고 내용을 확인할까요?
+            <span class="text-intro">
+                <span class="text-emp">새로운 편지</span>가 도착했어요<br>
+                질문을 해결하고 내용을 확인해요!
             </span>
         </div>
-{% include 'snippets/introletter.html' %}
-
+        <a href="{% url 'letter_quizapp:verify' pk=target_letter.initial_quiz.pk %}" 
+           class="container-snippets container-letter" >
+            <div class="item-arrow-right"></div>
+            <span class="icon-star1 material-icons">grade</span>
+            <span class="icon-star2 material-icons">grade</span>
+            <div class="spacing-horizontal-stretch">
+                <span class="text-content-bold">{{ target_letter.letter_info.receiver }}</span>
+            </div>
+            <div class="text-index interval-title">
+                {{ target_letter.letter_info.title|truncatechars:23 }}
+            </div>
+            <div class="spacing-horizontal-stretch">
+                <div class="text-content text-date">
+                    {{ target_letter.letter_info.written_at|date:"m월 d일"  }}
+                </div>
+                <span class="text-content-bold">{{ target_letter.letter_info.sender }}</span>
+            </div>
+        </a>
     </div>
 </main>
 

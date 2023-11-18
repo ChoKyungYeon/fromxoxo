@@ -5,6 +5,12 @@ label{
     cursor: pointer;
 }
 
+b{
+    font-weight: var(--fontweight-bold);
+}
+p{
+    font-weight: var(--fontweight-content);
+}
 
 a {
   text-decoration: none;
@@ -35,6 +41,9 @@ a:active {
   color:var(--gray);
 }
 
+form{
+    width: 100%;
+}
 
 .material-icons {
   display: inline-block;
@@ -43,15 +52,14 @@ a:active {
   vertical-align: middle;
 }
 
-
 main{
     max-height:1000000px;
     min-height: var(--height-body);
-    padding-bottom:var(--padding-bottom);
+    padding-bottom:12rem;
 }
 
 
-.main-centralize{
+.main-centered{
     padding-bottom: 0;
     display: flex;
     flex-direction:column;
@@ -59,14 +67,6 @@ main{
     align-items: center;
 }
 
-html{
-  font-size: 11.6px;
-  color:var(--black);
-}
-
-form{
-    width: 100%;
-}
 
 @font-face {
     font-family: 'omyu_pretty';
@@ -75,15 +75,21 @@ form{
     font-style: normal;
 }
 
+html{
+    font-size: 11.6px;
+    color:var(--black);
+}
+
+
 body {
     padding-top:var(--height-header);
-    font-family: 'omyu_pretty';
     background: var(--lightpink);
+    font-family: 'omyu_pretty';
 }
 
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
     html {
       font-size: 11.8px;
     }

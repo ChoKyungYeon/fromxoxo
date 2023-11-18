@@ -5,16 +5,16 @@
 
 
 <header class="header-empty" >
-    {% if page == 'savedmailbox' %}
-    {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
+    {% if from == 'savelist' %}
+    {%  url 'accountapp:savelist' pk=user.pk as url %}
     {% else %}
-    {%  url 'homescreenapp:homescreen'  as url %}
+    {%  url 'homescreenapp:intro'  as url %}
     {% endif %}
-    {% include 'headersnippets/navback.html' with url=url %}
+    {% include 'headersnippets/back.html' with url=url %}
 </header>
     <main>
         {% include 'letterapp/searchsnippets/guide.html' %}
-        {% include 'letterapp/searchsnippets/form.html' %}
+        {% include 'letterapp/searchsnippets/post.html' %}
     </main>
 {% endblock %}
 

@@ -8,7 +8,7 @@ header{
     width:100%;
     height:var(--height-header);
     position: fixed;
-    background-color:var(--black);
+    background:var(--black);
     padding-left:var(--padding-header);
     padding-right:var(--padding-header);
     top: 0;
@@ -22,17 +22,15 @@ header{
     background-color:var(--lightpink);
     color:var(--black);
 }
-.header-white{
-    background-color:var(--white);
-    color:var(--black);
-}
 
-header .text-title{
-    font-size: var(--fontsize-bold);
+
+header .text-header{
+    font-size: var(--fontsize-title);
     color:inherit;
-    font-weight: var(--fontweight-index);
+    font-weight: var(--fontweight-bold);
     margin-right: auto;
 }
+
 
 header .btn-like-false,
 header .btn-like-true{
@@ -46,8 +44,6 @@ header .btn-like-true{
     color:var(--softpink);
 }
 
-
-
 header .btn-back{
     color:inherit;
     font-size: 1.7rem;
@@ -57,18 +53,12 @@ header .btn-back{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-weight: var(--fontweight-index);
-}
-
-.header-home .text-title{
     font-weight: var(--fontweight-bold);
 }
 
 
-
-
 header .btn-home,
-header .btn-delete,
+header .btn-delete-header,
 header .btn-setting,
 header .btn-exit,
 header .btn-account,
@@ -79,21 +69,26 @@ header .btn-download{
     font-weight: 400;
     margin-left:auto;
 }
-header .btn-delete{
+
+header .btn-delete-header{
     font-size: 2.4rem;
     background: none;
     color: var(--red);
+    margin-left: auto;
 }
+
 header .btn-download{
     margin-left: 0;
 }
+
 header .btn-home{
     margin-right: auto;
     margin-left: 0;
     font-size: 2.3rem;
 }
+
 header .btn-exit{
-    font-weight: var(--fontweight-index);
+    font-weight: var(--fontweight-bold);
     padding:1rem;
     position: relative;
     left: 1rem;

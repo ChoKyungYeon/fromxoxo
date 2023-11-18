@@ -1,0 +1,11 @@
+{% load static %}
+<a href="{% url 'letter_infoapp:update' pk=target_letter.letter_info.pk %}" class="btn-edit material-icons">edit</a>
+<form action="{% url 'letterapp:delete' pk=target_letter.pk %}" method="post" id="form-delete-letter">
+    {% csrf_token %}
+    <input style="display:none" type="submit" name="next"
+           value="{% url 'accountapp:writelist' pk=target_letter.writer.pk %}">
+    <button type="button" onclick="confirmAction('form-delete-letter', '현재 편지를 삭제하시겠습니까?')" class="btn-delete material-icons" style="right:6rem;">
+        delete_forever
+    </button>
+</form>
+<script src="{% static 'js/confirmAction.js' %}"></script>

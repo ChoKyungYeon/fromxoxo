@@ -1,33 +1,46 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.db import models
 from accountapp.models import CustomUser
-from fromxoxo.choice import progresschoice, statechoice
+from fromxoxo.choice import LetterProgressChoice, LetterStateChoice
 import random
 from io import BytesIO
 from django.urls import reverse
 import qrcode
 from fromxoxo.utils import time_before, time_after
-
 import uuid
 import pyshorteners
-
 type_tiny = pyshorteners.Shortener()
+
 class Letter(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sender = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_sender', null=True)
-    receiver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_receiver', null=True)
-    checked_at = models.DateTimeField(null=True)
+    writer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_writer', null=True)
+    saver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_saver', null=True)
+
+    expire_from = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
-    progress = models.CharField(max_length=20, choices=progresschoice, default='progress1')
-    state = models.CharField(max_length=20, choices=statechoice, default='unchecked')
+
+    is_unsaved = models.BooleanField(default=False)
+    progress = models.CharField(max_length=20, choices=LetterProgressChoice, default='progress1')
+    state = models.CharField(max_length=20, choices=LetterStateChoice, default='unchecked')
     qr = models.ImageField(upload_to='letter/')
     url = models.CharField(max_length=100)
+
+    def initial_quiz(self):
+        return self.letter_quiz.all().order_by('created_at').first()
+
+    def quiz_len(self):
+        return self.letter_quiz.all().count()
 
     def finished_before(self):
         return time_before(self.finished_at)
 
+
     def delete_after(self):
-        return time_after(self.checked_at, timedelta(hours=24)) if self.state == 'checked' else None
+        return time_after(self.expire_from, timedelta(hours=24)) if self.state == 'checked' else None
+
+
+    def should_delete(self):#deploycheck
+        return (datetime.now() - self.expire_from) > timedelta(hours=24) if self.state == 'checked' else None
 
     def character_number(self):
         return random.randint(1, 23)
@@ -53,5 +66,10 @@ class Letter(models.Model):
         img.save(buffer, format='PNG')
         return buffer.getvalue()
 
-
-
+    def state_text(self):
+        if self.state == 'unchecked':
+            return '미확인'
+        elif self.state == 'checked':
+            return '저장 해제' if self.is_unsaved else '확인 완료'
+        else:
+            return '저장 완료'

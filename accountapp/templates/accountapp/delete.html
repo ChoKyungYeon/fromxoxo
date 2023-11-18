@@ -1,39 +1,38 @@
-
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
 
 <style>
-    #account-delete .text-alert {
-        font-size: var(--fontsize-bold);
-        font-weight: var(--fontweight-bold);
-        color: var(--black);
-    }
-    #account-delete .spacing-title{
-        justify-content: center;
-        margin-bottom: 1.3rem;
-    }
-    #account-delete .text-content{
-        font-size: var(--fontsize-index);
-        text-align: center;
+    #account-delete .text-title-bold{
+        margin-bottom: 1.5rem;
     }
 
-    #account-delete .container{
+    #account-delete .text-index{
+        text-align: center;
+        color: var(--gray);
+    }
+
+    #account-delete .container-form{
         justify-content: center;
         align-items: center;
         padding-top:3rem;
-        margin-top:0
     }
 
     #account-delete .btn-submit-close{
         background: var(--red);
+        width: 90%;
+        border:none;
+        margin-right: auto;
+        margin-left: auto;
     }
+
     @media screen and (min-width: 800px){
         #account-delete{
             padding-left: 26%;
             padding-right: 26%;
         }
     }
+
     @media screen and (min-width: 1100px){
         #account-delete{
             padding-left: 32%;
@@ -44,26 +43,26 @@
 </style>
 
 
-<header >
+<header>
     {% url 'accountapp:setting' pk=user.pk as url %}
-    {% include 'headersnippets/navback.html' with url=url %}
+    {% include 'headersnippets/back.html' with url=url %}
     {% with title="계정 삭제" %}
     {% include 'headersnippets/title.html' %}
     {% endwith %}
 </header>
 
 <main>
-    <div class="frame frame-form" id="account-delete">
-        <div class="container" >
-            <div class="spacing-title">
-                <span class="text-alert">From.XoXo를 떠나시나요?</span>
-            </div>
-                <span class="text-content">더 이상 새로운 편지를 작성하고<br>
-                저장한 편지를 확인할 수 없어요!</span>
-        <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="post" onsubmit="return confirmDeleteAccount()">
-            {% csrf_token %}
-            <input type="submit" class="btn-submit-close" value="계정 삭제">
-        </form>
+    <div class="frame" id="account-delete">
+        <div class="container-form" >
+            <span class="text-title-bold">From.XoXo를 떠나시나요?</span>
+            <span class="text-index">
+                더 이상 새로운 편지를 작성하고<br>
+                저장한 편지를 확인할 수 없어요!
+            </span>
+            <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="post" onsubmit="return confirmDeleteAccount()">
+                {% csrf_token %}
+                <input type="submit" class="btn-submit-close" value="계정 삭제">
+            </form>
         </div>
     </div>
 </main>

@@ -17,7 +17,7 @@
 
     #container-quiz .icon-edit{
         font-size: 1.5rem;
-        font-weight: var(--fontweight-index);
+        font-weight: var(--fontweight-bold);
         color: var(--black);
 
     }
@@ -30,7 +30,7 @@
     <div  class="spacing-vertical">
     <div class="spacing-horizontal">
         <span class="text-content-bold interval-right">{{ quiz.index }}번 문제</span>
-        {% if quiz.type == 'answer' %}
+        {% if quiz.type == 'word' %}
         <div class="text-number">단답형</div>
         {% elif quiz.type == 'choice' %}
         <div class="text-number">객관식</div>
@@ -38,7 +38,7 @@
         <div class="text-number">날짜형</div>
         {% endif %}
 
-    </div><span class="text-content" style="margin-top:0.3rem">{{ quiz.question|truncatechars:20}}</span>
+    </div><span class="text-content" style="margin-top:0.3rem">{{ quiz.question|truncatechars:17}}</span>
 
     </div>
     <span class="icon-edit material-icons">arrow_forward_ios</span>

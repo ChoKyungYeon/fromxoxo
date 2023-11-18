@@ -7,17 +7,18 @@
 
 </style>
 <header class="header-empty">
-        {%  url 'accountapp:savedmailbox' pk=user.pk as url %}
+        {%  url 'accountapp:savelist' pk=user.pk as url %}
         {% if page == 'saved' %}
         {% include 'headersnippets/exit.html' with url=url %}
         {% else %}
-        {% include 'headersnippets/navback.html' with url=url %}
+        {% include 'headersnippets/back.html' with url=url %}
         {% endif %}
 </header>
 
 <main>
-    {% include 'letterapp/resultsnippets/preview.html' %}
-    {% include 'letterapp/resultsnippets/info.html' %}
+    {% include 'letterapp/infosnippets/preview.html' %}
+    {% include 'letterapp/infosnippets/info.html' %}
+    {% include 'letterapp/infosnippets/unsaveguide.html' %}
 </main>
 
 {% endblock %}

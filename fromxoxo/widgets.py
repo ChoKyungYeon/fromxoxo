@@ -1,5 +1,4 @@
-from django.forms import Select, RadioSelect
-
+from django.forms import Select
 
 class NullSelect(Select):
     def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):

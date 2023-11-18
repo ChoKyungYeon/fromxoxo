@@ -4,9 +4,9 @@
 
 <header class="header-empty " >
         {% if target_letter.progress == 'done' %}
-        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+        {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
         {% else %}
-        {%  url 'homescreenapp:createguide'  as url %}
+        {%  url 'letterapp:create'  as url %}
         {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
@@ -14,27 +14,23 @@
 
 <main >
   <div class="frame-letter">
+        {% with progress=1 %}
         {% include 'snippets/progress.html' %}
-        {% include 'snippets/progressinfo.html' %}
-        {% if target_info.letter.progress == 'progress1' %}
-      <form class="form-horizontal" action="{% url 'letter_infoapp:update' pk=target_info.pk %}"
-        method="post" onsubmit="return confirmCreateLetter()">
-        {% else %}
-      <form class="form-horizontal" action="{% url 'letter_infoapp:update' pk=target_info.pk %}"
-        method="post">
-        {% endif %}
+        {% endwith %}
+        <form class="form-horizontal" action="{% url 'letter_infoapp:update' pk=target_info.pk %}"
+              method="post" {% if target_letter.progress == 'progress1' %} onsubmit="return confirmCreateInfo()" {% endif %}
+              enctype="multipart/form-data">
         {% csrf_token %}{% bootstrap_form form %}
         <input type="submit" class="btn-submit-fixed"  value="다음 단계로!">
-      </form>
+        </form>
   </div>
 </main>
 
 <script>
-    function confirmCreateLetter() {
+    function confirmCreateInfo() {
         var confirmMessage = "이제 편지 내용을 채워볼까요?";
         return confirm(confirmMessage);
     }
-
 </script>
 {% endblock %}
 

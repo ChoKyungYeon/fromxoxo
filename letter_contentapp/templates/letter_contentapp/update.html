@@ -4,27 +4,26 @@
 {% load static %}
 
 <style>
-
-
     #letter_content-create form {
         position: relative;
     }
 
-    #letter_content-create .field-content {
+    #letter_content-create #field-content {
+        width: 100%;
+        height: 20rem;
+    }
+
+    #letter_content-create #field-image {
         width: 100%;
     }
 
-    #letter_content-create .field-image {
-        width: 100%;
-    }
-
-    #letter_content-create .field-tema {
+    #letter_content-create #field-tema {
         width: 60%;
     }
 
-    .item-color-black,
-    .item-color-gray,
-    .item-color-middle {
+    #letter_content-create .circle-black,
+    #letter_content-create .circle-gray,
+    #letter_content-create .circle-middle {
         border: 1px solid var(--gray);
         position: absolute;
         top: 1.4rem;
@@ -35,30 +34,40 @@
         border-radius: 50%;
     }
 
-    .item-color-black {
+    #letter_content-create .circle-black {
         left: 3.3rem;
         background: var(--black);
     }
 
-    .item-color-middle {
+    #letter_content-create .circle-middle {
         left: 6.3rem;
         background: var(--borderpink);
     }
 
+
     @media screen and (min-width: 800px) {
-        #letter_content-create .field-tema {
+        #letter_content-create #field-content{
+            height: 19rem;
+        }
+        #letter_content-create #field-tema {
             width: 55%;
+        }
+    }
+
+    @media screen and (min-width: 1100px) {
+        #letter_content-create #field-content{
+            height: 18rem;
         }
     }
 </style>
 
 <header class="header-empty">
     {% url 'letter_infoapp:update' pk=target_letter.letter_info.pk as url %}
-    {% include 'headersnippets/navback.html' with url=url %}
+    {% include 'headersnippets/back.html' with url=url %}
     {% if target_letter.progress == 'done' %}
-    {%  url 'letterapp:result' pk=target_letter.pk as url %}
+    {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
     {% else %}
-    {%  url 'homescreenapp:createguide'  as url %}
+    {%  url 'letterapp:create'  as url %}
     {% endif %}
     {% include 'headersnippets/exit.html' with url=url %}
 </header>
@@ -66,30 +75,49 @@
 
 
 
-<main >
+<main>
     <div class="frame-letter" id="letter_content-create">
+        {% with progress=2 %}
         {% include 'snippets/progress.html' %}
-        {% include 'snippets/progressinfo.html' %}
-        {% if target_letter.progress == 'progress2' %}
+        {% endwith %}
+    
         <form class="form-horizontal" action="{% url 'letter_contentapp:update' pk=target_content.pk %}"
-              method="post" onsubmit="return confirmCreateContent()" enctype="multipart/form-data">
-        {% else %}
-        <form class="form-horizontal" action="{% url 'letter_contentapp:update' pk=target_content.pk %}"
-              method="post" enctype="multipart/form-data">
-        {% endif %}
-            <div class="item-color-black"></div>
-            <div class="item-color-gray"></div>
-            <div class="item-color-middle"></div>
-            {% csrf_token %}{% bootstrap_form form %}
-            <input type="submit" class="btn-submit-fixed" value="다음 단계로!">
+              method="post" {% if target_letter.progress == 'progress2' %} onsubmit="return confirmCreateContent()" {% endif %}
+              enctype="multipart/form-data">
+        <div class="circle-black"></div>
+        <div class="circle-gray"></div>
+        <div class="circle-middle"></div>
+        {% csrf_token %}{% bootstrap_form form %}
+        <input type="submit" class="btn-submit-fixed" value="다음 단계로!">
         </form>
     </div>
 </main>
-<script src="{% static 'js/changeTema.js' %}"></script>
+
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var bodyTema = document.getElementById('bodyTema');
+        var temaField = document.getElementById('field-tema');
+
+        temaField.addEventListener('change', function() {
+            // Define a function to update the tema classes
+            function updateTemaClasses(element) {
+                // Remove all tema-related classes
+                element.classList.remove('tema-blue', 'tema-pink', 'tema-gray', 'tema-yellow', 'tema-green', 'tema-purple');
+
+                // Add the selected tema class
+                var selectedTema = 'tema-' + temaField.value;
+                element.classList.add(selectedTema);
+            }
+
+            // Update classes for both elements
+            updateTemaClasses(bodyTema);
+        });
+    });
+
     function confirmCreateContent() {
         var confirmMessage = "작성을 완료하셨나요? 질문을 설정하세요!";
         return confirm(confirmMessage);
     }
+
 </script>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% with title="휴대폰 인증" %}
+{% include 'headersnippets/title.html' %}
+{% endwith %}
+
+{% if type == 'update' %}
+{% url 'accountapp:setting' pk=user.pk as url %}
+{% else %}
+{% url 'accountapp:login' as url %}
+{% endif %}
+{% include 'headersnippets/exit.html' with url=url %}

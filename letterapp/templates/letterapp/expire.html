@@ -11,19 +11,19 @@
 <header class="header-empty ">
 </header>
 
-<main class="main-centralize" id="letter-expire">
-    <div class="frame-centralize">
+<main class="main-centered" id="letter-expire">
+    <div class="frame-centered">
         <div class="spacing-title">
-            <span class="text-title" >
+            <span class="text-title-bold" >
                 {% if type == 'saved' %}
                     저장된 편지입니다!
                 {% else %}
-                    존재하지 않는 편지입니다!
+                    사라진 편지입니다!
                 {% endif %}
             </span>
             <img class="img-title img-crying" src='/static/icons/etc/crying.png'>
         </div>
-         <div class="item-guide text-index">
+         <div class="text-title">
             {% if type == 'saved' %}
             이 편지는 이미 저장되었어요!<br>
             새로운 편지를 작성해 볼까요?
@@ -32,7 +32,7 @@
             새로운 편지를 작성해 볼까요?
              {% endif %}
         </div>
-        <a href="{% url 'homescreenapp:homescreen' %}" class="btn-nav">
+        <a href="{% url 'homescreenapp:intro' %}" class="btn-nav">
             홈으로 돌아가기
         </a>
     </div>

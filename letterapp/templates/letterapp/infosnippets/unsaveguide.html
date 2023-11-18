@@ -1,0 +1,9 @@
+{% load static %}
+<a href="{% url 'letterapp:unsave' %}?letter_pk={{ target_letter.pk }}"
+    id="btn-loading2" onclick="startLoading(2, event,'편지 저장 해제 이후 다시 저장하지 않으면 24시간 뒤 사라집니다!')" class="btn-delete material-icons" >
+    delete_forever
+</a>
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+<script src="{% static 'js/startLoading.js' %}"></script>

@@ -2,16 +2,10 @@
     {% for quiz in quizs %}
     {% include 'snippets/quiz.html' %}
     {% endfor %}
-    {% if not target_letter.progress == 'done' %}
-    <a id="tostatedone" href="{% url 'letterapp:stateupdate' %}?letter_pk={{ target_letter.pk }}"
-       class="btn-submit-fixed">질문 설정 완료
-    </a>
-    {% else %}
-    <a href="{% url 'letterapp:result' pk=target_letter.pk %}" class="btn-submit-fixed">편지 수정 완료
-    </a>
-    {% endif %}
 {% else %}
     <div class="container-empty" style="margin-top:1.5rem;">
-        <span class="text-content">한개 이상 질문을 추가해 주세요!</span>
+        <span class="text-content">이제 질문을 추가해 주세요!</span>
     </div>
 {% endif %}
+
+

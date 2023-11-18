@@ -1,0 +1,5 @@
+{% if not user.is_authenticated %}
+    {% include 'headersnippets/login.html' %}
+{% else %}
+    <a class="btn-mailbox material-icons" href="{% url 'accountapp:writelist' pk=user.pk %}">dashboard</a>
+{% endif %}

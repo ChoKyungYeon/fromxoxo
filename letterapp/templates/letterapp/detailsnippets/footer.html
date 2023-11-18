@@ -21,7 +21,6 @@
 }
 .frame-footer .text-title{
     color: var(--white);
-    font-size: var(--fontsize-bold);
 }
 
 .frame-footer .btn-save{
@@ -44,7 +43,7 @@
 
 </style>
 {% if not user.is_authenticated %}
-    <button onclick="showGuide()" class="frame-footer">
+    <button onclick="showZoom(2)" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
                로그인 후 편지 저장!
@@ -55,8 +54,9 @@
         </div>
     </button>
 {% else %}
-    {% if user != target_letter.sender and user != target_letter.receiver %}
-    <a href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer" id="btn-loading">
+    {% if user != target_letter.writer and user != target_letter.saver %}
+    <a id="btn-loading2" onclick="startLoading(2, event)"
+       href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer" >
         <div class="container-footer">
             <span class="text-title">
                 편지를 저장해요!
@@ -66,14 +66,11 @@
             </div>
         </div>
     </a>
-    <div id="loading-save" class="loading-indicator">
-      <div class="spinner"></div>
-    </div>
     {% endif %}
 {% endif %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const saveButton = document.getElementById("btn-loading");
+  const saveButton = document.getElementById("btn-save");
   const loadingIndicator = document.getElementById("loading-save");
 
   saveButton.addEventListener("click", function(event) {
@@ -85,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Delay the actual link navigation by 1 second (1000 milliseconds)
     setTimeout(function() {
       window.location.href = saveButton.href; // Navigate to the link URL
-    }, 1500);
+    }, 1000);
   });
 });
 </script>

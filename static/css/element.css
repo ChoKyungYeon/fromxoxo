@@ -1,40 +1,42 @@
-
-
-
 /* text 관리 */
 
 
+.text-title-bold,
 .text-title{
     font-size:var(--fontsize-title);
     color:var(--black);
     font-weight:var(--fontweight-content);
 }
 
-
+.text-index-bold,
 .text-index{
     color:var(--black);
     font-size:var(--fontsize-index);
-    font-weight:var(--fontweight-index);
+    font-weight:var(--fontweight-content);
 }
 
-
-.text-content-bold{
-    color: var(--black);
-    font-size:var(--fontsize-content);
-    font-weight:var(--fontweight-index);
-}
-
+.text-content-bold,
 .text-content{
     color:var(--gray);
     font-size:var(--fontsize-content);
     font-weight:var(--fontweight-content);
 }
 
+.text-title-bold,
+.text-index-bold,
+.text-content-bold{
+    font-weight:var(--fontweight-bold);
+}
+
+.text-content-bold{
+    color: var(--black);
+}
 
 /* spacing 관리 */
 
 
 .spacing-title,
+.spacing-horizontal-center,
 .spacing-horizontal{
     display: flex;
     flex-direction:row;
@@ -42,10 +44,15 @@
     align-items: center;
     width:100%;
 }
+
+.spacing-horizontal-center{
+    justify-content: center;
+}
+
 .spacing-title{
     padding-left:0.5rem;
     padding-right:0.5rem;
-    margin-bottom:1.5rem;
+    margin-bottom:1.3rem;
 }
 
 .spacing-vertical{
@@ -54,22 +61,21 @@
     justify-content:flex-start;
     align-items: flex-start;
 }
-.spacing-container {
+
+.spacing-horizontal-stretch{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-flow: wrap;
     width: 100%;
 }
 /* btn 관리 */
 
 
-
-
-.btn-etc-fixed,
-.btn-delete-fixed,
-.btn-edit-fixed{
+.btn-reset,
+.btn-etc,
+.btn-delete,
+.btn-edit{
     border-radius: 50%;
     display: flex;
     flex-direction:row;
@@ -88,71 +94,28 @@
     z-index:100;
 }
 
-.btn-delete-fixed{
+.btn-delete{
     background: var(--red);
     font-size: 2.2rem;
 }
 
-.btn-etc-fixed{
+.btn-etc{
     width:4rem;
     height:4rem;
     font-size: 2.1rem;
     padding-left: 0.1rem;
 }
 
-.btn-add,
-.btn-delete,
-.btn-edit{
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items: center;
-    width: 1.7rem;
-    height: 1.7rem;
-    border-radius:50%;
-    background:var(--gray);
-    color: var(--white);
-    font-size:1.4rem;
-    font-weight:800;
-    margin-left:1rem;
-    flex-shrink:0;
+.btn-reset{
+    font-weight: 200;
+    font-size: 2.4rem;
+    padding-right: 0.2rem;
 }
 
-
-.btn-edit{
-    font-weight:100;
-    font-size:1.02rem;
-    padding:0.25rem 0.28rem;
-}
-.btn-delete{
-    margin-left:0.7rem;
-    background:var(--red);
-}
-.btn-warning-unclicked,
-.btn-warning-clicked{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    height: 2.5rem;
-    width: 2.5rem;
-    color: var(--white);
-    background: var(--blackgray);
-    font-size: 1.35rem;
-    font-weight: var(--fontweight-bold);
-    border-radius: 50%;
-    border: 2px dashed var(--softgray);
-    flex-shrink: 0;
-}
-.btn-warning-clicked{
-    border: 2px dashed var(--white);
-    background: #808080;
-    box-shadow: 0 0 10px var(--white);
-}
 .btn-submit-fixed,
 .btn-submit-close,
-.btn-submit{
-    margin-top:3.7rem;
+.btn-submit,
+.btn-nav{
     display: flex;
     flex-direction: row;
     justify-content:center;
@@ -160,13 +123,22 @@
     width:100%;
     background:var(--black);
     color:var(--white);
-    height: 5rem;
-    font-size:var(--fontsize-bold);
-    border-radius: 2.5rem;
-    border:none;
+    font-size:var(--fontsize-title);
     box-shadow: var(--shadow-btn-dark);
+    border:var(--border-btn);
     font-weight:var(--fontweight-content);
     z-index:100;
+    border-radius: 2.5rem;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-submit-fixed,
+.btn-submit-close,
+.btn-submit{
+    margin-top:3.7rem;
+    height: 5rem;
 }
 
 .btn-submit-close{
@@ -183,9 +155,8 @@
     bottom:2rem;
 }
 
-
 .btn-submit:active {
-  background-color: #3b2b2e;
+  background-color: var(--blackgray);
 }
 
 /* link 관리 */
@@ -196,33 +167,34 @@
     flex-direction:row;
     justify-content:flex-start;
     align-items: center;
-    width: fit-content;
 }
 
-.link .text-help{
-    font-size:var(--fontsize-content);
-    color:var(--gray);
-    font-weight:var(--fontweight-content);
-}
 .link .text-link{
-    font-weight:var(--fontweight-index);
+    font-weight:var(--fontweight-bold);
     font-size:var(--fontsize-content);
     color:var(--black);
     text-decoration: underline;
     text-decoration-color:var(--black);
     text-decoration-thickness: 1.5px;
-    margin-left:0.8rem;
+    margin-left:0.7rem;
 }
 
-.interval-item{
-    height:1.7rem;
-    width:100%;
-}
 /* slide 관리 */
 .slide{
     width: 100%;
+    display: none;
 }
-.loading-indicator{
+/* loading 관리 */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading{
     position: fixed;
     top:50%;
     left:50%;
@@ -233,20 +205,33 @@
     display: none;
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.loading .spinner-white,
+.loading .spinner{
+    border: 7px solid var(--black);
+    border-top: 7px solid var(--middlepink);
+    border-radius: 50%;
+    box-shadow: 0 0 3px var(--softgray);
+    width: 4rem;
+    height: 4rem;
+    animation: rotate 1s linear infinite;
 }
 
-.spinner {
-  border: 7px solid var(--black);
-  border-top: 7px solid var(--middlepink);
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  animation: rotate 1.5s linear infinite;
+.loading .spinner-white {
+    border: 7px solid var(--white);
+    border-top: 7px solid var(--middlepink);
+}
+.item-image{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+}
+
+.item-image .img{
+    object-fit: cover;
+    width: 2.6rem;
 }

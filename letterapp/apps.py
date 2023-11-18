@@ -1,6 +1,7 @@
 from django.apps import AppConfig
-
-
 class LetterappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'letterapp'
+
+    def ready(self):
+        import letterapp.signals

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<header class="header-empty">
+    {% if from == 'writelist' %}
+    {%  url 'accountapp:writelist' pk=user.pk as url %}
+    {% else %}
+    {%  url 'homescreenapp:intro' as url %}
+    {% endif %}
+    {% include 'headersnippets/back.html' with url=url %}
+</header>
+<main>
+    {% include 'letterapp/createsnippets/guide.html' %}
+    {% include 'letterapp/createsnippets/post.html' %}
+</main>
+{% endblock %}
+

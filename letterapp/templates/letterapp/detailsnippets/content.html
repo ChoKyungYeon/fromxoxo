@@ -10,34 +10,29 @@
     #letter-detail-content .text-content{
         letter-spacing: 0.15rem;
     }
-    #letter-detail-content .text-title{
-        font-size: var(--fontsize-bold);
-        font-weight:var(--fontweight-index);
-    }
+
     #letter-detail-content .text-index{
         font-size: var(--fontsize-title);
     }
-    #letter-detail-content .spacing-sender{
+    #letter-detail-content .spacing-writer{
         margin-left: auto;
         margin-top:3rem;
     }
-    #letter-detail-content .spacing-receiver{
+    #letter-detail-content .spacing-saver{
         margin-bottom: 2rem;
     }
     #letter-detail-content .text-date{
         margin-right: 1rem;
         color: var(--softgray);
-        font-size: var(--fontsize-title);
-        font-weight: var(--fontweight-content);
     }
-    #letter-detail-content .item-image{
+    #letter-detail-content .item-letterimage{
         width: 100%;
         height: 14rem;
         margin-bottom: 2rem;
         position: relative;
         flex-shrink: 0;
     }
-    #letter-detail-content  .image-click {
+    #letter-detail-content  .image-click{
         width: 2.5rem;
         height: 2.5rem;
         object-fit: cover;
@@ -46,23 +41,23 @@
         bottom: 1rem;
         transform: scaleX(-1);
     }
-    #letter-detail-content .image-content{
+    #letter-detail-content .item-letterimage .img{
         width: 100%;
         height: 100%;
-        border-radius:1rem;
+        border-radius:var(--border-radius-btn);
         border:1.5px solid #e3e3e3;
         box-shadow:0 3px 13px #e3e3e3;
         object-fit: cover;
         flex-shrink: 0;
     }
     @media screen and (min-width: 800px) {
-        #letter-detail-content .item-image{
-            height: 18rem;
+        #letter-detail-content .item-letterimage{
+            height: 16rem;
         }
     }
     @media screen and (min-width: 1000px) {
-        #letter-detail-content .item-image{
-            height: 20rem;
+        #letter-detail-content .item-letterimage{
+            height: 18rem;
         }
     }
 
@@ -73,15 +68,15 @@
 
 <div class="frame " id="letter-detail-content">
     <div class="container">
-    <span class="text-title spacing-receiver">{{ letter_info.title }}</span>
+    <span class="text-title-bold spacing-saver">{{ letter_info.title }}</span>
     {% if letter_content.image %}
-        <button onclick="showImage()" class="item-image">
-            <img class="image-content" src="{{ letter_content.image.url }}">
+        <button onclick="showZoom(3)" class="item-letterimage">
+            <img class="img" src="{{ letter_content.image.url }}">
             <img class="image-click" src='/static/icons/etc/click.png'>
         </button>
-        <button onclick="closeImage()" id="frame-zoom" class="frame-zoom">
+        <button onclick="closeZoom(3)" id="frame-zoom3" class="frame-zoom">
             <div 
-                class="btn-exit material-icons">close
+                class="icon-exit material-icons">close
             </div>
             <img class="image-zoomed" src="{{ letter_content.image.url }}">
         </button>
@@ -89,10 +84,10 @@
     <span class="text-content" >
         {{ letter_content.content|safe|linebreaksbr }}
     </span>
-    <span class=" spacing-sender">
-        <span class="text-date">{{ letter_info.written_at |date:"m월 d일" }}</span>
-        <span class="text-index">{{ letter_info.sender_name }}</span>
+    <span class=" spacing-writer">
+        <span class="text-title text-date">{{ letter_info.written_at |date:"m월 d일" }}</span>
+        <span class="text-index">{{ letter_info.sender }}</span>
     </span>
     </div>
 </div>
-<script src="{% static 'js/showImage.js' %}"></script>
+<script src="{% static 'js/showZoom.js' %}"></script>

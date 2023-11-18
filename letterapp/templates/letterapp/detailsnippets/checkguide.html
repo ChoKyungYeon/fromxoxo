@@ -1,0 +1,65 @@
+{% load static %}
+<style>
+
+    #frame-zoom1 .item-btn{
+        height: var(--height-header);
+        padding-left: var(--padding-header);
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-start;
+        align-items: center;
+    }
+
+    .btn-guide-untouched,
+    .btn-guide-touched{
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        align-items: center;
+        height: 2.5rem;
+        width: 2.5rem;
+        color: var(--white);
+        background: var(--blackgray);
+        font-size: 1.35rem;
+        font-weight: var(--fontweight-bold);
+        border-radius: 50%;
+        border: 2px dashed var(--softgray);
+        flex-shrink: 0;
+    }
+    .btn-guide-touched{
+        border: 2px dashed var(--white);
+        background: #808080;
+        box-shadow: 0 0 10px var(--white);
+    }
+
+</style>
+<button class="btn-guide-untouched material-icons" onclick="showZoom(1)">question_mark</button>
+<button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom " style="display: flex; opacity: 1">
+    <div class="item-btn"><span class="btn-guide-touched material-icons">question_mark</span></div>
+    <div class="container">
+        <div class="item-exit material-icons">
+            cancel
+        </div>
+        <span class="text-title-bold" >
+            편지를 확인했습니다!
+        </span>
+        <div class="item">
+            <span class="text-title">
+                <span class="icon material-icons">done</span>
+                확인한 편지는 24시간 후 사라져요
+            </span>
+            <span class="text-title">
+                <span class="icon material-icons">done</span>
+                편지를 저장하면 사라지지 않으며,
+            </span>
+            <span class="text-title">
+                <span class="icon material-icons">done</span>
+                나와 작성자만 볼 수 있게 돼요
+            </span>
+        </div>
+    </div>
+</button>
+<script src="{% static 'js/showZoom.js' %}"></script>

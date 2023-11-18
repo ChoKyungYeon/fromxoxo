@@ -3,18 +3,15 @@
 {% block content %}
     
 <style>
-
-    form .form-check {
-        padding-left: 0;
-        background: none;
+    .checkbox-unchecked,
+    .checkbox-checked{
+        position: absolute;
+        bottom: 0.4rem;
+        left: 6.2rem;
+        pointer-events: none;
     }
 
-    form .form-check .form-check-label {
-        margin-bottom: 0;
-        position: relative;
-    }
-
-    .item-terms {
+    #account-create .item-terms {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -23,36 +20,30 @@
         background: var(--whitegray);
         margin-top: 1.3rem;
         padding: 1.4rem var(--padding-content);
-        border-radius: 0.5rem;
-    }
-    .item-check {
-        position: absolute;
-        bottom: 0.4rem;
-        left: 6.5rem;
-        pointer-events: none;
+        border-radius: var(--border-radius-btn);
     }
 
 </style>
-    <header class="header-black">
+    <header>
     {% with title="회원가입" %}
     {% include 'headersnippets/title.html' %}
     {% endwith %}
     {% url 'accountapp:login' as url %}
     {% include 'headersnippets/exit.html' with url=url %}
 </header>
-<main >
-    <div class="frame frame-form" id="account-create">
-        <div class="container">
-            <form action="{% url 'accountapp:create' pk=target_phonenumber.pk %}" method="post">
-                <div class="checkbox-unchecked item-check material-icons" id="custom-checkbox-label">
+<main>
+    <div class="frame" id="account-create">
+        <div class="container-form">
+            <form action="{% url 'accountapp:create' pk=target_verification.pk %}" method="post">
+                <div class="checkbox-unchecked material-icons" id="custom-checkbox-label">
                     <span class="material-icons icon-check">check</span>
                 </div>
                 {% csrf_token %}{% bootstrap_form form %}
-                <a href="{% url 'homescreenapp:termofuse' %}" target="_blank" rel="noopener noreferrer" class="item-terms">
-                    <span class="text-content">(필수) 서비스 이용 약관 동의</span>
+                <a href="{% url 'documentapp:open' %}?type=termofuse" target="_blank" rel="noopener noreferrer" class="item-terms">
+                    <span class="text-content">(필수) 서비스이용약관 동의</span>
                     <span class="text-content">보기</span>
                 </a>
-                <a href="{% url 'homescreenapp:privacypolicy' %}" target="_blank" rel="noopener noreferrer" class="item-terms">
+                <a href="{% url 'documentapp:open' %}?type=privacypolicy" target="_blank" rel="noopener noreferrer" class="item-terms">
                     <span class="text-content">(필수) 개인정보처리방침 동의</span>
                     <span class="text-content">보기</span>
                 </a>

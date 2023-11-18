@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+
+#letter-info .image-qr{
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+}
+
+</style>
+<header class="header-empty">
+        {% url 'accountapp:writelist' pk=user.pk as url %}
+        {% if from == 'finish' %}
+        {% include 'headersnippets/exit.html' with url=url %}
+        {% else %}
+        {% include 'headersnippets/back.html' with url=url %}
+        {% endif %}
+</header>
+
+<main>
+    {% include 'letterapp/infosnippets/preview.html' %}
+    {% include 'letterapp/infosnippets/info.html' %}
+    {% if not target_letter.state == 'saved' %}
+        {% include 'letterapp/infosnippets/link.html' %}
+        {% if not from == 'finish' %}
+            {% if target_letter.state == 'unchecked' %}
+            {% include 'letterapp/infosnippets/navbar.html' %}
+            {% else %}
+            {% include 'letterapp/infosnippets/resetguide.html' %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</main>
+
+{% endblock %}

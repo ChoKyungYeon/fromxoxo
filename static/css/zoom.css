@@ -1,5 +1,4 @@
 /* 이미지 관리 */
-.frame-zoom-info,
 .frame-zoom{
     position:fixed;
     right:0;
@@ -13,6 +12,7 @@
     width:100%;
     height:100%;
     display:none;
+    transition: opacity 2s ease;
 }
 
 .frame-zoom .image-zoomed{
@@ -21,7 +21,7 @@
     border-radius:var(--border-radius-container)
 }
 
-.frame-zoom .btn-exit{
+.frame-zoom .icon-exit{
     position:fixed;
     right:1.5rem;
     top:1.5rem;
@@ -38,30 +38,25 @@
     border:2px solid var(--black);
 }
 
-.frame-zoom-info{
-    transition: opacity 2s ease;
-    display: flex;
-    opacity: 1;
-}
 
-.frame-zoom-info .container{
+.frame-zoom .container{
     position: fixed;
     width: 85vw;
     max-width: 500px;
     border-radius:var(--border-radius-container);
-    box-shadow: var(--shadow-container-dark);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items: center;
     background:var(--whitepink);
     padding:0 0 3.5rem 0;
+    box-shadow: var(--shadow-container-dark);
 }
 
-.frame-zoom-info .item-exit{
+.frame-zoom .item-exit{
     width: 100%;
     height:4.2rem;
     border-top-left-radius:  var(--border-radius-container);
@@ -72,75 +67,47 @@
     justify-content:flex-end;
     align-items: center;
     padding-right:0.8rem;
-}
-
-.frame-zoom-info .item-content{
-    width: fit-content;
-    border-bottom-left-radius: var(--border-radius-container);
-    border-bottom-right-radius: var(--border-radius-container);
-    background:var(--whitepink);
-    display: flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items: flex-start;
-    padding: 2.5rem 0 0 0 ;
-
-}
-.frame-zoom-info .spacing-title{
-    justify-content: center;
-    padding:0;
-    margin-bottom: 1.7rem;
-}
-
-.frame-zoom-info .btn-nav{
-    margin-top:1.3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items:center;
-    width:75%;
-    background:var(--black);
-    color:var(--white);
-    height: 4.7rem;
-    font-size: var(--fontsize-bold);
-    border-radius: 2.5rem;
-    border:1.5px solid #636363;
-    box-shadow: 0 3px 10px #c7c8cc;
-    font-weight:var(--fontweight-content);
-    margin-right: auto;
-    margin-left: auto;
-}
-
-
-
-.frame-zoom-info .text-title{
-    font-size: var(--fontsize-bold);
-    font-weight: var(--fontweight-index);
-}
-
-.frame-zoom-info .text-content{
-    width: fit-content;
-    font-size: var(--fontsize-title);
-}
-.frame-zoom-info .interval-content{
-    margin-bottom: 1rem;
-}
-
-.frame-zoom-info .icon-check {
-    font-size: 1.6rem;
-    color: var(--middlepink);
-    font-weight: var(--fontweight-index);
-    margin-right: 1rem;
-}
-
-.frame-zoom-info .btn-exit{
-    display: flex;
-    flex-direction:row;
-    justify-content:flex-end;
-    align-items: center;
-    height:100%;
-    width:5rem;
     font-weight:400;
     font-size:2.3rem;
-    color:var(--gray);
+    color:var(--black);
 }
+
+
+.frame-zoom .text-title-bold{
+    margin-top:2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.frame-zoom .btn-nav{
+    margin-top:1.3rem;
+    width:75%;
+    height: 4.6rem;
+}
+
+
+.frame-zoom .text-title{
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: left;
+    color: var(--gray);
+}
+
+.frame-zoom .item{
+    width: fit-content;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: flex-start;
+    padding-right: 0.5rem;
+}
+
+
+
+
+.frame-zoom .icon {
+    font-size: 1.6rem;
+    color: var(--middlepink);
+    font-weight: var(--fontweight-bold);
+    margin-right: 0.7rem;
+}
+

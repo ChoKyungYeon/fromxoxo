@@ -1,0 +1,31 @@
+{% load bootstrap4 %}
+{% load static %}
+<style>
+
+#letter_quiz-form-word .form-group:nth-of-type(3) {
+    position: relative;
+}
+
+</style>
+<div class="frame-quiz" id="letter_quiz-form-word">
+    {% if page == 'create' %}
+    <form action="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=word" method="post" enctype="multipart/form-data" >
+    {% else %}
+    <form action="{% url 'letter_quizapp:update' pk=target_quiz.pk %}" method="post" enctype="multipart/form-data" >
+    {% endif %}
+        {% csrf_token %}{% bootstrap_form form %}
+        <input type="submit" class="btn-submit-fixed" {% if page == 'create' %} value="질문 추가" {% else %} value="질문 수정" {% endif %}>
+    <div id="item-count" class="item-count"><span class="icon-right material-icons">arrow_right</span>
+        <span class="text-count" id="total-count">현재 0 글자</span>
+    </div>
+    </form>
+</div>
+<script src="{% static 'js/countLetter.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.frame-quiz form');
+        var formGroups = form.querySelectorAll('.form-group');
+        var itemLetterDiv = document.getElementById('item-count');
+        formGroups[2].appendChild(itemLetterDiv);
+    });
+</script>

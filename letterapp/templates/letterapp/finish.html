@@ -10,19 +10,19 @@
 <header class="header-empty" >
 </header>
 
-<main class="main-centralize" id="letter-finish">
-    <div class="frame-centralize">
+<main class="main-centered" >
+    <div class="frame-centered" id="letter-finish">
         <div class="spacing-title">
-            <span class="text-title">
-                <span class="text-emphasize">편지 작성을 </span>완료했어요
+            <span class="text-title-bold">
+                <span class="text-emp">편지 작성을 </span>완료했어요
             </span>
             <img class="img-title img-congratulate" src='/static/icons/etc/congratulate.png'>
         </div>
-        <div class="item-guide text-index">
-            편지는 확인 전까지 수정 및 삭제할 수<br>
+        <div class="text-title">
+            편지는 확인 전까지 수정, 삭제할 수<br>
             있으며, QR코드와 링크를 공유하세요!
         </div>
-        <a href="{% url 'letterapp:result' pk=target_letter.pk %}?page=finish" class="btn-nav">
+        <a href="{% url 'letterapp:writeinfo' pk=target_letter.pk %}?from=finish" class="btn-nav">
             내 편지 정보 확인하기
         </a>
     </div>

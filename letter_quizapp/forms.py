@@ -8,7 +8,7 @@ class Letter_quizChoiceCreateForm(ModelForm):
         model = Letter_quiz
         fields = ('question','image','choice1','choice2','choice3','choiceanswer')
         labels = {
-            'question': '상대방이 해결할 질문',
+            'question': '상대방에게 보이는 질문',
             'image': '',
             'choice1': '보기를 작성하고 답을 체크해요!',
             'choice2': '',
@@ -17,68 +17,69 @@ class Letter_quizChoiceCreateForm(ModelForm):
         }
 
         widgets = {
-            'question': forms.Textarea(attrs={'placeholder': '받는 사람과 보내는 사람만이 알 수 있는 질문 작성!','class': 'textarea field-question'}),
-            'image': forms.FileInput(attrs={'class': 'fileinput field-image'}),
+            'question': forms.Textarea(attrs={'placeholder': '둘만이 알고 있는 간결한 질문을 작성해요.','class': 'textarea'}),
+            'image': forms.FileInput(attrs={'class': 'fileinput'}),
             'choice1': forms.TextInput(attrs={'placeholder': '1번 선택지', 'class': 'textinput field-choice'}),
             'choice2': forms.TextInput(attrs={'placeholder': '2번 선택지', 'class': 'textinput field-choice'}),
             'choice3': forms.TextInput(attrs={'placeholder': '3번 선택지', 'class': 'textinput field-choice'}),
-            'choiceanswer': forms.CheckboxSelectMultiple(attrs={ 'class': 'selectmultiple' ,'id': 'field-choiceanswer'}),
+            'choiceanswer': forms.CheckboxSelectMultiple(attrs={ 'class': 'selectmultiple','id': 'field-choiceanswer'}),
         }
 
-class Letter_quizAnswerCreateForm(ModelForm):
+class Letter_quizWordCreateForm(ModelForm):
     class Meta:
         model = Letter_quiz
-        fields = ('question','image','answer')
+        fields = ('question','image','wordanswer')
         labels = {
-            'question': '상대방이 해결할 질문',
+            'question': '상대방에게 보이는 질문',
             'image': '',
-            'answer': '질문 정답',
+            'wordanswer': '단답형 정답',
         }
 
         widgets = {
-            'question': forms.Textarea(attrs={'placeholder': '받는 사람과 보내는 사람만이 알 수 있는 질문 작성!','class': 'textarea'}),
+            'question': forms.Textarea(attrs={'placeholder': '둘만이 알고 있는 간결한 질문을 작성해요.','class': 'textarea'}),
             'image': forms.FileInput(attrs={'class': 'fileinput'}),
-            'answer': forms.TextInput(attrs={'placeholder': '영어 한글 숫자로 이루어진 답!', 'class': 'textinput','id': 'field-answer'}),
+            'wordanswer': forms.TextInput(attrs={'placeholder': '영어/한글/숫자 (대소문자 미구분)', 'class': 'textinput','id': 'field-wordanswer'}),
         }
 
 class Letter_quizDateCreateForm(ModelForm):
     class Meta:
         model = Letter_quiz
-        fields = ('question','image','date')
+        fields = ('question','image','dateanswer')
         labels = {
-            'question': '상대방이 해결할 질문',
+            'question': '상대방에게 보이는 질문',
             'image': '',
-            'date': '정답 날짜',
+            'dateanswer': '날짜 정답',
         }
 
         widgets = {
-            'question': forms.Textarea(attrs={'placeholder': '받는 사람과 보내는 사람만이 알 수 있는 질문 작성!','class': 'textarea'}),
+            'question': forms.Textarea(attrs={'placeholder': '둘만이 알고 있는 간결한 질문을 작성해요.','class': 'textarea'}),
             'image': forms.FileInput(attrs={'class': 'fileinput'}),
-            'date':forms.DateInput(attrs={'placeholder': '정답', 'type': 'date', 'class': 'dateinput'}),
+            'dateanswer':forms.DateInput(attrs={'type': 'date', 'class': 'dateinput'}),
         }
 
-class Letter_quizAnswerVerifyForm(forms.Form):
-    compare_answer = forms.CharField(
+class Letter_quizWordVerifyForm(forms.Form):
+    wordanswer = forms.CharField(
         label="",
-        widget=forms.TextInput(attrs={'placeholder': '영어 한글 숫자로 이루어진 답!', 'class': 'textinput','id': 'field-answer'}),
+        max_length=15,
+        widget=forms.TextInput(attrs={'placeholder': '영어/한글/숫자 (대소문자 미구분)', 'class': 'textinput','id': 'field-wordanswer'}),
     )
 
 class Letter_quizDateVerifyForm(forms.Form):
-    compare_date = forms.DateField(
+    dateanswer = forms.DateField(
         label="",
-        widget=forms.DateInput(attrs={'placeholder': '정답', 'type': 'date', 'class': 'dateinput'}),
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'dateinput'}),
     )
 
 
 
 class Letter_quizChoiceVerifyForm(forms.Form):
-    quizanswerchoice = (
+    QuizAnswerChoice = (
         ('보기1', '✓'),
         ('보기2', '✓'),
         ('보기3', '✓'),
     )
-    compare_choice = forms.MultipleChoiceField(
-        choices=quizanswerchoice,
+    choiceanswer = forms.MultipleChoiceField(
+        choices=QuizAnswerChoice,
         label="",
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'selectmultiple', 'id': 'field-choiceanswer'}),
     )

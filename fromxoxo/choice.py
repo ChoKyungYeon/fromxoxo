@@ -1,10 +1,4 @@
-
-
-userstatechoice=(
-    ('premium', '프리미엄'),
-    ('normal', '일반'),
-)
-temachoice=(
+LetterTemaChoice = (
     ('blue', '블루'),
     ('pink', '핑크'),
     ('gray', '그레이'),
@@ -12,23 +6,28 @@ temachoice=(
     ('green', '그린'),
     ('purple', '퍼플'),
 )
-progresschoice=(
+LetterProgressChoice = (
     ('progress1', 'progress1'),
     ('progress2', 'progress2'),
     ('progress3', 'progress3'),
     ('done', 'done'),
 )
-statechoice=(
+LetterStateChoice = (
     ('unchecked', '미확인'),
     ('checked', '확인 완료'),
-    ('received', '저장 완료')
+    ('saved', '저장 완료'),
 )
-quiztypechoice=(
+QuizTypeChoice = (
     ('choice', '객관식'),
     ('word', '단답형'),
     ('date', '날짜형'),
 )
-quizanswerchoice = (
+VerificationTypeChoice = (
+    ('update', 'update'),
+    ('signup', 'signup'),
+    ('search', 'search'),
+)
+QuizAnswerChoice = (
     ('보기1', '✓'),
     ('보기2', '✓'),
     ('보기3', '✓'),

@@ -2,8 +2,7 @@ import hmac, hashlib, base64
 import time, requests, json
 
 from documentapp.models import Document
-
-try:#deploy check
+try:  # deploy check
     from fromxoxo.settings.local import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
 except:
     from fromxoxo.settings.deploy import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
@@ -13,12 +12,13 @@ try:
 except:
     contact_phone = '01031585834'
 
-SENS_ACCESS_KEY= SENS_ACCESS_KEY
-SENS_SECRET_KEY= SENS_SECRET_KEY
-SENS_SERVICE_KEY= SENS_SERVICE_KEY
+SENS_ACCESS_KEY = SENS_ACCESS_KEY
+SENS_SECRET_KEY = SENS_SECRET_KEY
+SENS_SERVICE_KEY = SENS_SERVICE_KEY
 
 url = "https://sens.apigw.ntruss.com"
 uri = f"/sms/v2/services/{SENS_SERVICE_KEY}/messages"
+
 
 def make_signature(SENS_SECRET_KEY, SENS_ACCESS_KEY, timestamp, uri):
     SENS_SECRET_KEY = bytes(SENS_SECRET_KEY, 'UTF-8')
@@ -38,13 +38,13 @@ def Send_SMS(to, contents, can_receive):
         "x-ncp-apigw-signature-v2": make_signature(SENS_SECRET_KEY, SENS_ACCESS_KEY, timestamp, uri)
     }
     data = {
-        "type":"SMS",
-        "from":contact_phone,  #deploy check
-        "content":'[From.XoXo]' +contents,
-        "subject":"SENS",
-        "messages":[
+        "type": "SMS",
+        "from": contact_phone,  # deploy check
+        "content": '[From.XoXo]' + contents,
+        "subject": "SENS",
+        "messages": [
             {
-                "to":to,
+                "to": to,
             }
         ]
     }

@@ -1,37 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<style>
-#letter_quiz-verify .item-letter{
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-}
-#letter_quiz-verify .text-count{
-    font-size: var(--fontsize-content);
-    font-weight: var(--fontweight-content);
-    color: var(--middlepink);
-    margin-right: 0.5rem;
-}
-#letter_quiz-verify .icon-right{
-    font-weight: var(--fontweight-index);
-    font-size: 2.2rem;
-    color: var(--black);
-}
-#letter_quiz-verify .text-answer{
-    font-weight: var(--fontweight-content);
-    font-size: var(--fontsize-detail);
-    color: var(--softgray);
-    margin-left: auto;
-}
-</style>
 <header class="header-empty">
-        {% if user == target_letter.sender %}
-        {%  url 'letterapp:result' pk=target_letter.pk as url %}
-        {% elif user == target_letter.receiver %}
+        {% if user == target_letter.writer %}
+        {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
+        {% elif user == target_letter.saver %}
         {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
@@ -41,16 +13,14 @@
 
 
 <main>
-    <div class="frame-letter" id="letter_quiz-verify">
-        {% include 'letter_quizapp/verifysnippets/question.html' %}
-        {% if type == 'choice' %}
-            {% include 'letter_quizapp/verifysnippets/choice.html' %}
-        {% elif type == 'answer' %}
-            {% include 'letter_quizapp/verifysnippets/answer.html' %}
-        {% else %}
-            {% include 'letter_quizapp/verifysnippets/date.html' %}
-        {% endif %}
-    </div>
+    {% include 'letter_quizapp/verifysnippets/question.html' %}
+    {% if target_quiz.type == 'choice' %}
+        {% include 'letter_quizapp/verifysnippets/choice.html' %}
+    {% elif target_quiz.type == 'word' %}
+        {% include 'letter_quizapp/verifysnippets/word.html' %}
+    {% else %}
+        {% include 'letter_quizapp/verifysnippets/date.html' %}
+    {% endif %}
 </main>
 
 

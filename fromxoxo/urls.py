@@ -21,16 +21,17 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='homescreens/homescreen', permanent=False)),
+    path('', RedirectView.as_view(url='homescreens/intro', permanent=False)),
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),
     path('homescreens/', include('homescreenapp.urls')),
-    path('phonenumbers/', include('phonenumberapp.urls')),
+    path('phonenumbers/', include('verificationapp.urls')),
     path('letters/', include('letterapp.urls')),
     path('letter_quizs/', include('letter_quizapp.urls')),
     path('letter_contents/', include('letter_contentapp.urls')),
     path('letter_infos/', include('letter_infoapp.urls')),
     path('letter_likes/', include('letter_likeapp.urls')),
+    path('documents/', include('documentapp.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

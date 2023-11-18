@@ -1,0 +1,45 @@
+{% load static %}
+<style>
+
+#frame-guide .icon-down {
+    font-size: 2rem;
+    color: var(--middlepink);
+    font-weight: var(--fontweight-bold);
+    margin-right: 1rem;
+}
+    #frame-zoom1 .btn-reset{
+        background: var(--whitegray);
+        color: var(--black);
+        font-weight: var(--fontweight-bold);
+        box-shadow: 0 0 10px var(--white);
+    }
+
+
+</style>
+<button onclick="showZoom(1)" class="btn-reset material-icons">lock_reset</button>
+<button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom" style="display: flex; opacity: 1;">
+    <div class="container">
+        <div class="item-exit material-icons">
+            cancel
+        </div>
+        <span class="text-title-bold" >
+            {% if target_letter.is_unsaved %}
+            편지가 저장 해제 되었어요!
+            {% else %}
+            상대방이 편지를 확인했어요!
+            {% endif %}
+        </span>
+        <span class="text-title" style="text-align: center">
+            상대방이 편지를 저장하지 않으면 <br>
+            {{ target_letter.delete_after }} 편지가 사라져요
+        </span>
+        <a href="{% url 'letterapp:reset' %}?letter_pk={{ target_letter.pk }}"  id="btn-loading1"
+           onclick="startLoading(1, event)" class="btn-nav">편지 상태 초기화</a>
+    </div>
+    <div class="btn-reset material-icons">lock_reset</div>
+</button>
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+<script src="{% static 'js/showZoom.js' %}"></script>
+<script src="{% static 'js/startLoading.js' %}"></script>

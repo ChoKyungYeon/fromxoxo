@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+<header>
+</header>
+
+<main style="padding-bottom: 0;">
+    {% include 'homescreenapp/introsnippets/navbar.html' %}
+    {% include 'homescreenapp/introsnippets/step.html' %}
+    {% include 'homescreenapp/introsnippets/save.html' %}
+    {% include 'homescreenapp/introsnippets/review.html' %}
+    {% include 'homescreenapp/introsnippets/ending.html' %}
+    {% include 'homescreenapp/introsnippets/guide.html' %}
+</main>
+{% include 'homescreenapp/introsnippets/footer.html' %}
+{% endblock %}

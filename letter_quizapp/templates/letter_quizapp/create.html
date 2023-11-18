@@ -1,34 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style>
-#letter_quiz-create .form-group{
-    margin-top:1.5rem;
-}
-
-#letter_quiz-create .form-group label{
-    margin-bottom:1.5rem;
-    font-size: var(--fontsize-title);
-}
-#letter_quiz-create .form-group:first-of-type label{
-    margin-top:0
-}
-
-</style>
-
-<header class="header-empty">
-        {%  url 'letter_quizapp:list' pk=target_letter.pk as url %}
-        {% include 'headersnippets/navback.html' with url=url %}
-</header>
 
 
+{% include 'letter_quizapp/postsnippets/createheader.html' %}
 <main  id="letter_quiz-create">
     {% if type == 'choice' %}
-        {% include 'letter_quizapp/createsnippets/choice.html' %}
-    {% elif type == 'answer' %}
-        {% include 'letter_quizapp/createsnippets/answer.html' %}
+        {% include 'letter_quizapp/postsnippets/choice.html' %}
+    {% elif type == 'word' %}
+        {% include 'letter_quizapp/postsnippets/word.html' %}
     {% else %}
-        {% include 'letter_quizapp/createsnippets/date.html' %}
+        {% include 'letter_quizapp/postsnippets/date.html' %}
     {% endif %}
 </main>
 {% endblock %}

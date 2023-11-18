@@ -1,9 +1,6 @@
 /* pink */
 
-
-
 /* blue */
-
 .tema-blue{
     --lightpink: #eef0fc;
     --gray:#74757b;
@@ -11,11 +8,9 @@
     --middlepink:#707ec2;
     --whitepink:#fbfbfe;
     background: var(--lightpink);
-
 }
 
 /* gray */
-
 .tema-gray{
     --lightpink: #f3f3f7;
     --gray:#74757b;
@@ -25,7 +20,6 @@
     background: var(--lightpink);
 }
 
-
 /* yellow */
 .tema-yellow{
     --lightpink: #fcf7ed;
@@ -34,10 +28,7 @@
     --middlepink:#e4bb67;
     --whitepink:#fefdfb;
     background: var(--lightpink);
-
 }
-
-
 
 /* green */
 .tema-green{
@@ -50,7 +41,6 @@
 }
 
 /* purple */
-
 .tema-purple{
     --lightpink: #f5eefc;
     --gray:#78747b;

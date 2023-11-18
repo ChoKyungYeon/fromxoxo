@@ -1,0 +1,52 @@
+{% load static %}
+<style>
+
+
+    #letter-info-link .container{
+        width: 47.5%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #letter-info-link .img{
+        width: 2.8rem;
+    }
+    #letter-info-link .item-image{
+        margin-bottom: 1rem;
+    }
+    #letter-info-link .spacing-horizontal-center{
+        padding-left: 0.3rem;
+    }
+    #letter-info-link .icon{
+        margin-left: 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--gray);
+    }
+
+
+</style>
+
+<div class="frame" id="letter-info-link">
+    <div class="spacing-horizontal-stretch">
+        <a href="{{ target_letter.qr.url }}" download="QRCode.png" class="container" >
+            <div class="item-image">
+                <img class="img" style="width: 3.2rem;" src='/static/icons/guide/qrcode.png'>
+            </div>
+            <div class="spacing-horizontal-center">
+                <span class="text-content-bold">qr 코드</span>
+                <span class="icon material-icons">download</span>
+            </div>
+        </a>
+        <button onclick="copyLetterUrl('복사한 편지 링크를 홈 화면에서 검색할 수 있어요!')"  class="container" data-url="{{target_letter.url}}">
+            <div class="item-image">
+                <img class="img" src='/static/icons/guide/url.png'>
+            </div>
+            <div class="spacing-horizontal-center">
+                <span class="text-content-bold">편지 링크</span>
+                <span class="icon material-icons" style="font-size: 1.2rem">content_copy</span>
+            </div>
+        </button>
+    </div>
+</div>
+<script src="{% static 'js/copyLetterUrl.js' %}"></script>

@@ -1,4 +1,6 @@
-from datetime import timedelta, datetime
+from datetime import datetime
+
+from django.http import HttpResponseForbidden
 
 
 def time_before(time):
@@ -18,9 +20,10 @@ def time_before(time):
         months = round(delta.total_seconds() / 2592000)
         return f'{months}달 전'
 
+
 def time_after(time, limit):
     interval = datetime.now() - time
-    delta= limit - interval
+    delta = limit - interval
     if delta.total_seconds() < 300:
         return '잠시 후'
     elif delta.total_seconds() < 3600:
@@ -37,14 +40,15 @@ def time_after(time, limit):
         return f'{months}달 후'
 
 
-def time_expire(time, expire_duration):
-    interval_hours = expire_duration - round((datetime.now() - time) / timedelta(hours=1))
-    if interval_hours <= 0:
-        return '1시간'
-    days, hours = divmod(interval_hours, 24)
-    if days > 0:
-        interval = f'{days}일'
-    else:
-        interval = f'{hours}시간'
-    return interval
 
+def is_user_related(user,letter):
+    return user in [letter.saver, letter.writer]
+
+def check_param(request,session_key,key_list):
+    session_value = request.GET.get(session_key, None)
+    return None if not session_value or session_value in key_list else session_value
+
+def register_session(self,session_key):
+    session_value = self.request.GET.get(session_key, None)
+    if session_value:
+        self.request.session[session_key] = session_value

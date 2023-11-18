@@ -1,0 +1,12 @@
+{% load bootstrap4 %}
+<div class="frame-quiz">
+    {% if page == 'create' %}
+    <form action="{% url 'letter_quizapp:create' pk=target_letter.pk %}?type=date" method="post" enctype="multipart/form-data">
+    {% else %}
+    <form action="{% url 'letter_quizapp:update' pk=target_quiz.pk %}" method="post" enctype="multipart/form-data">
+    {% endif %}
+        {% csrf_token %}{% bootstrap_form form %}
+        <input type="submit" class="btn-submit-fixed" {% if page == 'create' %} value="질문 추가" {% else %} value="질문 수정" {% endif %} >
+    </form>
+</div>
+

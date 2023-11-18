@@ -28,6 +28,18 @@
 .container-progress .item-progress3{
     right:0;
 }
+    .container-progressinfo{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        padding-top:1rem;
+        padding-bottom:1.5rem;
+    }
+    .container-progressinfo .text-detail{
+        color:var(--gray);
+    }
 </style>
 <div class="container-progress">
     {% if progress == 1 %}
@@ -41,5 +53,20 @@
     {% if progress == 3 %}
     <div class="item-progress item-progress3">
     </div>
+    {% endif %}
+</div>
+
+<div class="container-progressinfo">
+    {% if progress == 1 %}
+    <span class="text-content text-detail">기본 정보를 입력해요!</span>
+    <span class="text-content">(1/3)</span>
+    {% endif %}
+    {% if progress == 2 %}
+        <span class="text-content text-detail">내용과 테마를 정해요</span>
+        <span class="text-content">(2/3)</span>
+    {% endif %}
+    {% if progress == 3 %}
+        <span class="text-content text-detail">질문으로 잠금해요</span>
+        <span class="text-content">(3/3)</span>
     {% endif %}
 </div>

@@ -1,0 +1,28 @@
+{% load bootstrap4 %}
+{% load static %}
+<style>
+#letter_quiz-verify-word .item-count{
+    position: initial;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+</style>
+<div class="frame-quiz" id="letter_quiz-verify-word">
+    <form action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}"
+          method="post">
+        {% csrf_token %}{% bootstrap_form form %}
+        {% include 'letter_quizapp/verifysnippets/submit.html' %}
+    </form>
+    <div id="item-count" class="item-count">
+        {% if not is_user_related %}
+        <span class="text-content-bold">답 {{ target_quiz.answer_count }} 글자</span>
+        <span class="icon-right material-icons">arrow_right</span>
+        <span class="text-count" id="total-count">현재 0 글자</span>
+        {% else %}
+        <span class="text-answer">* {{ target_quiz.wordanswer }}</span>
+        {% endif %}
+    </div>
+</div>
+<script src="{% static 'js/countLetter.js' %}"></script>

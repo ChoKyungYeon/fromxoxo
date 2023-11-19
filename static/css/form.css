@@ -234,6 +234,7 @@ form .form-check .form-check-label {
 
 }
 /* selectmultiple */
+.label-selectmultiple,
 .selectmultiple label{
     display: flex;
     flex-direction:row;

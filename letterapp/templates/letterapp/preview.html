@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+#letter-preview{
+    padding-bottom:10rem;
+}
+</style>
+
+<header>
+    {% include 'headersnippets/like.html' %}
+    {% if user == target_letter.writer %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+    {% elif user == target_letter.saver %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
+    {% endif %}
+    {% include 'headersnippets/exit.html' with url=url %}
+</header>
+
+<main id="letter-preview">
+    {% include 'letterapp/lettersnippets/info.html' %}
+    {% include 'letterapp/lettersnippets/content.html' %}
+</main>
+{% endblock %}

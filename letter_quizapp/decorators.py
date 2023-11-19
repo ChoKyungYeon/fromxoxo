@@ -46,3 +46,30 @@ def Letter_quizEditDecorator(func):
                 return check
         return func(request, *args, **kwargs)
     return decorated
+
+def Letter_quizPreviewDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        checks = [
+            decorators.instance_update('letter_quiz'),
+            decorators.instance_owenership_required('related'),
+            decorators.progress_required(['done'])
+        ]
+        for check in checks:
+            if check:
+                return check
+        return func(request, *args, **kwargs)
+    return decorated
+
+def Letter_quizVerifyDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        checks = [
+            decorators.letter_redirector('letter_quiz'),
+            decorators.progress_required(['done']),
+        ]
+        for check in checks:
+            if check:
+                return check
+        return func(request, *args, **kwargs)
+    return decorated

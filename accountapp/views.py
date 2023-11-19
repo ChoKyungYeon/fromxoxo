@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.db import transaction
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.decorators.cache import never_cache
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, RedirectView
 import re
@@ -23,8 +23,6 @@ class AccountLoginView(LoginView):
 
     def dispatch(self, request, *args, **kwargs):
         register_session(self,'letter_pk')
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('homescreenapp:intro'))
         return super().dispatch(request, *args, **kwargs)
 
 

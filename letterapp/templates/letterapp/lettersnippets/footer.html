@@ -54,7 +54,6 @@
         </div>
     </button>
 {% else %}
-    {% if user != target_letter.writer and user != target_letter.saver %}
     <a id="btn-loading2" onclick="startLoading(2, event)"
        href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer" >
         <div class="container-footer">
@@ -66,7 +65,6 @@
             </div>
         </div>
     </a>
-    {% endif %}
 {% endif %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {

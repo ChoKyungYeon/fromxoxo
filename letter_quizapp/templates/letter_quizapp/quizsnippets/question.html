@@ -1,26 +1,26 @@
 {% load static %}
 <style>
-    #letter_quiz-verify-question {
+    #letter_quiz-quiz-question {
         padding-top:3rem;
     }
-    #letter_quiz-verify-question .text-title{
+    #letter_quiz-quiz-question .text-title{
         font-size:  var(--fontsize-title);
     }
-    #letter_quiz-verify-question .text-quiz{
+    #letter_quiz-quiz-question .text-quiz{
         font-size: inherit;
         font-weight: var(--fontweight-bold);
         color: var(--middlepink);
         margin-right: 0.5rem;
     }
-    #letter_quiz-verify-question .spacing-title {
+    #letter_quiz-quiz-question .spacing-title {
         margin-bottom: 0;
     }
-    #letter_quiz-verify-question .item-questionimage{
+    #letter_quiz-quiz-question .item-questionimage{
         margin-top: 1.5rem;
         width: 100%;
         position: relative;
     }
-    #letter_quiz-verify-question .image-quiz {
+    #letter_quiz-quiz-question .image-quiz {
         width: 100%;
         height: 15rem;
         object-fit: cover;
@@ -29,7 +29,7 @@
         box-shadow: var(--shadow-container);
     }
 
-    #letter_quiz-verify-question  .image-click {
+    #letter_quiz-quiz-question  .image-click {
         width: 2.5rem;
         height: 2.5rem;
         object-fit: cover;
@@ -39,7 +39,7 @@
         transform: scaleX(-1);
     }
 </style>
-<div class="frame-letter" id="letter_quiz-verify-question">
+<div class="frame-letter" id="letter_quiz-quiz-question">
     <div class="spacing-title" >
         <span class="text-title">
             <span class="text-quiz">({{ target_quiz.index }}/{{ target_letter.quiz_len }})</span>

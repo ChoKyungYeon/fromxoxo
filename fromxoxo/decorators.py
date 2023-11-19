@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from fromxoxo.utils import is_user_related
+from fromxoxo.utils import is_user_related, quiz_session_key
 from letter_contentapp.models import Letter_content
 from letter_infoapp.models import Letter_info
 from letter_likeapp.models import Letter_like
@@ -29,23 +29,26 @@ class Decorators:
             if letter.should_delete():
                 letter.delete()
 
+    def user_owenership_required(self):
+        if self.user.pk != self.object_pk:
+            return HttpResponseForbidden()
+
     def instance_update(self, object_param):
+        class_mapping = {
+            'letter': Letter,
+            'letter_content': Letter_content,
+            'letter_info': Letter_info,
+            'letter_quiz': Letter_quiz,
+            'letter_like': Letter_like,
+        }
         try:
             if object_param == 'letter':
                 self.letter = get_object_or_404(Letter, pk=self.object_pk)
-
-            if object_param == 'letter_content':
-                instance = get_object_or_404(Letter_content, pk=self.object_pk)
-                self.letter = instance.letter
-            elif object_param == 'letter_info':
-                instance = get_object_or_404(Letter_info, pk=self.object_pk)
-                self.letter = instance.letter
-            elif object_param == 'letter_quiz':
-                instance = get_object_or_404(Letter_quiz, pk=self.object_pk)
-                self.letter = instance.letter
-            elif object_param == 'letter_like':
-                instance = get_object_or_404(Letter_like, pk=self.object_pk)
-                self.letter = instance.letter
+            else:
+                instance_class = class_mapping.get(object_param)
+                if instance_class:
+                    instance = get_object_or_404(instance_class, pk=self.object_pk)
+                    self.letter = instance.letter
 
 
             if self.letter.should_delete():
@@ -58,10 +61,6 @@ class Decorators:
         except Http404:
             return HttpResponseRedirect(reverse('letterapp:expire') + '?type=none')
 
-
-    def user_owenership_required(self):
-        if self.user.pk != self.object_pk:
-            return HttpResponseForbidden()
 
 
     def instance_owenership_required(self, role):
@@ -87,23 +86,38 @@ class Decorators:
         if self.letter and self.letter.quiz_len() >= 5:
             return HttpResponseForbidden()
 
+
     def progress_required(self, progress_list):
         if self.letter and self.letter.progress not in progress_list:
             return HttpResponseForbidden()
 
-    def letter_redirecter(self):
+
+    def letter_redirector(self, object_param):
         try:
-            self.letter = get_object_or_404(Letter, pk=self.object_pk)
+            if object_param == 'letter':
+                self.letter = get_object_or_404(Letter, pk=self.object_pk)
+            elif object_param == 'letter_quiz':
+                instance = get_object_or_404(Letter_quiz, pk=self.object_pk)
+                self.letter = instance.letter
+
             if self.letter.should_delete():
                 self.letter.delete()
                 return HttpResponseRedirect(reverse('letterapp:expire') + '?type=none')
             if self.letter.writer == self.user:
-                return HttpResponseRedirect(reverse('letterapp:writeinfo', kwargs={'pk': self.letter.pk}))
+                return HttpResponseRedirect(reverse('letterapp:result', kwargs={'pk': self.letter.pk}))
             elif self.letter.saver == self.user:
-                return HttpResponseRedirect(reverse('letterapp:saveinfo', kwargs={'pk': self.letter.pk}))
+                return HttpResponseRedirect(reverse('letterapp:result', kwargs={'pk': self.letter.pk}))
             else:
                 if self.letter.state == 'saved':
                     return HttpResponseRedirect(reverse('letterapp:expire') + '?type=saved')
 
         except Http404:
             return HttpResponseRedirect(reverse('letterapp:expire') + '?type=none')
+
+
+    def quiz_redirector(self,request):
+        for letter_quiz in self.letter.letter_quiz.all().order_by('created_at'):
+            if request.session.get(quiz_session_key(self.letter,letter_quiz), None):
+                pass
+            else:
+                return HttpResponseRedirect(reverse('letter_quizapp:verify', kwargs={'pk': letter_quiz.pk}))

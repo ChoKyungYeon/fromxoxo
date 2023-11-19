@@ -16,21 +16,21 @@
         <div class="spacing-title">
             <span class="text-title-bold" >
                 {% if type == 'saved' %}
-                    저장된 편지입니다!
+                    편지가 저장되었어요!
                 {% else %}
-                    사라진 편지입니다!
+                    편지를 찾을 수 없어요!
                 {% endif %}
             </span>
             <img class="img-title img-crying" src='/static/icons/etc/crying.png'>
         </div>
-         <div class="text-title">
-            {% if type == 'saved' %}
-            이 편지는 이미 저장되었어요!<br>
-            새로운 편지를 작성해 볼까요?
-             {% else %}
-            더 이상 존재하지 않는 편지에요<br>
-            새로운 편지를 작성해 볼까요?
-             {% endif %}
+        <div class="text-title">
+        {% if type == 'saved' %}
+        이 주소의 편지는 저장되었어요!<br>
+        로그인하고 내용을 확인해 볼까요
+        {% else %}
+        이 주소는 잘못된 편지 주소이거나<br>
+        시간이 지나 사라져버린 편지에요!
+        {% endif %}
         </div>
         <a href="{% url 'homescreenapp:intro' %}" class="btn-nav">
             홈으로 돌아가기

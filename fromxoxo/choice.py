@@ -28,7 +28,7 @@ VerificationTypeChoice = (
     ('search', 'search'),
 )
 QuizAnswerChoice = (
-    ('보기1', '✓'),
-    ('보기2', '✓'),
-    ('보기3', '✓'),
+    ('choice1', '✓'),
+    ('choice2', '✓'),
+    ('choice3', '✓'),
 )

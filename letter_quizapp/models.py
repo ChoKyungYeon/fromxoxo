@@ -37,5 +37,3 @@ class Letter_quiz(models.Model):
     def answer_count(self):
         return len(self.wordanswer.replace(" ", "")) if self.wordanswer else 0
 
-    def choiceanswer_hint(self):
-        return ', '.join(self.choiceanswer)

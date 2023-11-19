@@ -74,9 +74,9 @@ class Letter_quizDateVerifyForm(forms.Form):
 
 class Letter_quizChoiceVerifyForm(forms.Form):
     QuizAnswerChoice = (
-        ('보기1', '✓'),
-        ('보기2', '✓'),
-        ('보기3', '✓'),
+        ('choice1', '✓'),
+        ('choice2', '✓'),
+        ('choice3', '✓'),
     )
     choiceanswer = forms.MultipleChoiceField(
         choices=QuizAnswerChoice,

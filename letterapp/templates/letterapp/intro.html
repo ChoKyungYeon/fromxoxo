@@ -3,6 +3,7 @@
 {% block content %}
 <style>
     #letter-intro{
+        margin-bottom:4rem;
         padding-left: calc(var(--padding-frame) + 5%);
         padding-right: calc(var(--padding-frame) + 5%);
     }
@@ -93,7 +94,7 @@
                 질문을 해결하고 내용을 확인해요!
             </span>
         </div>
-        <a href="{% url 'letter_quizapp:verify' pk=target_letter.initial_quiz.pk %}" 
+        <a href="{% url 'letterapp:detail' pk=target_letter.pk %}"
            class="container-snippets container-letter" >
             <div class="item-arrow-right"></div>
             <span class="icon-star1 material-icons">grade</span>

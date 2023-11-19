@@ -1,0 +1,83 @@
+<style>
+
+#letter_quiz-quiz-answer {
+    width: 100%;
+}
+
+
+#letter_quiz-quiz-answer .container-answer{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 5rem;
+    box-shadow: none;
+    margin-top:1.5rem;
+    border:none;
+}
+#letter_quiz-quiz-answer .container-choice{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: row;
+    height: 6.6rem;
+    margin-bottom:2rem;
+    padding:0;
+}
+#letter_quiz-quiz-answer .text-choice{
+    font-size: var(--fontsize-index);
+    font-weight: var(--fontweight-content);
+    color:var(--black);
+    line-height: 2.2rem;
+    margin-right: var(--padding-content);
+}
+
+
+#letter_quiz-quiz-answer .label-selectmultiple{
+    font-size:1.2rem;
+    margin: 0 var(--padding-content) 0 var(--padding-content);
+    width: 2.6rem;
+}
+#letter_quiz-quiz-answer .label-selected{
+    background: var(--black);
+    color: var(--white);
+}
+
+
+
+</style>
+
+<div class="frame-quiz" id="letter_quiz-quiz-answer">
+{% if target_quiz.type == 'choice' %}
+    <div class="container container-choice" style="margin-top:1.5rem">
+        <div class="label-selectmultiple {% if 'choice1' in target_quiz.choiceanswer %} label-selected {% endif %}">✓</div>
+        <span class="text-choice">{{ target_quiz.choice1 }}</span>
+    </div>
+    <div class="container container-choice" >
+        <div class="label-selectmultiple {% if 'choice2' in target_quiz.choiceanswer %} label-selected {% endif %}">✓</div>
+        <span class="text-choice">{{ target_quiz.choice2 }}</span>
+    </div>
+    <div class="container container-choice">
+        <div class="label-selectmultiple {% if 'choice3' in target_quiz.choiceanswer %} label-selected {% endif %}">✓</div>
+        <span class="text-choice">{{ target_quiz.choice3 }}</span>
+    </div>
+{% else %}
+
+    <div class="container container-answer">
+        <span class="text-index-bold" style="margin-right: 1rem">정답</span>
+        {% if target_quiz.type == 'word' %}
+        <span class="text-index">{{ target_quiz.wordanswer }}</span>
+        {% else %}
+        <span class="text-index">{{ target_quiz.dateanswer|date:"y년 m월 d일 " }}</span>
+        {% endif %}
+    </div>
+{% endif %}
+</div>
+
+
+
+{% if target_quiz.next_quiz %}
+    <a href="{% url 'letter_quizapp:preview' pk=target_quiz.next_quiz.pk %}" class="btn-submit-fixed">다음 질문으로</a>
+{% else %}
+    <a href="{% url 'letterapp:preview' pk=target_letter.pk %}" class="btn-submit-fixed">편지 확인하기</a>
+{% endif %}

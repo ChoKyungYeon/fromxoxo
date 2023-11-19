@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<header class="header-empty">
+            {% if user == target_letter.saver %}
+            {%  url 'accountapp:savelist' pk=user.pk as url %}
+            {% else %}
+            {% url 'accountapp:writelist' pk=user.pk as url %}
+            {% endif %}
+
+            {% if from == 'finish' %}
+            {% include 'headersnippets/exit.html' with url=url %}
+            {% else %}
+            {% include 'headersnippets/back.html' with url=url %}
+            {% endif %}
+</header>
+
+<main>
+    {% include 'letterapp/resultsnippets/preview.html' %}
+    {% include 'letterapp/resultsnippets/info.html' %}
+    {% if user == target_letter.saver %}
+    {% include 'letterapp/resultsnippets/unsaveguide.html' %}
+    {% else %}
+        {% if not target_letter.state == 'saved' %}
+            {% include 'letterapp/resultsnippets/link.html' %}
+            {% if not from == 'finish' %}
+                {% if target_letter.state == 'unchecked' %}
+                {% include 'letterapp/resultsnippets/navbar.html' %}
+                {% else %}
+                {% include 'letterapp/resultsnippets/resetguide.html' %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</main>
+
+{% endblock %}

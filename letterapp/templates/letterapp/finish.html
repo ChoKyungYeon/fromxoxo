@@ -22,7 +22,7 @@
             편지는 확인 전까지 수정, 삭제할 수<br>
             있으며, QR코드와 링크를 공유하세요!
         </div>
-        <a href="{% url 'letterapp:writeinfo' pk=target_letter.pk %}?from=finish" class="btn-nav">
+        <a href="{% url 'letterapp:result' pk=target_letter.pk %}?from=finish" class="btn-nav">
             내 편지 정보 확인하기
         </a>
     </div>

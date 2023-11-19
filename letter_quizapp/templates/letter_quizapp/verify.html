@@ -1,25 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <header class="header-empty">
-        {% if user == target_letter.writer %}
-        {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
-        {% elif user == target_letter.saver %}
-        {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
-        {% else %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
-        {% endif %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
 
 <main>
-    {% include 'letter_quizapp/verifysnippets/question.html' %}
+    {% include 'letter_quizapp/quizsnippets/question.html' %}
     {% if target_quiz.type == 'choice' %}
-        {% include 'letter_quizapp/verifysnippets/choice.html' %}
+        {% include 'letter_quizapp/quizsnippets/choice.html' %}
     {% elif target_quiz.type == 'word' %}
-        {% include 'letter_quizapp/verifysnippets/word.html' %}
+        {% include 'letter_quizapp/quizsnippets/word.html' %}
     {% else %}
-        {% include 'letter_quizapp/verifysnippets/date.html' %}
+        {% include 'letter_quizapp/quizsnippets/date.html' %}
     {% endif %}
 </main>
 

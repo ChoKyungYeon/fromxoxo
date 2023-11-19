@@ -6,7 +6,7 @@
         {%  url 'letter_contentapp:update' pk=target_letter.letter_content.pk as url %}
         {% include 'headersnippets/back.html' with url=url %}
         {% if target_letter.progress == 'done' %}
-        {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:create'  as url %}
         {% endif %}

@@ -4,7 +4,7 @@
 
 <header class="header-empty " >
         {% if target_letter.progress == 'done' %}
-        {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
+        {%  url 'letterapp:result' pk=target_letter.pk as url %}
         {% else %}
         {%  url 'letterapp:create'  as url %}
         {% endif %}

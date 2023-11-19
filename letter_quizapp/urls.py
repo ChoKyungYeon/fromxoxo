@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete/<uuid:pk>', Letter_quizDeleteView.as_view(), name='delete'),
     path('list/<uuid:pk>', Letter_quizListView.as_view(), name='list'),
     path('verify/<uuid:pk>', Letter_quizVerifyView.as_view(), name='verify'),
+    path('preview/<uuid:pk>', Letter_quizPreviewView.as_view(), name='preview'),
 ]

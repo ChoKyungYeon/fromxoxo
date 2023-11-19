@@ -6,10 +6,10 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.decorators.cache import never_cache
-from django.views.generic import CreateView, DetailView, DeleteView, UpdateView, FormView
+from django.views.generic import CreateView, DetailView, DeleteView, UpdateView, FormView, TemplateView
 from django.utils.decorators import method_decorator
 
-from fromxoxo.utils import is_user_related
+from fromxoxo.utils import is_user_related, quiz_session_key
 from letter_quizapp.decorators import *
 from letterapp.models import Letter
 from letter_quizapp.forms import *
@@ -133,6 +133,7 @@ class Letter_quizDeleteView(DeleteView):
         return reverse_lazy('letter_quizapp:list', kwargs={'pk': self.object.letter.pk})
 
 @method_decorator(never_cache, name='dispatch')
+@method_decorator(Letter_quizVerifyDecorator, name='dispatch')
 class Letter_quizVerifyView(FormView):
     model = Letter_quiz
     template_name = 'letter_quizapp/verify.html'
@@ -156,7 +157,6 @@ class Letter_quizVerifyView(FormView):
         context['target_letter'] = self.target_letter
         context['target_quiz'] = self.target_quiz
         context['tema'] = self.target_letter.letter_content.tema
-        context['is_user_related'] = is_user_related(self.request.user, self.target_letter)
         return context
 
     def form_valid(self, form):
@@ -197,14 +197,27 @@ class Letter_quizVerifyView(FormView):
                        form.add_error('dateanswer', '더 미래의 날짜를 선택해 주세요!')
                     return self.form_invalid(form)
 
-            if not is_user_related(self.request.user, self.target_letter) and not self.target_quiz.next_quiz():
-                self.target_letter.state = 'checked'
-                self.target_letter.expire_from = datetime.now()
-                self.target_letter.save()
+            self.request.session[quiz_session_key(self.target_letter,self.target_quiz)] = True
             return super().form_valid(form)
 
     def get_success_url(self):
-        if self.target_quiz.next_quiz():
-            return reverse_lazy('letter_quizapp:verify', kwargs={'pk': self.target_quiz.next_quiz().pk})
-        else:
-            return reverse_lazy('letterapp:detail', kwargs={'pk': self.target_letter.pk})
+        return reverse_lazy('letterapp:detail', kwargs={'pk': self.target_letter.pk})
+
+
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+@method_decorator(Letter_quizPreviewDecorator, name='dispatch')
+class Letter_quizPreviewView(TemplateView):
+    model = Letter_quiz
+    template_name = 'letter_quizapp/preview.html'
+
+
+    def get_context_data(self, **kwargs):
+        target_quiz = get_object_or_404(Letter_quiz, pk=self.kwargs['pk'])
+        target_letter = self.object.letter
+        context = super().get_context_data(**kwargs)
+        context['target_letter'] = target_letter
+        context['target_quiz'] = target_quiz
+        context['tema'] = target_letter.letter_content.tema
+        return context

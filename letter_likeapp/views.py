@@ -12,7 +12,7 @@ from letterapp.models import Letter
 @method_decorator(Letter_likeDecorator, name='dispatch')
 class Letter_likeView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('letterapp:detail', kwargs={'pk': self.request.GET.get('letter_pk')})
+        return reverse('letterapp:preview', kwargs={'pk': self.request.GET.get('letter_pk')})
 
     def get(self, request, *args, **kwargs):
         target_user = request.user

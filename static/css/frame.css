@@ -201,19 +201,8 @@
     font-size: 2.2rem;
     color: var(--black);
 }
-.frame-quiz .text-answer{
-    font-weight: var(--fontweight-content);
-    font-size: var(--fontsize-detail);
-    color: var(--softgray);
-    margin-left: auto;
-}
-.frame-quiz .item-answer{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 0.5rem;
-    align-items: center;
-    flex-direction: row;
-}
+
+
 .frame-letter{
     width: 100%;
     padding-top:0.5rem;

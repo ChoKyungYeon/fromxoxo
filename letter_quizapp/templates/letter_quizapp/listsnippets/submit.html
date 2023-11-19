@@ -5,7 +5,7 @@
            href="{% url 'letterapp:progressupdate' %}?letter_pk={{ target_letter.pk }}" class="btn-submit-fixed btn-loading">질문 설정 완료</a>
 
     {% else %}
-        <a id="btn-loading2" onclick="startLoading(2,event, null)"  href="{% url 'letterapp:writeinfo' pk=target_letter.pk %}" class="btn-submit-fixed">
+        <a id="btn-loading2" onclick="startLoading(2,event, null)"  href="{% url 'letterapp:result' pk=target_letter.pk %}" class="btn-submit-fixed">
             편지 수정 완료
         </a>
     {% endif %}

@@ -9,25 +9,15 @@
 </style>
 
 <header>
-        {% if is_user_related %}
-            {% include 'headersnippets/like.html' %}
-        {% else %}
-            {% include 'letterapp/detailsnippets/checkguide.html' %}
-        {% endif %}
-        {% if user == target_letter.writer %}
-            {%  url 'letterapp:writeinfo' pk=target_letter.pk as url %}
-        {% elif user == target_letter.saver %}
-            {%  url 'letterapp:saveinfo' pk=target_letter.pk as url %}
-        {% else %}
-            {%  url 'letterapp:intro' pk=target_letter.pk as url %}
-        {% endif %}
+        {% include 'letterapp/lettersnippets/checkguide.html' %}
+        {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
 <main id="letter-detail">
-    {% include 'letterapp/detailsnippets/info.html' %}
-    {% include 'letterapp/detailsnippets/content.html' %}
-    {% include 'letterapp/detailsnippets/saveguide.html' %}
+    {% include 'letterapp/lettersnippets/info.html' %}
+    {% include 'letterapp/lettersnippets/content.html' %}
+    {% include 'letterapp/lettersnippets/saveguide.html' %}
 </main>
-{% include 'letterapp/detailsnippets/footer.html' %}
+{% include 'letterapp/lettersnippets/footer.html' %}
 {% endblock %}

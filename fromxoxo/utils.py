@@ -44,11 +44,10 @@ def time_after(time, limit):
 def is_user_related(user,letter):
     return user in [letter.saver, letter.writer]
 
-def check_param(request,session_key,key_list):
-    session_value = request.GET.get(session_key, None)
-    return None if not session_value or session_value in key_list else session_value
-
 def register_session(self,session_key):
     session_value = self.request.GET.get(session_key, None)
     if session_value:
         self.request.session[session_key] = session_value
+
+def quiz_session_key(letter,quiz):
+    return f'Letter:{letter.pk}Quiz:{quiz.pk}'

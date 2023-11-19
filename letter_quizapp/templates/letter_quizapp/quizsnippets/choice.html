@@ -2,11 +2,11 @@
 {% load static %}
 <style>
 
-#letter_quiz-verify-choice {
+#letter_quiz-quiz-choice {
     width: 100%;
 }
 
-#letter_quiz-verify-choice .container-choice{
+#letter_quiz-quiz-choice .container-choice{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -15,14 +15,14 @@
     flex-direction: column;
     margin-top:1.5rem;
 }
-#letter_quiz-verify-choice .spacing-item{
+#letter_quiz-quiz-choice .spacing-item{
     width:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
 }
-#letter_quiz-verify-choice .item-choice{
+#letter_quiz-quiz-choice .item-choice{
     width:100%;
     display: flex;
     justify-content:flex-start;
@@ -34,8 +34,10 @@
     margin-bottom:2rem;
     border-radius: var(--border-radius-container);
     background: var(--white);
+    border:var(--border-container);
+    box-shadow: var(--shadow-container);
 }
-#letter_quiz-verify-choice .text-choice{
+#letter_quiz-quiz-choice .text-choice{
     font-size: var(--fontsize-index);
     font-weight: var(--fontweight-content);
     color:var(--black);
@@ -44,7 +46,7 @@
 }
 
 
-#letter_quiz-verify-choice .selectmultiple {
+#letter_quiz-quiz-choice .selectmultiple {
     display: flex;
     flex-direction: column;
     justify-content:center;
@@ -54,35 +56,36 @@
     top:0;
 }
 
-#letter_quiz-verify-choice .selectmultiple .form-check {
+#letter_quiz-quiz-choice .selectmultiple .form-check {
     margin: 0;
     padding:0;
     flex-shrink: 0;
     width: 2.6rem;
 }
 
-#letter_quiz-verify-choice .selectmultiple label{
+#letter_quiz-quiz-choice .selectmultiple label{
     height:2.6rem;
     margin: 2rem 0 4rem 0;
     width: 100%;
     font-size:1.2rem;
 }
 
-#letter_quiz-verify-choice .selectmultiple input{
+#letter_quiz-quiz-choice .selectmultiple input{
     display: none;
 }
-#letter_quiz-verify-choice .invalid-feedback {
+#letter_quiz-quiz-choice .invalid-feedback {
     position: absolute;
     bottom:-2.2rem;
     left:0.3rem;
 }
 
 </style>
-<div class="frame-quiz" id="letter_quiz-verify-choice">
+<div class="frame-quiz" id="letter_quiz-quiz-choice">
     <div id="container-choice" class="container-choice">
         <form  style="width: 0; height: 0"   action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}" method="post">
             {% csrf_token %}{% bootstrap_form form %}
-            {% include 'letter_quizapp/verifysnippets/submit.html' %}
+            <input type="submit" class="btn-submit-fixed" {% if target_quiz.next_quiz %} value="편지 확인하기"
+            {% else %} value="다음 질문으로" {% endif %}>
         </form>
             <div class="spacing-item">
                 <div class="item-choice">
@@ -95,11 +98,6 @@
                     <span class="text-choice">{{ target_quiz.choice3 }}</span>
                 </div>
             </div>
-    </div>
-    <div class="item-answer">
-        {% if is_user_related %}
-        <span class="text-answer">* {{ target_quiz.choiceanswer_hint }}</span>
-        {% endif %}
     </div>
 </div>
 <script src="{% static 'js/handleSelectMultiple.js' %}"></script>

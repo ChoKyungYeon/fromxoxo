@@ -50,16 +50,15 @@ class LetterCreateView(CreateView):
             form.instance.save()
             return super().form_valid(form)
 
-
     def get_success_url(self):
         return reverse('letter_infoapp:update', kwargs={'pk': self.object.letter_info.pk})
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
-@method_decorator(LetterWriteInfoDecorator, name='dispatch')
-class LetterWriteInfoView(DetailView):
+@method_decorator(LetterResultDecorator, name='dispatch')
+class LetterResultView(DetailView):
     model = Letter
-    template_name = 'letterapp/writeinfo.html'
+    template_name = 'letterapp/result.html'
     context_object_name = 'target_letter'
 
     def get_context_data(self, **kwargs):
@@ -68,19 +67,6 @@ class LetterWriteInfoView(DetailView):
         context['tema'] = self.object.letter_content.tema
         return context
 
-@method_decorator(never_cache, name='dispatch')
-@method_decorator(login_required, name='dispatch')
-@method_decorator(LetterSaveInfoDecorator, name='dispatch')
-class LetterSaveInfoView(DetailView):
-    model = Letter
-    template_name = 'letterapp/saveinfo.html'
-    context_object_name = 'target_letter'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tema'] = self.object.letter_content.tema
-        context['from'] = self.request.GET.get('from', None)
-        return context
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='dispatch')
@@ -106,68 +92,6 @@ class LetterSavedView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tema'] = self.object.letter_content.tema
-        return context
-
-@method_decorator(never_cache, name='dispatch')
-class LetterIntroView(DetailView):
-    model = Letter
-    template_name = 'letterapp/intro.html'
-    context_object_name = 'target_letter'
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
-            target_user = request.user
-            if target_letter.writer == target_user:
-                return HttpResponseRedirect(reverse('letterapp:writeinfo', kwargs={'pk': target_letter.pk}))
-            
-            elif target_letter.saver == target_user:
-                return HttpResponseRedirect(reverse('letterapp:saveinfo',  kwargs={'pk': target_letter.pk}))
-
-            else:
-                if target_letter.state == 'saved':
-                    return HttpResponseRedirect(reverse('letterapp:expire') + '?type=saved')
-            
-        except:
-            return HttpResponseRedirect(reverse('letterapp:expire') + '?type=none')
-        return super().dispatch(request, *args, **kwargs)
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tema'] = self.object.letter_content.tema
-        context['page'] = 'intro'
-        return context
-
-
-@method_decorator(never_cache, name='dispatch')
-class LetterDetailView(DetailView):
-    model = Letter
-    template_name = 'letterapp/detail.html'
-    context_object_name = 'target_letter'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.target_user=request.user
-        try:
-            target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
-            if not is_user_related(request.user, target_letter):
-                if target_letter.state == 'unchecked':
-                    return HttpResponseRedirect(reverse('letterapp:intro', kwargs={'pk':target_letter.pk}))
-                if target_letter.state == 'saved':
-                    return HttpResponseRedirect(reverse('letterapp:expire') + '?type=saved')
-
-        except:
-            return HttpResponseRedirect(reverse('letterapp:expire') + '?type=none')
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['letter_content'] = self.object.letter_content
-        context['letter_info'] = self.object.letter_info
-        context['is_user_related'] = is_user_related(self.target_user, self.object)
-        context['tema'] = self.object.letter_content.tema
-        if self.request.user.is_authenticated:
-            like = Letter_like.objects.filter(user=self.target_user, letter=self.object).first()
-            context['like'] = like
         return context
 
 
@@ -254,7 +178,7 @@ class LetterUnsaveView(RedirectView):
 @method_decorator(LetterResetDecorator, name='dispatch')
 class LetterResetView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('letterapp:writeinfo', kwargs={'pk': self.request.GET.get('letter_pk')})
+        return reverse('letterapp:result', kwargs={'pk': self.request.GET.get('letter_pk')})
 
     def get(self, request, *args, **kwargs):
         target_letter = Letter.objects.get(pk=request.GET.get('letter_pk'))
@@ -264,7 +188,7 @@ class LetterResetView(RedirectView):
             target_letter.save()
             return super(LetterResetView, self).get(request, *args, **kwargs)
 
-
+@method_decorator(never_cache, name='dispatch')
 class LetterSearchView(FormView):
     model = Letter
     template_name = 'letterapp/search.html'
@@ -304,3 +228,58 @@ class LetterSearchView(FormView):
 
     def get_success_url(self):
         return reverse('letterapp:intro', kwargs={'pk': self.target_letter.pk})
+
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(LetterIntroDecorator, name='dispatch')
+class LetterIntroView(DetailView):
+    model = Letter
+    template_name = 'letterapp/intro.html'
+    context_object_name = 'target_letter'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tema'] = self.object.letter_content.tema
+        context['page'] = 'intro'
+        return context
+
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(LetterDetailDecorator, name='dispatch')
+class LetterDetailView(DetailView):
+    model = Letter
+    template_name = 'letterapp/detail.html'
+    context_object_name = 'target_letter'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.target_user = request.user
+        target_letter= get_object_or_404(Letter, pk=self.kwargs['pk'])
+        if target_letter.state == 'unchecked':
+            target_letter.state = 'checked'
+            target_letter.expire_from = datetime.now()
+            target_letter.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['letter_content'] = self.object.letter_content
+        context['letter_info'] = self.object.letter_info
+        context['tema'] = self.object.letter_content.tema
+        return context
+
+
+@method_decorator(never_cache, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+@method_decorator(LetterPreviewDecorator, name='dispatch')
+class LetterPreviewView(DetailView):
+    model = Letter
+    template_name = 'letterapp/preview.html'
+    context_object_name = 'target_letter'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['letter_content'] = self.object.letter_content
+        context['letter_info'] = self.object.letter_info
+        context['tema'] = self.object.letter_content.tema
+        context['like'] = Letter_like.objects.filter(user=self.request.user, letter=self.object).first()
+        return context

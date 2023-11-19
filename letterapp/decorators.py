@@ -2,33 +2,7 @@ from fromxoxo.decorators import *
 
 
 
-def LetterWriteInfoDecorator(func):
-    def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
-        checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('writer'),
-            decorators.progress_required(['done'])
-        ]
-        for check in checks:
-            if check:
-                return check
-        return func(request, *args, **kwargs)
-    return decorated
 
-def LetterSaveInfoDecorator(func):
-    def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
-        checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('saver'),
-            decorators.state_required(['saved']),
-        ]
-        for check in checks:
-            if check:
-                return check
-        return func(request, *args, **kwargs)
-    return decorated
 
 def LetterFinishDecorator(func):
     def decorated(request, *args, **kwargs):
@@ -125,11 +99,55 @@ def LetterResetDecorator(func):
         return func(request, *args, **kwargs)
     return decorated
 
-def LetterIntroDecorator(func):
+def LetterPreviewDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=request.GET.get('letter_pk'))
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
         checks = [
             decorators.instance_update('letter'),
+            decorators.instance_owenership_required('related'),
+            decorators.progress_required(['done']),
+        ]
+        for check in checks:
+            if check:
+                return check
+        return func(request, *args, **kwargs)
+    return decorated
+
+def LetterResultDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        checks = [
+            decorators.instance_update('letter'),
+            decorators.instance_owenership_required('related'),
+            decorators.progress_required(['done'])
+        ]
+        for check in checks:
+            if check:
+                return check
+        return func(request, *args, **kwargs)
+    return decorated
+
+def LetterIntroDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        checks = [
+            decorators.letter_redirector('letter'),
+            decorators.progress_required(['done']),
+        ]
+        for check in checks:
+            if check:
+                return check
+        return func(request, *args, **kwargs)
+    return decorated
+
+
+def LetterDetailDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        checks = [
+            decorators.letter_redirector('letter'),
+            decorators.quiz_redirector(request),
+            decorators.progress_required(['done']),
         ]
         for check in checks:
             if check:

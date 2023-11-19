@@ -215,7 +215,7 @@ class Letter_quizPreviewView(TemplateView):
 
     def get_context_data(self, **kwargs):
         target_quiz = get_object_or_404(Letter_quiz, pk=self.kwargs['pk'])
-        target_letter = self.object.letter
+        target_letter = target_quiz.letter
         context = super().get_context_data(**kwargs)
         context['target_letter'] = target_letter
         context['target_quiz'] = target_quiz

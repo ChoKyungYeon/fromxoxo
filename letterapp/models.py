@@ -40,7 +40,7 @@ class Letter(models.Model):
 
 
     def should_delete(self):#deploycheck
-        return (datetime.now() - self.expire_from) > timedelta(minutes=1) if self.state == 'checked' else None
+        return (datetime.now() - self.expire_from) > timedelta(hours=24) if self.state == 'checked' else None
 
     def character_number(self):
         return random.randint(1, 23)

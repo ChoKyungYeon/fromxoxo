@@ -1,7 +1,6 @@
 import random
 import uuid
 from datetime import datetime, timedelta
-
 from django.db import transaction
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -16,22 +15,16 @@ from verificationapp.forms import *
 from verificationapp.models import Verification
 from django.contrib.auth import get_user_model
 
-def UpdateVerification():
-    for verification in Verification.objects.filter(is_verified=False):
-        if datetime.now() - verification.created_at > timedelta(minutes=3):
-            verification.delete()
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_unrequired, name='dispatch')
+@method_decorator(VerificationCreateDecorator, name='dispatch')
 class VerificationCreateView(CreateView):
     model = Verification
     template_name = 'verificationapp/create.html'
 
     def dispatch(self, request, *args, **kwargs):
-        UpdateVerification()
         self.type = request.GET.get('type', None)
-        if not self.type or self.type not in ['update', 'search', 'signup']:
-            return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -76,16 +69,14 @@ class VerificationCreateView(CreateView):
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_unrequired, name='dispatch')
+@method_decorator(VerificationVerifyDecorator, name='dispatch')
 class VerificationVerifyView(FormView):
     model = Verification
     form_class = PhoneNumberVerifyForm
     template_name = 'verificationapp/verify.html'
 
     def dispatch(self, request, *args, **kwargs):
-        UpdateVerification()
         self.target_verification = get_object_or_404(Verification, pk=self.kwargs['pk'])
-        if self.target_verification.is_verified:
-            return HttpResponseForbidden()
         self.type = self.target_verification.type
         return super().dispatch(request, *args, **kwargs)
 

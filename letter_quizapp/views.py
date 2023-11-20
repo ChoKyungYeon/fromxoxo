@@ -9,7 +9,6 @@ from django.views.decorators.cache import never_cache
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView, FormView, TemplateView
 from django.utils.decorators import method_decorator
 
-from fromxoxo.utils import is_user_related, quiz_session_key
 from letter_quizapp.decorators import *
 from letterapp.models import Letter
 from letter_quizapp.forms import *
@@ -26,8 +25,6 @@ class Letter_quizCreateView(CreateView):
     def dispatch(self, request, *args, **kwargs):
         self.type = request.GET.get('type', None)
         self.target_letter = get_object_or_404(Letter, pk=self.kwargs['pk'])
-        if not self.type or self.type not in ['choice','word','date']:
-            return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
 
     def get_form_class(self):
@@ -144,6 +141,13 @@ class Letter_quizVerifyView(FormView):
         self.target_letter = self.target_quiz.letter
         return super().dispatch(request, *args, **kwargs)
 
+    def count_error(self):
+        self.target_letter.error += 1
+        self.target_letter.errored_at = datetime.now()
+        self.target_letter.save()
+        return HttpResponseRedirect(reverse('letterapp:intro', kwargs={'pk': self.target_letter.pk})) \
+            if self.target_letter.is_locked() else None
+
     def get_form_class(self):
         if self.type == 'choice':
             return Letter_quizChoiceVerifyForm
@@ -174,6 +178,9 @@ class Letter_quizVerifyView(FormView):
                             if a != b:
                                 letter_difference += 1
                         form.add_error('wordanswer', f'{letter_difference}개의 단어가 일치하지 않아요!')
+                        response = self.count_error()
+                        if response:
+                            return response
                     return self.form_invalid(form)
 
             elif self.type == 'choice':
@@ -182,9 +189,11 @@ class Letter_quizVerifyView(FormView):
                 if user_choice != quiz_choice:
                     if len(user_choice) == 1 and len(quiz_choice) > 1:
                         form.add_error('choiceanswer', '모든 정답을 선택해 주세요!')
-
                     else:
                         form.add_error('choiceanswer', '정답이 정확하지 않습니다!')
+                    response = self.count_error()
+                    if response:
+                        return response
                     return self.form_invalid(form)
             else:
                 user_date = form.cleaned_data['dateanswer']
@@ -195,6 +204,9 @@ class Letter_quizVerifyView(FormView):
 
                     else:
                        form.add_error('dateanswer', '더 미래의 날짜를 선택해 주세요!')
+                    response = self.count_error()
+                    if response:
+                        return response
                     return self.form_invalid(form)
 
             self.request.session[quiz_session_key(self.target_letter,self.target_quiz)] = True

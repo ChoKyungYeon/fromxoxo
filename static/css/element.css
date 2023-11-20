@@ -152,7 +152,7 @@
     position: fixed;
     right:calc(var(--padding-frame) + 4%);
     left:calc(var(--padding-frame) + 4%);
-    bottom:2rem;
+    bottom:3rem;
 }
 
 .btn-submit:active {

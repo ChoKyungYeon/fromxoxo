@@ -99,18 +99,10 @@
     {% endif %}
 
     {% if forloop.counter|divisibleby:2 %}
-        {% if user == letter.saver %}
-            <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-right">
-        {% else %}
-            <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-right">
-        {% endif %}
+        <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-right">
         <div class="icon-left"></div>
     {% else %}
-        {% if user == letter.saver %}
-            <a href="{% url 'letterapp:intro' pk=letter.pk %}" class="container-snippets container-left">
-        {% else %}
-            <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-left">
-        {% endif %}
+        <a href="{% url 'letterapp:result' pk=letter.pk %}" class="container-snippets container-left">
         <div class="icon-right"></div>
     {% endif %}
     <div class="spacing-horizontal-stretch">

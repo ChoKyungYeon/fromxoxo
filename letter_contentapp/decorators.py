@@ -4,10 +4,10 @@ from letter_contentapp.models import Letter_content
 
 def Letter_contentUpdateDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_update('letter_content'),
-            decorators.instance_owenership_required('writer'),
+            decorators.get_letter(Letter_content, redirect=False),
+            decorators.role_required('writer'),
             decorators.state_required(['unchecked']),
             decorators.progress_required(['progress2','progress3','done'])
         ]

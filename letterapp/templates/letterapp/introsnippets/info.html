@@ -1,0 +1,81 @@
+<style>
+
+    .container-letter{
+        width: 100%;
+        padding-top: 1.9rem;
+        padding-bottom: 1.7rem;
+    }
+
+
+    .text-date {
+        background: var(--gray);
+        font-size: var(--fontsize-small);
+        color: var(--white);
+        padding:0.2rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .interval-title {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+
+    .item-arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        display: inline-block;
+        position: absolute;
+        background: transparent;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .item-arrow-right {
+        border-left: 14px solid var(--white);
+        right: -13px;
+    }
+
+
+    .icon-star2,
+    .icon-star1 {
+        position: absolute;
+        font-weight: 600;
+    }
+    .icon-star1 {
+        right: 8%;
+        top:3rem;
+        font-size: 1.3rem;
+        color: var(--middlepink);
+        transform: rotate(-45deg);
+    }
+    .icon-star2 {
+        right: 18%;
+        top:2rem;
+        font-size: 1.4rem;
+        color:var(--borderpink);
+        transform: rotate(-25deg);
+    }
+
+</style>
+
+
+<button {% if target_letter.is_locked %} onclick="reloadZoom(1)" {% else %} onclick="showZoom(1)" {% endif %} class="container-snippets container-letter" >
+    <div class="item-arrow-right"></div>
+    <span class="icon-star1 material-icons">grade</span>
+    <span class="icon-star2 material-icons">grade</span>
+    <div class="spacing-horizontal-stretch">
+        <span class="text-content-bold">{{ target_letter.letter_info.receiver }}</span>
+    </div>
+    <div class="text-index interval-title">
+        {{ target_letter.letter_info.title|truncatechars:23 }}
+    </div>
+    <div class="spacing-horizontal-stretch">
+        <div class="text-content text-date">
+            {{ target_letter.letter_info.written_at|date:"m월 d일"  }}
+        </div>
+        <span class="text-content-bold">{{ target_letter.letter_info.sender }}</span>
+    </div>
+</button>

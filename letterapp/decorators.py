@@ -1,15 +1,28 @@
 from fromxoxo.decorators import *
 
 
+def LetterSessionDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request, **kwargs)
+        decorators.register_session('from')
+        return func(request, *args, **kwargs)
+    return decorated
 
-
+def LetterExpireDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request, **kwargs)
+        response=decorators.session_required(['none','saved'])
+        if response:
+            return response
+        return func(request, *args, **kwargs)
+    return decorated
 
 def LetterFinishDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('writer'),
+            decorators.get_letter(Letter, redirect=False),
+            decorators.role_required('writer'),
             decorators.state_required(['unchecked']),
             decorators.progress_required(['done']),
         ]
@@ -21,10 +34,10 @@ def LetterFinishDecorator(func):
 
 def LetterSavedDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('saver'),
+            decorators.get_letter(Letter, redirect=False),
+            decorators.role_required('saver'),
             decorators.state_required(['saved']),
         ]
         for check in checks:
@@ -35,9 +48,9 @@ def LetterSavedDecorator(func):
 
 def LetterDeleteDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_owenership_required('writer'),
+            decorators.role_required('writer'),
             decorators.state_required(['unchecked']),
             decorators.progress_required(['done'])
         ]
@@ -49,9 +62,9 @@ def LetterDeleteDecorator(func):
 
 def LetterProgressUpdateDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=request.GET.get('letter_pk'))
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_owenership_required('writer'),
+            decorators.role_required('writer'),
             decorators.progress_required(['progress3'])
         ]
         for check in checks:
@@ -62,10 +75,10 @@ def LetterProgressUpdateDecorator(func):
 
 def LetterSaveDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=request.GET.get('letter_pk'))
+        decorators=Decorators(request, **kwargs)
         checks = [
             decorators.state_required(['checked']),
-            decorators.instance_owenership_required('unrelated'),
+            decorators.role_required('unrelated'),
         ]
         for check in checks:
             if check:
@@ -75,9 +88,9 @@ def LetterSaveDecorator(func):
 
 def LetterUnsaveDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=request.GET.get('letter_pk'))
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_owenership_required('saver'),
+            decorators.role_required('saver'),
             decorators.state_required(['saved']),
         ]
         for check in checks:
@@ -88,9 +101,9 @@ def LetterUnsaveDecorator(func):
 
 def LetterResetDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=request.GET.get('letter_pk'))
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_owenership_required('writer'),
+            decorators.role_required('writer'),
             decorators.state_required(['checked']),
         ]
         for check in checks:
@@ -101,10 +114,10 @@ def LetterResetDecorator(func):
 
 def LetterPreviewDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('related'),
+            decorators.get_letter(Letter, redirect=False),
+            decorators.role_required('related'),
             decorators.progress_required(['done']),
         ]
         for check in checks:
@@ -115,10 +128,10 @@ def LetterPreviewDecorator(func):
 
 def LetterResultDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.instance_update('letter'),
-            decorators.instance_owenership_required('related'),
+            decorators.get_letter(Letter, redirect=False),
+            decorators.role_required('related'),
             decorators.progress_required(['done'])
         ]
         for check in checks:
@@ -129,10 +142,11 @@ def LetterResultDecorator(func):
 
 def LetterIntroDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.letter_redirector('letter'),
+            decorators.get_letter(Letter, redirect=True),
             decorators.progress_required(['done']),
+            decorators.update_error(),
         ]
         for check in checks:
             if check:
@@ -143,11 +157,13 @@ def LetterIntroDecorator(func):
 
 def LetterDetailDecorator(func):
     def decorated(request, *args, **kwargs):
-        decorators=Decorators(request.user, object_pk=kwargs['pk'])
+        decorators=Decorators(request, **kwargs)
         checks = [
-            decorators.letter_redirector('letter'),
-            decorators.quiz_redirector(request),
+            decorators.get_letter(Letter, redirect=True),
+            decorators.quiz_redirector(),
             decorators.progress_required(['done']),
+            decorators.update_error(),
+            decorators.is_locked(),
         ]
         for check in checks:
             if check:

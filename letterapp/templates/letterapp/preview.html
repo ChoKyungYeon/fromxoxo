@@ -4,7 +4,8 @@
 
 <style>
 #letter-preview{
-    padding-bottom:10rem;
+    padding-bottom:6rem;
+    width: 100%;
 }
 </style>
 
@@ -18,8 +19,11 @@
     {% include 'headersnippets/exit.html' with url=url %}
 </header>
 
-<main id="letter-preview">
-    {% include 'letterapp/lettersnippets/info.html' %}
-    {% include 'letterapp/lettersnippets/content.html' %}
+<main style="padding-bottom:4rem;">
+    <div id="letter-preview" class="tema-{{ tema }}">
+        {% include 'letterapp/lettersnippets/info.html' %}
+        {% include 'letterapp/lettersnippets/content.html' %}
+    </div>
+    {% include 'letterapp/lettersnippets/screenshot.html' %}
 </main>
 {% endblock %}

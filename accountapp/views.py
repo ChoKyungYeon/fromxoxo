@@ -9,25 +9,23 @@ import re
 from accountapp.decorators import *
 from accountapp.forms import *
 from fromxoxo.decorators import *
-from fromxoxo.utils import register_session
 from verificationapp.models import Verification
 from django.utils.decorators import method_decorator
 
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_unrequired, name='dispatch')
+@method_decorator(AccountLoginDecorator, name='dispatch')
 class AccountLoginView(LoginView):
     form_class = AccountLoginForm
     template_name = 'accountapp/login.html'
     success_url = reverse_lazy('homescreenapp:intro')
 
-    def dispatch(self, request, *args, **kwargs):
-        register_session(self,'letter_pk')
-        return super().dispatch(request, *args, **kwargs)
 
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_unrequired, name='dispatch')
+@method_decorator(AccountCreateDecorator, name='dispatch')
 class AccountCreateView(CreateView):
     model = CustomUser
     form_class = AccountCreateForm
@@ -36,8 +34,6 @@ class AccountCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.target_verification = get_object_or_404(Verification, pk=self.kwargs['pk'])
-        if self.request.session.get("verification_pk", None) != str(self.target_verification.pk):
-            return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):

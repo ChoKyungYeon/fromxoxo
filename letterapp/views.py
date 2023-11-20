@@ -3,13 +3,10 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.db import transaction
-from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import DetailView, DeleteView, TemplateView, RedirectView, FormView, CreateView
-from fromxoxo.utils import register_session, is_user_related
 from letter_contentapp.models import Letter_content
 from letter_infoapp.models import Letter_info
 from letter_likeapp.models import Letter_like
@@ -20,6 +17,7 @@ from letterapp.models import Letter
 
 @method_decorator(never_cache, name='dispatch')
 @method_decorator(login_required, name='post')
+@method_decorator(LetterSessionDecorator, name='dispatch')
 class LetterCreateView(CreateView):
     model = Letter
     form_class = LetterCreateForm
@@ -27,7 +25,6 @@ class LetterCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.target_user = request.user
-        register_session(self, 'from')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -94,16 +91,11 @@ class LetterSavedView(DetailView):
         context['tema'] = self.object.letter_content.tema
         return context
 
-
+@method_decorator(LetterExpireDecorator, name='dispatch')
 class LetterExpireView(TemplateView):
     template_name = 'letterapp/expire.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        self.type = request.GET.get('type', None)
-        if not self.type or self.type not in ['none','saved']:
-            return HttpResponseForbidden()
-        return super().dispatch(request, *args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['type'] = self.type
@@ -189,14 +181,11 @@ class LetterResetView(RedirectView):
             return super(LetterResetView, self).get(request, *args, **kwargs)
 
 @method_decorator(never_cache, name='dispatch')
+@method_decorator(LetterSessionDecorator, name='dispatch')
 class LetterSearchView(FormView):
     model = Letter
     template_name = 'letterapp/search.html'
     form_class = LetterSearchForm
-
-    def dispatch(self, request, *args, **kwargs):
-        register_session(self,'from')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -237,10 +226,16 @@ class LetterIntroView(DetailView):
     template_name = 'letterapp/intro.html'
     context_object_name = 'target_letter'
 
+    def dispatch(self, request, *args, **kwargs):
+        self.target_letter= get_object_or_404(Letter, pk=self.kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tema'] = self.object.letter_content.tema
         context['page'] = 'intro'
+        context['remaining_time'] = self.object.error_reset_timeout()
+        context['redirect_url'] = reverse('letterapp:intro', kwargs={'pk': self.object.pk})
         return context
 
 
@@ -253,11 +248,6 @@ class LetterDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         self.target_user = request.user
-        target_letter= get_object_or_404(Letter, pk=self.kwargs['pk'])
-        if target_letter.state == 'unchecked':
-            target_letter.state = 'checked'
-            target_letter.expire_from = datetime.now()
-            target_letter.save()
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

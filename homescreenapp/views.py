@@ -2,7 +2,6 @@ import uuid
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
-from fromxoxo.utils import is_user_related
 from letterapp.models import Letter
 
 @method_decorator(never_cache, name='dispatch')
@@ -17,7 +16,7 @@ class HomescreenIntroView(TemplateView):
             try:
                 letter_uuid = uuid.UUID(letter_pk)
                 letter = Letter.objects.get(pk=letter_uuid)
-                if not is_user_related(self.target_user, letter) and letter.state == 'checked':
+                if not letter.is_user_related(self.target_user) and letter.state == 'checked':
                     self.ongoing_letter = letter
             except:
                 pass

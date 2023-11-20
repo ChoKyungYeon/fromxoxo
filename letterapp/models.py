@@ -16,6 +16,9 @@ class Letter(models.Model):
     writer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_writer', null=True)
     saver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_saver', null=True)
 
+    error = models.IntegerField(default=0)
+    errored_at = models.DateTimeField(null=True)
+
     expire_from = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
 
@@ -31,19 +34,39 @@ class Letter(models.Model):
     def quiz_len(self):
         return self.letter_quiz.all().count()
 
+    def can_try(self):
+        return 5-self.error
+
     def finished_before(self):
         return time_before(self.finished_at)
 
-
     def delete_after(self):
-        return time_after(self.expire_from, timedelta(hours=24)) if self.state == 'checked' else None
+        return time_after(self.expire_from, timedelta(hours=24)) if self.expire_from else None
 
+    def error_reset_timeout(self):
+        if self.errored_at:
+            remaining_time = timedelta(minutes=5) - (datetime.now() - self.errored_at)
+            remaining_time_in_sec = max(remaining_time, timedelta(0)).total_seconds()
+            return round(remaining_time_in_sec)
 
-    def should_delete(self):#deploycheck
-        return (datetime.now() - self.expire_from) > timedelta(hours=24) if self.state == 'checked' else None
+    def should_reset_error(self):
+        return (datetime.now() - self.errored_at) > timedelta(minutes=5) if self.errored_at else None
+
+    def is_locked(self):
+        return self.error == 5
+
+    def should_delete(self):
+        return (datetime.now() - self.expire_from) > timedelta(hours=24) if self.expire_from else None
 
     def character_number(self):
         return random.randint(1, 23)
+
+    def screenshot_name(self):
+        formatted_date = self.letter_info.written_at.strftime('%y.%m.%d')
+        return f'[{formatted_date}] {self.letter_info.title}'
+
+    def is_user_related(self, user):
+        return user in [self.writer, self.saver]
 
     def generate_url(self):
         base_url = reverse('letterapp:intro', kwargs={'pk': self.pk})

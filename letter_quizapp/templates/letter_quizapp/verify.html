@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <header class="header-empty">
+        {% include 'headersnippets/error.html' with url=url %}
         {%  url 'letterapp:intro' pk=target_letter.pk as url %}
         {% include 'headersnippets/exit.html' with url=url %}
 </header>

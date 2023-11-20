@@ -1,0 +1,47 @@
+<style>
+    .text-error{
+        color: var(--red);
+        font-weight: var(--fontweight-bold);
+        font-size: inherit;
+        margin-left: 0.3rem;
+    }
+</style>
+{% load static %}
+<button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom"
+        {% if target_letter.is_locked %} style="display: flex; opacity: 1;"{% endif %}>
+    <div class="container">
+        <div class="item-exit material-icons">
+            cancel
+        </div>
+        <span class="text-title-bold" >
+            {% if target_letter.is_locked %}
+            편지가 잠금되었어요!
+            {% elif target_letter.error %}
+            퀴즈를 {{target_letter.error }}번 틀리셨어요!
+            {% else %}
+            퀴즈를 해결해 주세요!
+            {% endif %}
+        </span>
+        <span class="text-title" style="text-align: center" >
+            {% if target_letter.is_locked %}
+            잠금 해제까지 남은 시간 <span id="countdown" class="text-error" >{{remaining_time}}</span>
+            {% else %}
+            퀴즈를 5회 이상 틀리실 경우 <br>
+            5분간 편지가 잠금됩니다!
+            {% endif %}
+        </span>
+        {% if not target_letter.is_locked %}
+        <a href="{% url 'letterapp:detail' pk=target_letter.pk %}" id="btn-loading1"
+           onclick="startLoading(1, event)" class="btn-nav">시작해 볼까요?
+        </a>
+        {% endif %}
+    </div>
+</button>
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+<span id="remainingTime" style="display:none;">{{ remaining_time }}</span>
+<span id="redirectUrl" style="display:none;">{{ redirect_url }}</span>
+<script src="{% static 'js/countdown.js' %}"></script>
+<script src="{% static 'js/showZoom.js' %}"></script>
+<script src="{% static 'js/startLoading.js' %}"></script>

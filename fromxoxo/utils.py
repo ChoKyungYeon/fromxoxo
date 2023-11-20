@@ -40,14 +40,3 @@ def time_after(time, limit):
         return f'{months}달 후'
 
 
-
-def is_user_related(user,letter):
-    return user in [letter.saver, letter.writer]
-
-def register_session(self,session_key):
-    session_value = self.request.GET.get(session_key, None)
-    if session_value:
-        self.request.session[session_key] = session_value
-
-def quiz_session_key(letter,quiz):
-    return f'Letter:{letter.pk}Quiz:{quiz.pk}'

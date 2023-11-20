@@ -28,9 +28,13 @@
     #letter-detail-content .item-letterimage{
         width: 100%;
         height: 14rem;
+        overflow: hidden;
         margin-bottom: 2rem;
         position: relative;
         flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #letter-detail-content  .image-click{
         width: 2.5rem;
@@ -43,11 +47,9 @@
     }
     #letter-detail-content .item-letterimage .img{
         width: 100%;
-        height: 100%;
         border-radius:var(--border-radius-btn);
         border:1.5px solid #e3e3e3;
         box-shadow:0 3px 13px #e3e3e3;
-        object-fit: cover;
         flex-shrink: 0;
     }
     @media screen and (min-width: 800px) {
@@ -72,7 +74,7 @@
     {% if letter_content.image %}
         <button onclick="showZoom(3)" class="item-letterimage">
             <img class="img" src="{{ letter_content.image.url }}">
-            <img class="image-click" src='/static/icons/etc/click.png'>
+            <img class="image-click" id="image-content" src='/static/icons/etc/click.png'>
         </button>
         <button onclick="closeZoom(3)" id="frame-zoom3" class="frame-zoom">
             <div 

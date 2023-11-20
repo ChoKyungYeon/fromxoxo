@@ -197,7 +197,7 @@ class Letter_quizVerifyView(FormView):
                     return self.form_invalid(form)
             else:
                 user_date = form.cleaned_data['dateanswer']
-                quiz_date = self.target_quiz.date
+                quiz_date = self.target_quiz.dateanswer
                 if user_date != quiz_date:
                     if user_date > quiz_date:
                        form.add_error('dateanswer', '더 과거의 날짜를 선택해 주세요!')

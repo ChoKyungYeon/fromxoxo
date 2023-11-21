@@ -17,6 +17,20 @@ def AccountOwnershipDecorator(func):
         return func(request, *args, **kwargs)
     return decorated
 
+def AccountCharacterUpdateDecorator(func):
+    def decorated(request, *args, **kwargs):
+        decorators=Decorators(request, **kwargs)
+        checks = [
+            decorators.ownership_required(),
+            decorators.session_required(['heart', 'animal','christmas'])
+        ]
+        for check in checks:
+            if check:
+                return check
+
+        return func(request, *args, **kwargs)
+    return decorated
+
 def AccountCreateDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)

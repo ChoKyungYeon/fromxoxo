@@ -59,7 +59,7 @@ class Letter(models.Model):
         return (datetime.now() - self.expire_from) > timedelta(hours=24) if self.expire_from else None
 
     def character_number(self):
-        return random.randint(1, 23)
+        return random.randint(1, 20)
 
     def screenshot_name(self):
         formatted_date = self.letter_info.written_at.strftime('%y.%m.%d')

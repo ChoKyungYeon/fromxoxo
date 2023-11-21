@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -151,6 +153,11 @@ class AccountSettingView(DetailView):
     context_object_name = 'target_user'
     template_name = 'accountapp/setting.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['icon_int'] = random.randint(1, 20)
+        return context
+
 
 @method_decorator(login_required, name='dispatch')
 @method_decorator(AccountOwnershipDecorator, name='dispatch')
@@ -166,6 +173,27 @@ class AccountNotificationUpdateView(RedirectView):
         self.target_user.can_receive_notification = True if self.target_user.can_receive_notification == False else False
         self.target_user.save()
         return super(AccountNotificationUpdateView, self).get(request, *args, **kwargs)
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(AccountCharacterUpdateDecorator, name='dispatch')
+class AccountCharacterUpdateView(RedirectView):
+    def dispatch(self, request, *args, **kwargs):
+        self.target_user = get_object_or_404(CustomUser, pk=self.kwargs['pk'])
+        self.type = self.request.GET.get('type', None)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('accountapp:setting', kwargs={'pk': self.target_user.pk})
+
+    def get(self, request, *args, **kwargs):
+        if self.type == 'animal':
+            self.target_user.character = 'character2'
+        elif self.type == 'heart':
+            self.target_user.character = 'character1'
+        else:
+            self.target_user.character = 'character3'
+        self.target_user.save()
+        return super(AccountCharacterUpdateView, self).get(request, *args, **kwargs)
 
 
 @method_decorator(never_cache, name='dispatch')

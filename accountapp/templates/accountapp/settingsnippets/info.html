@@ -1,0 +1,21 @@
+<style>
+    #account-setting-info .container{
+        box-shadow: none;
+        border:none;
+        padding-top:1.3rem;
+        padding-bottom:1.3rem;
+    }
+</style>
+<div class="frame" id="account-setting-info">
+    <div class="spacing-title">
+        <span class="text-title-bold">계정 정보</span>
+    </div>
+    <div class="container">
+        <div class="spacing-horizontal">
+            <span class="text-content-bold" >{{ user.username }}
+                    <span class="text-content" style="color: var(--black)">님</span>
+                </span>
+            {% include 'accountapp/settingsnippets/iconguide.html' %}
+        </div>
+    </div>
+</div>

@@ -32,3 +32,8 @@ QuizAnswerChoice = (
     ('choice2', '✓'),
     ('choice3', '✓'),
 )
+AccountCharaterChoice = (
+    ('character1', '하트'),
+    ('character2', '동룰'),
+    ('character3', '크리스마스'),
+)

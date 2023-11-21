@@ -66,7 +66,7 @@
     <div class="container">
     <span class="text-title-bold spacing-saver">{{ letter_info.title }}</span>
     {% if letter_content.image %}
-        <button onclick="show(3)" class="item-letterimage">
+        <button onclick="showZoom(3)" class="item-letterimage">
             <img class="img" src="{{ letter_content.image.url }}">
             <img class="image-click" id="image-content" src='/static/icons/etc/click.png'>
         </button>

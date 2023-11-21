@@ -1,5 +1,5 @@
 
-function show(counter) {
+function showZoom(counter) {
     var element = document.getElementById("frame-zoom"+ counter);
     element.style.display = "flex";
     element.style.opacity = 0;
@@ -41,7 +41,7 @@ function showSlide(slideNumber) {
         if (i === slideNumber) {
             btn.classList.add('btn-touched');
             btn.classList.remove('btn-untouched');
-            slide.style.display = 'flex';
+            slide.style.display = 'block';
         } else {
             btn.classList.add('btn-untouched');
             btn.classList.remove('btn-touched');

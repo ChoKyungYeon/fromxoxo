@@ -75,12 +75,17 @@
         flex-shrink: 0;
     }
 
+    #snippet-letter .item-face .img-christmas,
     #snippet-letter .item-face .img{
         object-fit: cover;
         width: 3.5rem;
         height: 3.5rem;
         position: relative;
         top: 0.1rem;
+    }
+    #snippet-letter .item-face .img-christmas{
+        width: 3.1rem;
+        height: 3.1rem;
     }
 
     @media screen and (min-width: 800px) {
@@ -94,7 +99,8 @@
 <div class="spacing-horizontal-stretch" id="snippet-letter">
     {% if forloop.counter|divisibleby:2 %}
         <div class="item-face">
-            <img class="img" src='/static/icons/character/face{{ letter.character_number }}.png'>
+            <img {% if target_user.character != 'character3' %} class="img" {% else %} class="img-christmas" {% endif %}
+                    src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
         </div>
     {% endif %}
 
@@ -124,7 +130,8 @@
 
     {% if not forloop.counter|divisibleby:2 %}
         <div class="item-face">
-            <img class="img" src='/static/icons/character/face{{ letter.character_number }}.png'>
+            <img {% if target_user.character != 'character3' %} class="img" {% else %} class="img-christmas" {% endif %}
+                    src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
         </div>
     {% endif %}
 </div>

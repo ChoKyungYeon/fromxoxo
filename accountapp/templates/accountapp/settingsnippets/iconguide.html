@@ -1,0 +1,95 @@
+{% load static %}
+<style>
+    .btn-charater{
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: var(--lightpink);
+        border-radius: 50%;
+        width: 4.2rem;
+        height: 4.2rem;
+        margin-left: auto;
+        position: relative;
+    }
+    .img-icon{
+        width: 2.6rem;
+    }
+    .icon-edit{
+                display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: var(--black);
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+       font-weight: 400;
+        font-size: 0.9rem;
+        color: var(--white);
+        right:-0.3rem;
+        bottom:-0.1rem;
+        position: absolute;
+    }
+    #frame-zoom1 .spacing-horizontal-stretch{
+        padding-left: var(--padding-frame);
+        padding-right: var(--padding-frame);
+    }
+
+    #frame-zoom1 .container-nav {
+        width: 31%;
+        padding-top:1.5rem;
+        padding-bottom:1.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: none;
+        background: var(--white);
+        border-radius: var(--border-radius-container);
+        border:var(--border-container);
+        flex-shrink: 0;
+    }
+
+    #frame-zoom1 .item-image {
+        margin-bottom: 0.7rem;
+    }
+    #frame-zoom1 .item-image .img{
+        width: 2.8rem;
+    }
+</style>
+<button onclick="showZoom(1)" class="btn-charater">
+    <img class="img-icon" src='/static/icons/{{ target_user.character }}/face{{ icon_int }}.png'>
+    <span class="icon-edit material-icons">edit</span>
+</button>
+<button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom">
+    <div class="icon-exit material-icons">close</div>
+    <div class="spacing-horizontal-stretch">
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=heart" class="container-nav">
+            <div class="item-image">
+                <img class="img" src='/static/icons/character1/face{{ icon_int }}.png'>
+            </div>
+            <div class="text-content-bold" >
+                하트
+            </div>
+        </a>
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=animal" class="container-nav">
+            <div class="item-image">
+                <img class="img" src='/static/icons/character2/face{{ icon_int }}.png'>
+            </div>
+            <div class="text-content-bold" >
+                동물
+            </div>
+        </a>
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=christmas" class="container-nav">
+            <div class="item-image">
+                <img class="img" src='/static/icons/character3/face{{ icon_int }}.png'>
+            </div>
+            <div class="text-content-bold" >
+                크리스마스
+            </div>
+        </a>
+    </div>
+</button>
+<script src="{% static 'js/show.js' %}"></script>

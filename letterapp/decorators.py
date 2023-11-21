@@ -50,6 +50,7 @@ def LetterDeleteDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
         checks = [
+            decorators.get_letter(Letter, redirect=False),
             decorators.role_required('writer'),
             decorators.state_required(['unchecked']),
             decorators.progress_required(['done'])
@@ -64,6 +65,7 @@ def LetterProgressUpdateDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
         checks = [
+            decorators.get_letter(Letter, redirect=False),
             decorators.role_required('writer'),
             decorators.progress_required(['progress3'])
         ]
@@ -77,6 +79,7 @@ def LetterSaveDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
         checks = [
+            decorators.get_letter(Letter, redirect=False),
             decorators.state_required(['checked']),
             decorators.role_required('unrelated'),
         ]
@@ -90,6 +93,7 @@ def LetterUnsaveDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
         checks = [
+            decorators.get_letter(Letter, redirect=False),
             decorators.role_required('saver'),
             decorators.state_required(['saved']),
         ]
@@ -103,6 +107,7 @@ def LetterResetDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
         checks = [
+            decorators.get_letter(Letter, redirect=False),
             decorators.role_required('writer'),
             decorators.state_required(['checked']),
         ]

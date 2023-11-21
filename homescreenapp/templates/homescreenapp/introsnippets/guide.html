@@ -12,12 +12,12 @@
             편지로 바로 이동하시겠어요?
             </span>
         <a href="{% url 'letterapp:detail' pk=ongoing_letter.pk %}"  id="btn-loading1"
-           onclick="startLoading(1, event)" class="btn-nav">편지 바로가기</a>
+           onclick="showLoading(1, event)" class="btn-nav">편지 바로가기</a>
     </div>
 </button>
 <div id="loading" class="loading">
     <div class="spinner-white"></div>
 </div>
 {% endif %}
-<script src="{% static 'js/showZoom.js' %}"></script>
-<script src="{% static 'js/startLoading.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>

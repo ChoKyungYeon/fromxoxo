@@ -156,7 +156,7 @@ class AccountSettingView(DetailView):
 @method_decorator(AccountOwnershipDecorator, name='dispatch')
 class AccountNotificationUpdateView(RedirectView):
     def dispatch(self, request, *args, **kwargs):
-        self.target_user = CustomUser.objects.get(pk=self.request.GET.get('user_pk'))
+        self.target_user = CustomUser.objects.get(pk=self.request.GET.get('object_pk'))
         return super().dispatch(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):

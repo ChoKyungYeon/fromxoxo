@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-
+{% load static %}
 <style>
     #account-delete .text-title-bold{
         margin-bottom: 1.5rem;
@@ -67,11 +67,5 @@
         </div>
     </div>
 </main>
-<script>
-    function confirmAction(event, text) {
-        if (!confirm(text)) {
-            event.preventDefault();
-        }
-    }
-</script>
+<script src="{% static 'js/confirm.js' %}"></script>
 {% endblock %}

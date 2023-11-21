@@ -11,12 +11,12 @@
             로그인/ 회원가입하고 홈 화면 또는 <br>
             링크로 다시 접속해서 저장해요
             </span>
-        <a href="{% url 'accountapp:login' %}?letter_pk={{target_letter.pk}}"  id="btn-loading1"
-           onclick="startLoading(1, event)" class="btn-nav">이해했어요!</a>
+        <a href="{% url 'accountapp:login' %}?redirect_pk={{target_letter.pk}}"  id="btn-loading1"
+           onclick="showLoading(1, event)" class="btn-nav">이해했어요!</a>
     </div>
 </button>
 <div id="loading" class="loading">
     <div class="spinner"></div>
 </div>
-<script src="{% static 'js/showZoom.js' %}"></script>
-<script src="{% static 'js/startLoading.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>

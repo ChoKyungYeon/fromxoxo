@@ -2,10 +2,10 @@
 {% load bootstrap4 %}
 <div class="frame">
   <div class="container-form">
-      <form id="form-create-phonenumber" action="{% url 'verificationapp:create' %}?type={{ type }}" method="post" >
+      <form id="form-create-verification" action="{% url 'verificationapp:create' %}?type={{ type }}" method="post" >
         {% csrf_token %}{% bootstrap_form form %}
         <input type="submit" class="btn-submit btn-submit-close"  value="인증 번호 받기">
       </form>
   </div>
 </div>
-<script src="{% static 'js/confirmVerification.js' %}"></script>
+<script src="{% static 'js/confirm.js' %}"></script>

@@ -112,7 +112,7 @@ class VerificationVerifyView(FormView):
                 if self.type == 'signup':
                     self.target_verification.is_verified = True
                     self.target_verification.save()
-                    self.request.session['verification_pk'] = str(self.target_verification.pk)
+                    self.request.session['object_pk'] = str(self.target_verification.pk)
                     return HttpResponseRedirect(reverse('accountapp:create', kwargs={'pk': self.kwargs['pk']}))
                 
                 elif self.type == 'update':

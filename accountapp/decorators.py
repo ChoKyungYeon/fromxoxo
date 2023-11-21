@@ -3,7 +3,7 @@ from fromxoxo.decorators import *
 def AccountLoginDecorator(func):
     def decorated(request, *args, **kwargs):
         decorators=Decorators(request, **kwargs)
-        decorators.register_session('letter_pk')
+        decorators.register_session('redirect_pk')
         return func(request, *args, **kwargs)
     return decorated
 

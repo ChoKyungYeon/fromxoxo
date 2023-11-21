@@ -44,7 +44,7 @@
     flex-direction:row;
     justify-content:flex-start;
     align-items: center;
-    color: var(--whitegray);
+    color: #d4d4d4;
     font-size:var(--fontsize-content);
     font-weight:var(--fontweight-content);
     border:1.5px solid var(--borderpink);
@@ -52,16 +52,15 @@
 
 
 
-.form-horizontal .form-control-file,
 .form-horizontal .form-control {
     width:75%
 }
-
 /* field */
 .form-control-file{
     padding: 0;
 }
 
+.form-control-file::placeholder,
 .form-control::placeholder{
     color: #d4d4d4;
     font-size:var(--fontsize-content);
@@ -118,7 +117,6 @@
     align-items: flex-start;
     padding-top:0.8rem;
 }
-
 .fileinput,
 .dateinput,
 .select,
@@ -138,19 +136,16 @@
     justify-content:flex-start;
 }
 
-
 input[type="file"]::-webkit-file-upload-button {
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items: center;
+    background: var(--red);
+    height: 5rem;
     background:#ecedee;
     border: none;
     border-radius: 0;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
-    width:6.5rem;
-    height:calc(var(--height-form) - 3px);
+    padding-left: 1rem;
+    padding-right: 1rem;
     cursor: pointer;
     color: var(--black);
     font-size: var(--fontsize-detail);
@@ -159,36 +154,31 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 input[type="file"]::file-selector-button {
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items: center;
+    height: 4.9rem;
     background:#ecedee;
     border: none;
-    border-radius: 0;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
-    width:6.5rem;
-    height: var(--height-form);
+    padding-left: 1rem;
+    padding-right: 1rem;
     cursor: pointer;
     color: var(--black);
     font-size: var(--fontsize-detail);
     font-weight: var(--fontsize-content);
     margin-right:1rem;
+    border-bottom:1.5px solid var(--borderpink);
 }
 
- input[type="file"]::-ms-browse {
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items: center;
+
+input[type="file"]::-ms-browse {
+    height: 4.8rem;
     background:#ecedee;
     border: none;
     border-radius: 0;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
-    width:6.5rem;
-    height: var(--height-form);
+    padding-left: 1rem;
+    padding-right: 1rem;
     cursor: pointer;
     color: var(--black);
     font-size: var(--fontsize-detail);

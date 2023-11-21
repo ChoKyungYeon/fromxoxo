@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+
+from fromxoxo.utils import time_before
 from letterapp.models import Letter
 from fromxoxo.choice import LetterTemaChoice
 
@@ -10,3 +12,4 @@ class Letter_content(models.Model):
     tema = models.CharField(max_length=20, choices=LetterTemaChoice, default='pink')
     content = models.TextField(max_length=2000, null=True)
     image = models.ImageField(upload_to='letter_content/', null=True, blank=True)
+    saved_at = models.DateTimeField(null=True)

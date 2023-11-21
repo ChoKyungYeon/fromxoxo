@@ -5,7 +5,7 @@ from django.http import HttpResponseForbidden
 
 def time_before(time):
     delta = datetime.now() - time
-    if delta.total_seconds() < 300:
+    if delta.total_seconds() < 60:
         return '방금전'
     elif delta.total_seconds() < 3600:
         minutes = round(delta.total_seconds() / 60)

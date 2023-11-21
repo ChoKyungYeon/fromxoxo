@@ -47,7 +47,7 @@
 
 </style>
 {% if not quizs.count == 5 %}
-<button onclick="showZoom(1)" class="btn-add material-icons">add</button>
+<button onclick="show(1)" class="btn-add material-icons">add</button>
 <button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom">
     <div class="icon-exit material-icons">close</div>
     <div class="spacing-horizontal-stretch">
@@ -77,5 +77,5 @@
         </a>
     </div>
 </button>
-<script src="{% static 'js/showZoom.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>
 {% endif %}

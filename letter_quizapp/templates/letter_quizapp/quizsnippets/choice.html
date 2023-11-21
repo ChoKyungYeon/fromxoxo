@@ -82,7 +82,7 @@
 </style>
 <div class="frame-quiz" id="letter_quiz-quiz-choice">
     <div id="container-choice" class="container-choice">
-        <form  style="width: 0; height: 0"   action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}" method="post">
+        <form  style="width: 0; height: 0" action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}" method="post">
             {% csrf_token %}{% bootstrap_form form %}
             <input type="submit" class="btn-submit-fixed" {% if target_quiz.next_quiz %} value="편지 확인하기"
             {% else %} value="다음 질문으로" {% endif %}>

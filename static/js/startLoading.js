@@ -1,4 +1,4 @@
-function startLoading(counter, event, alert) {
+function showLoading(counter, event, alert) {
   event.preventDefault(); // Prevent the default link behavior
 
   const saveButton = document.getElementById('btn-loading' + counter);

@@ -4,6 +4,7 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
+from accountapp.models import CustomUser
 from letterapp.models import Letter
 from verificationapp.models import Verification
 
@@ -25,10 +26,12 @@ class Decorators:
         self.request = request
         self.user = request.user
         self.letter = None
-        try:
+        if 'pk' in kwargs:
             self.object_pk = kwargs['pk']
-        except:
-            self.object_pk = request.GET.get('letter_pk')
+        elif 'object_pk' in request.GET:
+            self.object_pk = request.GET.get('object_pk')
+        else:
+            self.object_pk = None
 
     def register_session(self, session_key):
         session_value = self.request.GET.get(session_key, None)
@@ -37,11 +40,11 @@ class Decorators:
 
 
     def ownership_required(self):
-        if self.user.pk != self.object_pk:
+        if self.user != get_object_or_404(CustomUser, pk=self.object_pk):
             return HttpResponseForbidden()
 
     def verification_required(self):
-        if self.request.session.get("verification_pk", None) != str(self.object_pk):
+        if self.request.session.get("object_pk", None) != str(self.object_pk):
             return HttpResponseForbidden()
 
 
@@ -132,6 +135,3 @@ class Decorators:
                 self.letter.state = 'checked'
                 self.letter.expire_from = datetime.now()
                 self.letter.save()
-
-            for letter_quiz in letter_quizs:
-                self.request.session[quiz_session_key(self.letter, letter_quiz)] = False

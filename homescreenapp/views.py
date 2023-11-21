@@ -11,16 +11,16 @@ class HomescreenIntroView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         self.target_user = self.request.user
         self.ongoing_letter = None
-        letter_pk = self.request.session.get("letter_pk", None)
+        redirect_pk = self.request.session.get("redirect_pk", None)
         if self.target_user.is_authenticated:
             try:
-                letter_uuid = uuid.UUID(letter_pk)
+                letter_uuid = uuid.UUID(redirect_pk)
                 letter = Letter.objects.get(pk=letter_uuid)
                 if not letter.is_user_related(self.target_user) and letter.state == 'checked':
                     self.ongoing_letter = letter
             except:
                 pass
-        self.request.session["letter_pk"] = None
+        self.request.session["redirect_pk"] = None
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

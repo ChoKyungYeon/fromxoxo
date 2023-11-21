@@ -12,11 +12,11 @@ from letterapp.models import Letter
 @method_decorator(Letter_likeDecorator, name='dispatch')
 class Letter_likeView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('letterapp:preview', kwargs={'pk': self.request.GET.get('letter_pk')})
+        return reverse('letterapp:preview', kwargs={'pk': self.request.GET.get('object_pk')})
 
     def get(self, request, *args, **kwargs):
         target_user = request.user
-        target_letter = get_object_or_404(Letter, pk=self.request.GET.get('letter_pk'))
+        target_letter = get_object_or_404(Letter, pk=self.request.GET.get('object_pk'))
         letter_like = Letter_like.objects.filter(user=target_user, letter=target_letter)
         if letter_like.exists():
             letter_like.delete()

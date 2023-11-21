@@ -32,7 +32,7 @@
         </span>
         {% if not target_letter.is_locked %}
         <a href="{% url 'letterapp:detail' pk=target_letter.pk %}" id="btn-loading1"
-           onclick="startLoading(1, event)" class="btn-nav">시작해 볼까요?
+           onclick="showLoading(1, event)" class="btn-nav">시작해 볼까요?
         </a>
         {% endif %}
     </div>
@@ -43,5 +43,5 @@
 <span id="remainingTime" style="display:none;">{{ remaining_time }}</span>
 <span id="redirectUrl" style="display:none;">{{ redirect_url }}</span>
 <script src="{% static 'js/countdown.js' %}"></script>
-<script src="{% static 'js/showZoom.js' %}"></script>
-<script src="{% static 'js/startLoading.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>
+<script src="{% static 'js/show.js' %}"></script>

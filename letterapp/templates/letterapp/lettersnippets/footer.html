@@ -43,7 +43,7 @@
 
 </style>
 {% if not user.is_authenticated %}
-    <button onclick="showZoom(2)" class="frame-footer">
+    <button onclick="show(2)" class="frame-footer">
         <div class="container-footer">
             <span class="text-title">
                로그인 후 편지 저장!
@@ -54,8 +54,8 @@
         </div>
     </button>
 {% else %}
-    <a id="btn-loading2" onclick="startLoading(2, event)"
-       href="{% url 'letterapp:save' %}?letter_pk={{ target_letter.pk }}" class="frame-footer" >
+    <a id="btn-loading2" onclick="showLoading(2, event)"
+       href="{% url 'letterapp:save' %}?object_pk={{ target_letter.pk }}" class="frame-footer" >
         <div class="container-footer">
             <span class="text-title">
                 편지를 저장해요!

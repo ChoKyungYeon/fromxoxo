@@ -19,7 +19,10 @@ a {
   cursor:pointer;
   display:block;
 }
-
+input {
+    border:none;
+    box-shadow: none;
+}
 button{
     background: inherit;
     color: inherit;
@@ -90,9 +93,6 @@ body {
 
 
 @media screen and (min-width: 800px) {
-    html {
-      font-size: 11.8px;
-    }
     main{
         max-height:1000000px;
         padding-bottom:20rem;

@@ -95,10 +95,9 @@ class LetterSavedView(DetailView):
 class LetterExpireView(TemplateView):
     template_name = 'letterapp/expire.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['type'] = self.type
+        context['type'] = self.request.GET.get('type', None)
         return context
 
 
@@ -117,7 +116,7 @@ class LetterDeleteView(DeleteView):
 @method_decorator(LetterProgressUpdateDecorator, name='dispatch')
 class LetterProgressUpdateView(RedirectView):
     def dispatch(self, request, *args, **kwargs):
-        self.target_letter =Letter.objects.get(pk=self.request.GET.get('letter_pk'))
+        self.target_letter =Letter.objects.get(pk=self.request.GET.get('object_pk'))
         return super().dispatch(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
@@ -136,10 +135,10 @@ class LetterProgressUpdateView(RedirectView):
 @method_decorator(LetterSaveDecorator, name='dispatch')
 class LetterSaveView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('letterapp:saved', kwargs={'pk': self.request.GET.get('letter_pk')})
+        return reverse('letterapp:saved', kwargs={'pk': self.request.GET.get('object_pk')})
 
     def get(self, request, *args, **kwargs):
-        target_letter = Letter.objects.get(pk=request.GET.get('letter_pk'))
+        target_letter = Letter.objects.get(pk=request.GET.get('object_pk'))
         with transaction.atomic():
             target_letter.saver = request.user
             target_letter.state = 'saved'
@@ -156,7 +155,7 @@ class LetterUnsaveView(RedirectView):
         return reverse('accountapp:savelist', kwargs={'pk': self.request.user.pk})
 
     def get(self, request, *args, **kwargs):
-        target_letter = Letter.objects.get(pk=request.GET.get('letter_pk'))
+        target_letter = Letter.objects.get(pk=request.GET.get('object_pk'))
         with transaction.atomic():
             target_letter.saver = None
             target_letter.state = 'checked'
@@ -170,10 +169,10 @@ class LetterUnsaveView(RedirectView):
 @method_decorator(LetterResetDecorator, name='dispatch')
 class LetterResetView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('letterapp:result', kwargs={'pk': self.request.GET.get('letter_pk')})
+        return reverse('letterapp:result', kwargs={'pk': self.request.GET.get('object_pk')})
 
     def get(self, request, *args, **kwargs):
-        target_letter = Letter.objects.get(pk=request.GET.get('letter_pk'))
+        target_letter = Letter.objects.get(pk=request.GET.get('object_pk'))
         with transaction.atomic():
             target_letter.expire_from = None
             target_letter.state = 'unchecked'

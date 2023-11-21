@@ -10,14 +10,14 @@
         </a>
         {% if target_user.can_receive_notification == True %}
         <a id="btn-disable" onclick="confirmChangeState('btn-disable', '문자 알림을 수신 중단하시겠습니까?')"
-           href="{% url 'accountapp:notificationupdate' %}?user_pk={{ target_user.pk }}"
+           href="{% url 'accountapp:notificationupdate' %}?object_pk={{ target_user.pk }}"
            class="item-last-child">
             <span class="text-content">알림 수신중</span>
             <span class="material-icons icon">notifications</span>
         </a>
         {% else %}
         <a id="btn-able" onclick="confirmChangeState('btn-able', '문자 알림을 수신하시겠습니까?')"
-           href="{% url 'accountapp:notificationupdate' %}?user_pk={{ target_user.pk }}"
+           href="{% url 'accountapp:notificationupdate' %}?object_pk={{ target_user.pk }}"
            class="item-last-child">
             <span class="text-content">알림 받지 않음</span>
             <span class="material-icons icon">notifications_off</span>
@@ -25,6 +25,6 @@
         {% endif %}
     </div>
 </div>
-<script src="{% static 'js/confirmChangeState.js' %}"></script>
+<script src="{% static 'js/confirm.js' %}"></script>
 
 

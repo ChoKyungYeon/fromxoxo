@@ -16,7 +16,7 @@
         <div class="spacing-title">
             <span class="text-title-bold" >
                 {% if type == 'saved' %}
-                    편지가 저장되었어요!
+                    이미 저장된 편지입니다!
                 {% else %}
                     편지를 찾을 수 없어요!
                 {% endif %}
@@ -25,8 +25,9 @@
         </div>
         <div class="text-title">
         {% if type == 'saved' %}
-        이 주소의 편지는 저장되었어요!<br>
-        로그인하고 내용을 확인해 볼까요
+        <br>
+        작성자 또는 수신자라면 로그인 후<br>
+        편지 목록에서 확인해 주세요!
         {% else %}
         이 주소는 잘못된 편지 주소이거나<br>
         시간이 지나 사라져버린 편지에요!

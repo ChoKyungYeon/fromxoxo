@@ -20,7 +20,7 @@
     max-height: 83vh;
     border-radius:var(--border-radius-container)
 }
-
+.frame-zoom .icon-download,
 .frame-zoom .icon-exit{
     position:fixed;
     right:1.5rem;
@@ -32,10 +32,17 @@
     width:2.6rem;
     height:2.6rem;
     font-size:2rem;
-    background:var(--whitegray);
+    background:var(--softgray);
     color:var(--black);
     border-radius:50%;
     border:2px solid var(--black);
+}
+.frame-zoom .btn-etc{
+    background: var(--white);
+    box-shadow: var(--shadow-btn-white);
+    font-size: 2.2rem;
+    font-weight: var(--fontweight-bold);
+    color: var(--black);
 }
 
 

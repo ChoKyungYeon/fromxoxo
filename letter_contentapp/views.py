@@ -32,6 +32,7 @@ class Letter_contentUpdateView(UpdateView):
         with transaction.atomic():
             self.target_letter.progress = 'progress3' if progress == 'progress2' else progress
             self.target_letter.save()
+            form.instance.saved_at = datetime.now()
             form.instance.save()
             return super().form_valid(form)
 

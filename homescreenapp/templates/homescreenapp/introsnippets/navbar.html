@@ -18,7 +18,7 @@
     #homescreen-intro-navbar .text-logo-xoxo {
         font-size: 2.6rem;
         font-weight: var(--fontweight-bold);
-        color: var(--softpink);
+        color: #ffe299; /*var(--whitepink)*/
         padding-left: 0.5rem;
     }
     #homescreen-intro-navbar .text-introduce {
@@ -86,20 +86,21 @@
     #homescreen-intro-navbar .img-lightbulb{
         position: absolute;
         width: 6.6rem;
+        transform: rotate(-30deg);
         height:auto;
         object-fit: cover;
-        transform: rotate(-30deg);
-        bottom:0.5rem;
+        bottom:1rem;/*bottom:0.5rem;*/
         left:1.5rem;
     }
+
     #homescreen-intro-navbar .img-letter{
-        width: 8.5rem;
+        width: 9.6rem;/*width:8.5rem;*/
         height:auto;
         object-fit: cover;
         position: absolute;
-        transform: rotate(25deg);
-        bottom:1.5rem;
-        right:1.5rem;
+        transform: rotate(20deg);/*transform: rotate(25deg);*/
+        bottom:0rem;/*bottom:1.3rem;*/
+        right:1.5rem;/*right:1.7rem;*/
     }
     #homescreen-intro-navbar .link{
         margin-top:3rem;
@@ -120,8 +121,8 @@
     #homescreen-intro-navbar .link .text-link{
         font-size:var(--fontsize-title);
         font-weight:var(--fontweight-content);
-        color:var(--softpink);
-        text-decoration-color:var(--softpink);
+        color:#ffe299;/*var(--whitepink)*/
+        text-decoration-color:#ffe299;/*var(--whitepink)*/
         text-decoration-thickness: 2px;
         margin-right:0.8rem;
         margin-left:0;
@@ -129,8 +130,8 @@
 
     @media screen and (min-width: 800px) {
         #homescreen-intro-navbar .img-letter{
-            width: 11rem;
-            bottom:0.6rem;
+            width: 12rem;/*width: 11rem;*/
+            bottom:0rem;/*bottom:0.6rem;*/
         }
 
         #homescreen-intro-navbar .container-title{
@@ -140,8 +141,8 @@
     }
     @media screen and (min-width: 1100px) {
         #homescreen-intro-navbar .img-letter{
-            width: 12rem;
-            bottom:1.7rem;
+            width: 13rem;/*width: 12rem;*/
+            bottom:0.5rem;/*bottom:1.7rem;*/
         }
         #homescreen-intro-navbar .img-lightbulb{
             width: 7.4rem;
@@ -167,10 +168,10 @@
         </div>
     </div>
     <div class="container-image">
-        <img class="img-lightbulb" src='/static/icons/homescreen/lightbulb.png'>
+        <img class="img-lightbulb" src='/static/icons/homescreen/bell.png'>
         <span class="icon-star3 material-icons">grade</span>
         <span class="icon-star4 material-icons">grade</span>
-        <img class="img-letter" src='/static/icons/homescreen/letter.png'>
+        <img class="img-letter" src='/static/icons/homescreen/gift.png'>
     </div>
     <a href="{% url 'letterapp:create' %}?from=homescreen" class="btn-nav" >편지를 작성해 볼까요?
         <span class="icon material-icons" style="font-size: 1.85rem;">outgoing_mail</span>

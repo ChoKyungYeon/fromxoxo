@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),
     path('homescreens/', include('homescreenapp.urls')),
-    path('phonenumbers/', include('verificationapp.urls')),
+    path('verifications/', include('verificationapp.urls')),
     path('letters/', include('letterapp.urls')),
     path('letter_quizs/', include('letter_quizapp.urls')),
     path('letter_contents/', include('letter_contentapp.urls')),

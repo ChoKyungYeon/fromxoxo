@@ -17,7 +17,6 @@ from django.contrib.auth import get_user_model
 
 
 @method_decorator(never_cache, name='dispatch')
-@method_decorator(login_unrequired, name='dispatch')
 @method_decorator(VerificationCreateDecorator, name='dispatch')
 class VerificationCreateView(CreateView):
     model = Verification

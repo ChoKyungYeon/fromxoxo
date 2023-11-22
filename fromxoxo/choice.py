@@ -33,7 +33,8 @@ QuizAnswerChoice = (
     ('choice3', '✓'),
 )
 AccountCharaterChoice = (
-    ('character1', '하트'),
-    ('character2', '동룰'),
-    ('character3', '크리스마스'),
+    ('character1', 'heart'),
+    ('character2', 'animal'),
+    ('character3', 'winter'),
+    ('character4', 'autumn'),
 )

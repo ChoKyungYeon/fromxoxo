@@ -99,8 +99,7 @@
 <div class="spacing-horizontal-stretch" id="snippet-letter">
     {% if forloop.counter|divisibleby:2 %}
         <div class="item-face">
-            <img {% if target_user.character != 'character3' %} class="img" {% else %} class="img-christmas" {% endif %}
-                    src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
+            <img class="img" src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
         </div>
     {% endif %}
 
@@ -130,8 +129,7 @@
 
     {% if not forloop.counter|divisibleby:2 %}
         <div class="item-face">
-            <img {% if target_user.character != 'character3' %} class="img" {% else %} class="img-christmas" {% endif %}
-                    src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
+            <img class="img" src='/static/icons/{{ target_user.character }}/face{{ letter.character_number }}.png'>
         </div>
     {% endif %}
 </div>

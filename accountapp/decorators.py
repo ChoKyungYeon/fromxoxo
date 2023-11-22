@@ -22,7 +22,7 @@ def AccountCharacterUpdateDecorator(func):
         decorators=Decorators(request, **kwargs)
         checks = [
             decorators.ownership_required(),
-            decorators.session_required(['heart', 'animal','christmas'])
+            decorators.session_required(['character1', 'character2','character3','character4'])
         ]
         for check in checks:
             if check:

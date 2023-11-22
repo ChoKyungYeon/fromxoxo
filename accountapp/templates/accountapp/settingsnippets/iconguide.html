@@ -38,9 +38,9 @@
     }
 
     #frame-zoom1 .container-nav {
-        width: 31%;
-        padding-top:1.5rem;
-        padding-bottom:1.3rem;
+        width: 47.5%;
+        padding-top:1.7rem;
+        padding-bottom:1.7rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -56,7 +56,7 @@
         margin-bottom: 0.7rem;
     }
     #frame-zoom1 .item-image .img{
-        width: 2.8rem;
+        width: 3rem;
     }
 </style>
 <button onclick="showZoom(1)" class="btn-charater">
@@ -66,28 +66,38 @@
 <button onclick="closeZoom(1)" id="frame-zoom1" class="frame-zoom">
     <div class="icon-exit material-icons">close</div>
     <div class="spacing-horizontal-stretch">
-        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=heart" class="container-nav">
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character1" class="container-nav">
             <div class="item-image">
                 <img class="img" src='/static/icons/character1/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                하트
+                heart
             </div>
         </a>
-        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=animal" class="container-nav">
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character2" class="container-nav">
             <div class="item-image">
                 <img class="img" src='/static/icons/character2/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                동물
+                animal
             </div>
         </a>
-        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=christmas" class="container-nav">
+    </div>
+    <div class="spacing-horizontal-stretch" style="margin-top:2rem">
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character3" class="container-nav">
             <div class="item-image">
                 <img class="img" src='/static/icons/character3/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                크리스마스
+                winter
+            </div>
+        </a>
+        <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character4" class="container-nav">
+            <div class="item-image">
+                <img class="img" src='/static/icons/character4/face{{ icon_int }}.png'>
+            </div>
+            <div class="text-content-bold" >
+                autumn
             </div>
         </a>
     </div>

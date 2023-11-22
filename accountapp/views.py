@@ -186,12 +186,7 @@ class AccountCharacterUpdateView(RedirectView):
         return reverse('accountapp:setting', kwargs={'pk': self.target_user.pk})
 
     def get(self, request, *args, **kwargs):
-        if self.type == 'animal':
-            self.target_user.character = 'character2'
-        elif self.type == 'heart':
-            self.target_user.character = 'character1'
-        else:
-            self.target_user.character = 'character3'
+        self.target_user.character = self.type
         self.target_user.save()
         return super(AccountCharacterUpdateView, self).get(request, *args, **kwargs)
 

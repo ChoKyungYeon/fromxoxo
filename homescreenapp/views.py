@@ -2,6 +2,8 @@ import uuid
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+
+from letter_contentapp.models import Letter_content
 from letterapp.models import Letter
 
 @method_decorator(never_cache, name='dispatch')
@@ -9,6 +11,10 @@ class HomescreenIntroView(TemplateView):
     template_name = 'homescreenapp/intro.html'
 
     def dispatch(self, request, *args, **kwargs):
+        for letter_content in Letter_content.objects.all():
+            if letter_content.tema:
+                letter_content.theme =letter_content.tema
+                letter_content.save()
         self.target_user = self.request.user
         self.ongoing_letter = None
         redirect_pk = self.request.session.get("redirect_pk", None)

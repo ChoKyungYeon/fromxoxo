@@ -3,7 +3,7 @@
 <div class="frame-quiz" id="letter_quiz-quiz-date">
     <form action="{% url 'letter_quizapp:verify' pk=target_quiz.pk %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}{% bootstrap_form form %}
-        <input type="submit" class="btn-submit-fixed" {% if target_quiz.next_quiz %} value="편지 확인하기"
-        {% else %} value="다음 질문으로" {% endif %}>
+        <input type="submit" class="btn-submit-fixed" {% if target_quiz.next_quiz %} value="다음 질문으로"
+        {% else %} value="편지 확인하기" {% endif %}>
     </form>
 </div>

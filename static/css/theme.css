@@ -1,0 +1,102 @@
+/* pink */
+
+/* blue */
+.theme-pink{
+    --bgtheme:#fceef2;
+    --bordertheme:#ebdbe0;
+    --maintheme:#e87d8f;
+    --formtheme:#fefbfc;
+    --headertheme:#fceef2;
+}
+.theme-blue{
+    --bgtheme: #eef0fc;
+    --bordertheme:#dbdeeb;
+    --maintheme:#707ec2;
+    --formtheme:#fbfbfe;
+    --headertheme: #eef0fc;
+}
+
+/* gray */
+.theme-gray{
+    --bgtheme: #f3f3f7;
+    --bordertheme:#d9dbe3;
+    --maintheme:#8f92a3;
+    --formtheme:#fcfcfd;
+    --headertheme: #f3f3f7;
+}
+
+/* yellow */
+.theme-yellow{
+    --bgtheme: #fcf7ed;
+    --bordertheme:#e8e2d4;
+    --maintheme:#e4bb67;
+    --formtheme:#fefdfb;
+    --headertheme: #fcf7ed;
+}
+
+/* green */
+.theme-green{
+    --bgtheme: #f0faf2;
+    --bordertheme:#d6e6dc;
+    --maintheme:#70c28b;
+    --formtheme:#fbfefc;
+    --headertheme:#f0faf2;
+}
+
+/* purple */
+.theme-purple{
+    --bgtheme: #f5eefc;
+    --bordertheme:#ded6e6;
+    --maintheme:#9970c2;
+    --formtheme:#fdfbfe;
+    --headertheme:#f5eefc;
+}
+
+/* christmas */
+.theme-christmas{
+        --pinktheme: #efc8d5;
+    --bluetheme: #c8cbef;
+    --bgtheme: #f2eefc;
+    --bordertheme:#dddbe1;
+    --maintheme:#8b70c2;
+    --formtheme:#fcfbfe;
+        --headertheme:#f2eefc;
+}
+
+.theme-christmas,
+.theme-blue,
+.theme-yellow,
+.theme-green,
+.theme-purple,
+.theme-gray,
+.theme-pink{
+    background: var(--bgtheme);
+    --border-container:1.5px solid var(--bordertheme);
+    --shadow-container:0px 3px 13px var(--bordertheme);
+}
+
+.theme-christmas{
+    background: linear-gradient(180deg,#D0D2E6,#cfd1e8, #D6D7E4, #e5d7dc,#e8cfd7, #e6d0d8);
+}
+
+.decoration-snow{
+    position: fixed;
+    z-index: -1;
+    display: none;
+}
+
+.theme-christmas .decoration-snow{
+    display: block;
+}
+
+.decoration-gift{
+    display: none;
+}
+.theme-christmas .decoration-gift{
+    display: block;
+    position: absolute;
+    transform:rotate(15deg);
+    width: 2.7rem;
+    right:1.3rem;
+    top:1.3rem
+}

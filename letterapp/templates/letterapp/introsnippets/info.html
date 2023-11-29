@@ -4,6 +4,7 @@
         width: 100%;
         padding-top: 1.9rem;
         padding-bottom: 1.7rem;
+        position: relative;
     }
 
 
@@ -48,14 +49,14 @@
         right: 8%;
         top:3rem;
         font-size: 1.3rem;
-        color: var(--middlepink);
+        color: var(--maintheme);
         transform: rotate(-45deg);
     }
     .icon-star2 {
         right: 18%;
         top:2rem;
         font-size: 1.4rem;
-        color:var(--borderpink);
+        color:var(--bordertheme);
         transform: rotate(-25deg);
     }
 
@@ -63,6 +64,7 @@
 
 
 <button {% if target_letter.is_locked %} onclick="reloadZoom(1)" {% else %} onclick="showZoom(1)" {% endif %} class="container-snippets container-letter" >
+    <img class="decoration-gift" src='/static/icons/christmas/bow.png'>
     <div class="item-arrow-right"></div>
     <span class="icon-star1 material-icons">grade</span>
     <span class="icon-star2 material-icons">grade</span>
@@ -70,7 +72,7 @@
         <span class="text-content-bold">{{ target_letter.letter_info.receiver }}</span>
     </div>
     <div class="text-index interval-title">
-        {{ target_letter.letter_info.title|truncatechars:23 }}
+        {{ target_letter.letter_info.title|truncatechars:18 }}
     </div>
     <div class="spacing-horizontal-stretch">
         <div class="text-content text-date">

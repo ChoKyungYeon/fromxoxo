@@ -85,7 +85,6 @@ html{
 }
 body {
     padding-top:var(--height-header);
-    background: var(--lightpink);
     font-family: 'omyu_pretty';
 }
 

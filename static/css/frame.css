@@ -41,7 +41,7 @@
 
 .frame-centered .text-emp{
     font-weight: inherit;
-    color: var(--middlepink);
+    color: var(--maintheme);
     font-size: inherit;
 }
 .frame-centered .img-title{
@@ -77,7 +77,7 @@
 
 .frame-setting .item-last-child,
 .frame-setting .item {
-    border-bottom:2px solid var(--lightpink);
+    border-bottom:2px solid var(--bgtheme);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -192,7 +192,7 @@
 .frame-quiz .text-count{
     font-size: var(--fontsize-content);
     font-weight: var(--fontweight-content);
-    color: var(--middlepink);
+    color: var(--maintheme);
     margin-right: 0.5rem;
 }
 .frame-quiz .icon-right{

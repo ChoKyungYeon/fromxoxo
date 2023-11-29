@@ -208,7 +208,7 @@
 .loading .spinner-white,
 .loading .spinner{
     border: 7px solid var(--black);
-    border-top: 7px solid var(--middlepink);
+    border-top: 7px solid var(--maintheme);
     border-radius: 50%;
     box-shadow: 0 0 3px var(--softgray);
     width: 4rem;
@@ -218,7 +218,7 @@
 
 .loading .spinner-white {
     border: 7px solid var(--white);
-    border-top: 7px solid var(--middlepink);
+    border-top: 7px solid var(--maintheme);
 }
 .item-image{
     text-align: center;

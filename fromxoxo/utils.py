@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 
 from django.http import HttpResponseForbidden
@@ -38,5 +39,4 @@ def time_after(time, limit):
     else:
         months = round(delta.total_seconds() / 2592000)
         return f'{months}달 후'
-
 

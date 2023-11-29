@@ -18,7 +18,7 @@
 <a href="{% url 'letter_quizapp:preview' pk=target_letter.initial_quiz.pk %}" class="frame frame-top" id="letter-info-preview"  >
     <div class="container">
         <div class="item">
-            <span class="text-content-bold" >{{ target_letter.letter_info.title|truncatechars:23 }}</span>
+            <span class="text-content-bold" >{{ target_letter.letter_info.title|truncatechars:18 }}</span>
             <div class="spacing-horizontal" style="margin-top:0.4rem;">
                 <span class="text-content" style="margin-right: 0.7rem">등록 질문</span>
                 <span class="text-content-bold">{{ target_letter.letter_quiz.all|length }}개</span>

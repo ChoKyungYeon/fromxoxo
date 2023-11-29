@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 {%  include 'head.html' %}
-<body class="tema-{{ tema }}" id="bodyTema">
+<body class="theme-{{ theme }}" id="bodyTheme">
+    {% for info in decoration_icon_info %}
+    <span class="decoration-snow material-icons" style="left:{{ info.0 }}; bottom:{{ info.1 }};
+            color:{{ info.2 }}; font-size:{{ info.3 }}; transform:{{ info.4 }};">ac_unit</span>
+    {% endfor %}
     {% block content %}
     {% endblock %}
 </body>

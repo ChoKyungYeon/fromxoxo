@@ -174,6 +174,7 @@ class AccountNotificationUpdateView(RedirectView):
         self.target_user.save()
         return super(AccountNotificationUpdateView, self).get(request, *args, **kwargs)
 
+
 @method_decorator(login_required, name='dispatch')
 @method_decorator(AccountCharacterUpdateDecorator, name='dispatch')
 class AccountCharacterUpdateView(RedirectView):

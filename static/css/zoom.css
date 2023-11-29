@@ -58,7 +58,7 @@
     flex-direction:column;
     justify-content:flex-start;
     align-items: center;
-    background:var(--whitepink);
+    background:var(--formtheme);
     padding:0 0 3.5rem 0;
     box-shadow: var(--shadow-container-dark);
 }
@@ -68,7 +68,7 @@
     height:4.2rem;
     border-top-left-radius:  var(--border-radius-container);
     border-top-right-radius:var(--border-radius-container);
-    background:var(--lightpink);
+    background:var(--headertheme);
     display: flex;
     flex-direction:row;
     justify-content:flex-end;
@@ -113,7 +113,7 @@
 
 .frame-zoom .icon {
     font-size: 1.6rem;
-    color: var(--middlepink);
+    color: var(--maintheme);
     font-weight: var(--fontweight-bold);
     margin-right: 0.7rem;
 }

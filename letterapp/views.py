@@ -7,6 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import DetailView, DeleteView, TemplateView, RedirectView, FormView, CreateView
+
 from letter_contentapp.models import Letter_content
 from letter_infoapp.models import Letter_info
 from letter_likeapp.models import Letter_like
@@ -61,7 +62,7 @@ class LetterResultView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['from'] = self.request.GET.get('from', None)
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         return context
 
 
@@ -75,7 +76,7 @@ class LetterFinishView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         return context
 
 @method_decorator(never_cache, name='dispatch')
@@ -88,7 +89,7 @@ class LetterSavedView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         return context
 
 @method_decorator(LetterExpireDecorator, name='dispatch')
@@ -189,7 +190,6 @@ class LetterSearchView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['from'] = self.request.session.get("from", None)
-        context['tema'] = 'blue'
         return context
 
     def form_valid(self, form):
@@ -231,7 +231,7 @@ class LetterIntroView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         context['page'] = 'intro'
         context['remaining_time'] = self.object.error_reset_timeout()
         context['redirect_url'] = reverse('letterapp:intro', kwargs={'pk': self.object.pk})
@@ -253,7 +253,7 @@ class LetterDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['letter_content'] = self.object.letter_content
         context['letter_info'] = self.object.letter_info
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         return context
 
 
@@ -269,6 +269,6 @@ class LetterPreviewView(DetailView):
         context = super().get_context_data(**kwargs)
         context['letter_content'] = self.object.letter_content
         context['letter_info'] = self.object.letter_info
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         context['like'] = Letter_like.objects.filter(user=self.request.user, letter=self.object).first()
         return context

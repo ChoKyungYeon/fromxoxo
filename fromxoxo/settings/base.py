@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'letter_contentapp',
     'letter_infoapp',
     'letter_likeapp',
-
 ]
 
 MIDDLEWARE = [
@@ -63,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'fromxoxo.context_processors.theme_context_processor',
             ],
         },
     },

@@ -1,10 +1,11 @@
-LetterTemaChoice = (
+LetterThemeChoice = (
     ('blue', '블루'),
     ('pink', '핑크'),
     ('gray', '그레이'),
     ('yellow', '옐로우'),
     ('green', '그린'),
     ('purple', '퍼플'),
+    ('christmas', '크리스마스'),
 )
 LetterProgressChoice = (
     ('progress1', 'progress1'),

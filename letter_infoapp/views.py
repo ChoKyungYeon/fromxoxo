@@ -28,7 +28,7 @@ class Letter_infoUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = self.target_letter
-        context['tema'] = self.target_content.tema
+        context['theme'] = self.target_content.theme
         return context
 
     def form_valid(self, form):

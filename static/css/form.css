@@ -47,7 +47,7 @@
     color: #d4d4d4;
     font-size:var(--fontsize-content);
     font-weight:var(--fontweight-content);
-    border:1.5px solid var(--borderpink);
+    border:1.5px solid var(--bordertheme);
 }
 
 
@@ -69,7 +69,7 @@
 
 .form-control:valid {
     color:var(--gray);
-    background: var(--whitepink);
+    background: var(--formtheme);
 }
 
 .form-control.is-invalid {
@@ -84,8 +84,8 @@
 
 .form-control.is-valid:focus,
 .form-control:focus {
-  border: 2px solid var(--borderpink);
-  box-shadow: 0 0 2.5px var(--borderpink);
+  border: 2px solid var(--bordertheme);
+  box-shadow: 0 0 2.5px var(--bordertheme);
 }
 .form-control.is-invalid:focus{
   border: 2px solid #f39a95;
@@ -166,7 +166,7 @@ input[type="file"]::file-selector-button {
     font-size: var(--fontsize-detail);
     font-weight: var(--fontsize-content);
     margin-right:1rem;
-    border-bottom:1.5px solid var(--borderpink);
+    border-bottom:1.5px solid var(--bordertheme);
 }
 
 
@@ -233,7 +233,7 @@ form .form-check .form-check-label {
     height:2.6rem;
     margin: 2.7rem 0 1.2rem 0;
     width: 100%;
-    border:1.5px solid var(--borderpink);
+    border:1.5px solid var(--bordertheme);
     background:var(--white);
     color:var(--gray);
     font-weight: var(--fontweight-bold);

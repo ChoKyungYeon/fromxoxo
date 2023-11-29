@@ -38,7 +38,7 @@ class Letter_quizCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = self.target_letter
-        context['tema'] = self.target_letter.letter_content.tema
+        context['theme'] = self.target_letter.letter_content.theme
         context['type'] = self.request.GET.get('type', None)
         context['page'] = 'create'
         return context
@@ -85,7 +85,7 @@ class Letter_quizUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = self.target_letter
-        context['tema'] = self.target_letter.letter_content.tema
+        context['theme'] = self.target_letter.letter_content.theme
         context['type'] = self.request.GET.get('type', None)
         context['page'] = 'update'
         return context
@@ -115,7 +115,7 @@ class Letter_quizListView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['quizs'] = self.object.letter_quiz.all().order_by('created_at')
-        context['tema'] = self.object.letter_content.tema
+        context['theme'] = self.object.letter_content.theme
         return context
 
 
@@ -160,7 +160,7 @@ class Letter_quizVerifyView(FormView):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = self.target_letter
         context['target_quiz'] = self.target_quiz
-        context['tema'] = self.target_letter.letter_content.tema
+        context['theme'] = self.target_letter.letter_content.theme
         return context
 
     def form_valid(self, form):
@@ -231,5 +231,5 @@ class Letter_quizPreviewView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['target_letter'] = target_letter
         context['target_quiz'] = target_quiz
-        context['tema'] = target_letter.letter_content.tema
+        context['theme'] = target_letter.letter_content.theme
         return context

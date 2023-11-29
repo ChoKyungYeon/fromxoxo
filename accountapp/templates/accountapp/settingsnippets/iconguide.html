@@ -6,7 +6,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        background: var(--lightpink);
+        background: var(--bgtheme);
         border-radius: 50%;
         width: 4.2rem;
         height: 4.2rem;
@@ -71,7 +71,7 @@
                 <img class="img" src='/static/icons/character1/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                heart
+                하트
             </div>
         </a>
         <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character2" class="container-nav">
@@ -79,7 +79,7 @@
                 <img class="img" src='/static/icons/character2/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                animal
+                동물
             </div>
         </a>
     </div>
@@ -89,7 +89,7 @@
                 <img class="img" src='/static/icons/character3/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                winter
+                겨울
             </div>
         </a>
         <a href="{% url 'accountapp:characterupdate' pk=target_user.pk %}?type=character4" class="container-nav">
@@ -97,7 +97,7 @@
                 <img class="img" src='/static/icons/character4/face{{ icon_int }}.png'>
             </div>
             <div class="text-content-bold" >
-                autumn
+                가을
             </div>
         </a>
     </div>

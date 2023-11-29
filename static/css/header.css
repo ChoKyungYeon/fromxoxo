@@ -19,7 +19,7 @@ header{
 
 
 .header-empty{
-    background-color:var(--lightpink);
+    background:transparent;
     color:var(--black);
 }
 
@@ -31,9 +31,6 @@ header .text-header{
     font-weight: var(--fontweight-bold);
     margin-right: auto;
 }
-header .text-error{
-    color: var(--red);
-}
 
 header .btn-like-false,
 header .btn-like-true{
@@ -44,7 +41,7 @@ header .btn-like-true{
 }
 
 header .btn-like-true{
-    color:var(--softpink);
+    color:#f2b5ca;
 }
 
 header .btn-back{

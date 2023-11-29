@@ -12,9 +12,11 @@ class HomescreenIntroView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         for letter_content in Letter_content.objects.all():
-            if letter_content.tema:
-                letter_content.theme =letter_content.tema
+            try:
+                letter_content.theme = letter_content.tema
                 letter_content.save()
+            except:
+                pass
         self.target_user = self.request.user
         self.ongoing_letter = None
         redirect_pk = self.request.session.get("redirect_pk", None)

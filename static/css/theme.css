@@ -54,13 +54,14 @@
 
 /* christmas */
 .theme-christmas{
-        --pinktheme: #efc8d5;
+    --pinktheme: #efc8d5;
     --bluetheme: #c8cbef;
     --bgtheme: #f2eefc;
     --bordertheme:#dddbe1;
     --maintheme:#8b70c2;
     --formtheme:#fcfbfe;
-        --headertheme:#f2eefc;
+    --headertheme:#f2eefc;
+    --black:#303136;
 }
 
 .theme-christmas,

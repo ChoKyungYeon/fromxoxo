@@ -1,21 +1,16 @@
 import hmac, hashlib, base64
 import time, requests, json
-
-from documentapp.models import Document
-try:  # deploy check
+try:
     from fromxoxo.settings.local import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
+
 except:
     from fromxoxo.settings.deploy import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
 
-try:
-    contact_phone = Document.objects.all().first().phonenumber.replace('-', '')
-except:
-    contact_phone = '01031585834'
+contact_phone = '01057325834'
 
 SENS_ACCESS_KEY = SENS_ACCESS_KEY
 SENS_SECRET_KEY = SENS_SECRET_KEY
 SENS_SERVICE_KEY = SENS_SERVICE_KEY
-
 url = "https://sens.apigw.ntruss.com"
 uri = f"/sms/v2/services/{SENS_SERVICE_KEY}/messages"
 
@@ -39,7 +34,7 @@ def Send_SMS(to, contents, can_receive):
     }
     data = {
         "type": "SMS",
-        "from": contact_phone,  # deploy check
+        "from": contact_phone,
         "content": '[From.XoXo]' + contents,
         "subject": "SENS",
         "messages": [

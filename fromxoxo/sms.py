@@ -2,7 +2,6 @@ import hmac, hashlib, base64
 import time, requests, json
 try:
     from fromxoxo.settings.local import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
-
 except:
     from fromxoxo.settings.deploy import SENS_ACCESS_KEY, SENS_SECRET_KEY, SENS_SERVICE_KEY
 

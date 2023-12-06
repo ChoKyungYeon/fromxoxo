@@ -1,5 +1,7 @@
 import random
 import uuid
+from datetime import datetime
+
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -17,6 +19,7 @@ class CustomUser(AbstractUser):
     phonenumber = models.CharField(max_length=11, unique=True)
     can_receive_notification = models.BooleanField(default=True)
     agree_terms = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=datetime.now())
     character = models.CharField(max_length=20, choices=AccountCharaterChoice, default='character3')
 
     def __str__(self):

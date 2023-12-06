@@ -15,7 +15,7 @@ class Letter(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     writer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_writer', null=True)
     saver = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='letter_saver', null=True)
-    created_at = models.DateTimeField(default=datetime.now())
+    created_at = models.DateTimeField(auto_now_add=True)
     error = models.IntegerField(default=0)
     errored_at = models.DateTimeField(null=True)
 

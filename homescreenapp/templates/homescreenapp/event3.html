@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+.text-event{
+    color: var(--black);
+    font-size: 1.8rem;
+    width: 70%;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+}
+
+</style>
+<header class="header-empty">
+</header>
+
+<main >
+{% if user.username == 'sh1226' %}
+<div class="text-event">우리 진짜 작년에 만났는데 벌써 1년이나 지났네!? 내가 작년에 소빵이 너한테 룸 스프레이 줬을 때 울먹 울먹 했던 게 어제 같은데 ㅠㅠㅠ
+    벌써 이렇게 우리가 1년 동안 같이 많을 걸 했다니 ㅎㅎㅎㅎ 올해는 당연하고 우리 내년에도 진짜 행복하게 연애하자
+
+</div>
+    {% endif %}
+<a href="{% url 'homescreenapp:event4' %}" class="btn-submit-fixed">다음 다음 다음</a>
+</main>
+{% endblock %}

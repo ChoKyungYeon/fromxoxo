@@ -168,10 +168,20 @@
         </div>
     </div>
     <div class="container-image">
+        {% if user.username == 'sh1226' %}
+            <button ><img class="img-lightbulb" src='/static/icons/homescreen/hare.png'>
+            <div style="color: var(--white); font-size: 1.4rem;position: absolute; top: 1rem; left: 4rem">난 김소빵</div></button>
+        {% else %}
         <img class="img-lightbulb" src='/static/icons/homescreen/bell.png'>
+        {% endif %}
         <span class="icon-star3 material-icons">grade</span>
         <span class="icon-star4 material-icons">grade</span>
+        {% if user.username == 'sh1226' %}
+            <button id="tripleClickBtn"><img class="img-letter" src='/static/icons/homescreen/rabbit.png'>
+            <div style="color: var(--white); font-size: 1.4rem;position: absolute; top: 2rem; right: 2rem">소빵아 나 계속 눌러!</div></button>
+        {% else %}
         <img class="img-letter" src='/static/icons/homescreen/gift.png'>
+        {% endif %}
     </div>
     <a href="{% url 'letterapp:create' %}?from=homescreen" class="btn-nav" >편지를 작성해 볼까요?
         <span class="icon material-icons" style="font-size: 1.85rem;">outgoing_mail</span>
@@ -191,3 +201,23 @@
         </a>
     {% endif %}
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get the element by its ID
+    var button = document.getElementById('tripleClickBtn');
+    // Initialize a variable to count the clicks
+    var clickCount = 0;
+
+    // Add an event listener for the 'click' event
+    button.addEventListener('click', function() {
+        // Increment the click count
+        clickCount++;
+
+        // Check if the button has been clicked three times
+        if (clickCount === 10) {
+            // Navigate to the desired page
+            window.location.href = "{% url 'homescreenapp:event1' %}"; // Change to your desired URL
+        }
+    });
+});
+</script>

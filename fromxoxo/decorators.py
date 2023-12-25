@@ -38,7 +38,6 @@ class Decorators:
         if session_value:
             self.request.session[session_key] = session_value
 
-
     def ownership_required(self):
         if self.user != get_object_or_404(CustomUser, pk=self.object_pk):
             return HttpResponseForbidden()
@@ -46,7 +45,6 @@ class Decorators:
     def verification_required(self):
         if self.request.session.get("object_pk", None) != str(self.object_pk):
             return HttpResponseForbidden()
-
 
     def update_user(self):
         letters=list(self.user.letter_writer.filter(progress='done').all()) + list(self.user.letter_saver.all())
@@ -106,7 +104,6 @@ class Decorators:
         session_value = self.request.GET.get('type', None)
         if not session_value or session_value not in session_list:
             return HttpResponseForbidden()
-
 
     def state_required(self, state_list):
         if self.letter and self.letter.state not in state_list:

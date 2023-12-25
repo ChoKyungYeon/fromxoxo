@@ -30,3 +30,14 @@ class HomescreenIntroView(TemplateView):
 
 
 
+class HomescreenEvent1View(TemplateView):
+    template_name = 'homescreenapp/event1.html'
+
+class HomescreenEvent2View(TemplateView):
+    template_name = 'homescreenapp/event2.html'
+
+class HomescreenEvent3View(TemplateView):
+    template_name = 'homescreenapp/event3.html'
+
+class HomescreenEvent4View(TemplateView):
+    template_name = 'homescreenapp/event4.html'

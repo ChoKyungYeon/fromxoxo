@@ -51,8 +51,11 @@ class VerificationCreateView(CreateView):
             if type != 'search' and phonenumber in phonenumbers:
                 form.add_error('phonenumber', '이미 존재하는 전화번호입니다.')
                 return self.form_invalid(form)
-
-            form.instance.code = random.randint(100000, 999999)
+            try:
+                import fromxoxo.settings.local
+                form.instance.code=111111
+            except:
+                form.instance.code = random.randint(100000, 999999)
 
             to = form.instance.phonenumber
             content = f'인증번호 {form.instance.code}를 3분 내에 입력해 주세요'

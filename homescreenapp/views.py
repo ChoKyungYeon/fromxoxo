@@ -1,14 +1,28 @@
 import uuid
+from datetime import datetime
+
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+
+from analyticsapp.models import Analytics
 from letterapp.models import Letter
+
 
 @method_decorator(never_cache, name='dispatch')
 class HomescreenIntroView(TemplateView):
     template_name = 'homescreenapp/intro.html'
 
     def dispatch(self, request, *args, **kwargs):
+        today = datetime.now().date()
+        analytics = Analytics.objects.get_or_create(created_at=today)[0]
+        session_analytics_pk=request.session.get('analytics_pk', None)
+        current_analytics_pk=str(analytics.pk)
+        if not session_analytics_pk or not session_analytics_pk == current_analytics_pk:
+            analytics.view_count += 1
+            analytics.save()
+            request.session['analytics_pk'] = current_analytics_pk
+
         self.target_user = self.request.user
         self.ongoing_letter = None
         redirect_pk = self.request.session.get("redirect_pk", None)

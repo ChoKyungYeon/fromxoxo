@@ -1,8 +1,6 @@
 import random
 from datetime import datetime
 
-from django.http import HttpResponseForbidden
-
 
 def time_before(time):
     delta = datetime.now() - time

@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import DetailView, DeleteView, TemplateView, RedirectView, FormView, CreateView
 
+from analyticsapp.models import Analytics
 from letter_contentapp.models import Letter_content
 from letter_infoapp.models import Letter_info
 from letter_likeapp.models import Letter_like
@@ -39,6 +40,11 @@ class LetterCreateView(CreateView):
 
     def form_valid(self, form):
         with transaction.atomic():
+            today = datetime.now().date()
+            analytics = Analytics.objects.get_or_create(created_at=today)[0]
+            analytics.letter_count += 1
+            analytics.save()
+
             self.target_user.letter_writer.exclude(progress='done').delete()
             form.instance.writer = self.target_user
             form.instance.url = form.instance.generate_url()

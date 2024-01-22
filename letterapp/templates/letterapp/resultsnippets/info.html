@@ -51,11 +51,7 @@
             {% if target_letter.state == 'unchecked' %}
             <span class="text-content-bold text-unchecked">
             {% elif target_letter.state == 'checked' %}
-                {% if target_letter.is_unsaved %}
                 <span class="text-content-bold text-checked">
-                {% else %}
-                <span class="text-content-bold text-checked">
-                {% endif %}
             {% else %}
             <span class="text-content-bold text-saved">
             {% endif %}

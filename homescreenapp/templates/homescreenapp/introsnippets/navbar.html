@@ -18,7 +18,7 @@
     #homescreen-intro-navbar .text-logo-xoxo {
         font-size: 2.6rem;
         font-weight: var(--fontweight-bold);
-        color: #b8bbe0; /*var(--formtheme)*/
+        color:#f8bfd1; /*#b8bbe0;*/
         padding-left: 0.5rem;
     }
     #homescreen-intro-navbar .text-introduce {
@@ -89,18 +89,18 @@
         transform: rotate(-30deg);
         height:auto;
         object-fit: cover;
-        bottom:1rem;/*bottom:0.5rem;*/
+        bottom:0.5rem;/*bottom:1rem;*/
         left:1.5rem;
     }
 
     #homescreen-intro-navbar .img-letter{
-        width: 9.6rem;/*width:8.5rem;*/
+        width: 8.5rem;/*width:9.6rem;*/
         height:auto;
         object-fit: cover;
         position: absolute;
-        transform: rotate(20deg);/*transform: rotate(25deg);*/
-        bottom:0rem;/*bottom:1.3rem;*/
-        right:1.5rem;/*right:1.7rem;*/
+        transform: rotate(25deg);/*transform: rot5ate(2deg);*/
+        bottom:1.3rem;/*bottom:0rem;*/
+        right:1.7rem;/*right:1.5rem;*/
     }
     #homescreen-intro-navbar .link{
         margin-top:3rem;
@@ -121,8 +121,8 @@
     #homescreen-intro-navbar .link .text-link{
         font-size:var(--fontsize-title);
         font-weight:var(--fontweight-content);
-        color:#b8bbe0;/*var(--formtheme)*/
-        text-decoration-color:#b8bbe0;/*var(--formtheme)*/
+        color:#f8bfd1;/*#b8bbe0;*/
+        text-decoration-color:#f8bfd1;/*#b8bbe0;*/
         text-decoration-thickness: 2px;
         margin-right:0.8rem;
         margin-left:0;
@@ -130,8 +130,8 @@
 
     @media screen and (min-width: 800px) {
         #homescreen-intro-navbar .img-letter{
-            width: 12rem;/*width: 11rem;*/
-            bottom:0rem;/*bottom:0.6rem;*/
+            width: 11rem;/*width: 12rem;*/
+            bottom:0.6rem;/*bottom:0rem;*/
         }
 
         #homescreen-intro-navbar .container-title{
@@ -141,8 +141,8 @@
     }
     @media screen and (min-width: 1100px) {
         #homescreen-intro-navbar .img-letter{
-            width: 13rem;/*width: 12rem;*/
-            bottom:0.5rem;/*bottom:1.7rem;*/
+            width: 12rem;/*width: 13rem;*/
+            bottom:1.7rem;/*bottom:0.5rem;*/
         }
         #homescreen-intro-navbar .img-lightbulb{
             width: 7.4rem;
@@ -168,20 +168,10 @@
         </div>
     </div>
     <div class="container-image">
-        {% if user.username == 'sh1226' %}
-            <button ><img class="img-lightbulb" src='/static/icons/homescreen/hare.png'>
-            <div style="color: var(--white); font-size: 1.4rem;position: absolute; top: 1rem; left: 4rem">난 김소빵</div></button>
-        {% else %}
-        <img class="img-lightbulb" src='/static/icons/homescreen/bell.png'>
-        {% endif %}
+        <img class="img-lightbulb" src='/static/icons/homescreen/lightbulb.png'>
         <span class="icon-star3 material-icons">grade</span>
         <span class="icon-star4 material-icons">grade</span>
-        {% if user.username == 'sh1226' %}
-            <button id="tripleClickBtn"><img class="img-letter" src='/static/icons/homescreen/rabbit.png'>
-            <div style="color: var(--white); font-size: 1.4rem;position: absolute; top: 2rem; right: 2rem">소빵아 나 계속 눌러!</div></button>
-        {% else %}
-        <img class="img-letter" src='/static/icons/homescreen/gift.png'>
-        {% endif %}
+        <img class="img-letter" src='/static/icons/homescreen/letter.png'>
     </div>
     <a href="{% url 'letterapp:create' %}?from=homescreen" class="btn-nav" >편지를 작성해 볼까요?
         <span class="icon material-icons" style="font-size: 1.85rem;">outgoing_mail</span>
@@ -201,23 +191,3 @@
         </a>
     {% endif %}
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Get the element by its ID
-    var button = document.getElementById('tripleClickBtn');
-    // Initialize a variable to count the clicks
-    var clickCount = 0;
-
-    // Add an event listener for the 'click' event
-    button.addEventListener('click', function() {
-        // Increment the click count
-        clickCount++;
-
-        // Check if the button has been clicked three times
-        if (clickCount === 10) {
-            // Navigate to the desired page
-            window.location.href = "{% url 'homescreenapp:event1' %}"; // Change to your desired URL
-        }
-    });
-});
-</script>

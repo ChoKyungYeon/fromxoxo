@@ -35,7 +35,7 @@ class LetterAdmin(admin.ModelAdmin):
             "<strong>작성 완료 시간:</strong> {}<br>"
             "<strong>작성 일시:</strong> {}<br>"
             "<strong>작성 단계:</strong> {}<br>"
-            "<strong>확인 단계:</strong> {}"
+            "<strong>확인 단계:</strong> {}<br>"
             "<strong>URL:</strong> {}",
             letter_title,
             obj.writer,

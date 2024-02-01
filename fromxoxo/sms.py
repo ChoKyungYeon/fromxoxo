@@ -23,7 +23,7 @@ def make_signature(SENS_SECRET_KEY, SENS_ACCESS_KEY, timestamp, uri):
     return signingKey
 
 
-def Send_SMS(to, contents, can_receive):
+def Send_SMS(to, contents):
     timestamp = str(int(time.time() * 1000))
     header = {
         "Content-Type": "application/json; charset=utf-8",
@@ -42,8 +42,7 @@ def Send_SMS(to, contents, can_receive):
             }
         ]
     }
-    if can_receive:
-        try:
-            response = requests.post(url + uri, headers=header, data=json.dumps(data))
-        except:
-            pass
+    try:
+        response = requests.post(url + uri, headers=header, data=json.dumps(data))
+    except:
+        pass

@@ -12,7 +12,6 @@ urlpatterns = [
     path('usernameupdate/<uuid:pk>', AccountUsernameUpdateView.as_view(), name='usernameupdate'),
     path('passwordupdate/<uuid:pk>', AccountPasswordUpdateView.as_view(), name='passwordupdate'),
     path('passwordreset/<uuid:pk>', AccountPasswordResetView.as_view(), name='passwordreset'),
-    path('notificationupdate/', AccountNotificationUpdateView.as_view(), name='notificationupdate'),
     path('characterupdate/<uuid:pk>', AccountCharacterUpdateView.as_view(), name='characterupdate'),
     path('delete/<uuid:pk>', AccountDeleteView.as_view(), name='delete'),
     path('create/<uuid:pk>', AccountCreateView.as_view(), name='create'),

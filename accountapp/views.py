@@ -1,5 +1,4 @@
 import random
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -76,12 +75,16 @@ class AccountUsernameUpdateView(UpdateView):
     form_class = AccountUsernameUpdateForm
     template_name = 'accountapp/usernameupdate.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        self.origin_username = get_object_or_404(CustomUser, pk=self.kwargs['pk']).username
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         username = form.cleaned_data['username']
         usernames = get_user_model().objects.values_list('username', flat=True)
         pattern = r'^[a-zA-Z0-9!@#$%^&*()_+{}|:"<>?`~\[\]\\;\',./-]+$'
         with transaction.atomic():
-            if username == self.object.username:
+            if username == self.origin_username:
                 form.add_error('username', '기존과 다른 아이디를 설정해 주세요.')
                 return self.form_invalid(form)
 
@@ -110,12 +113,16 @@ class AccountPasswordResetView(UpdateView):
     form_class = AccountPasswordResetForm
     success_url = reverse_lazy('accountapp:logout')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.origin_username = get_object_or_404(CustomUser, pk=self.kwargs['pk']).username
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         usernames = get_user_model().objects.values_list('username', flat=True)
         username = form.cleaned_data['username']
         pattern = r'^[a-zA-Z0-9!@#$%^&*()_+{}|:"<>?`~\[\]\\;\',./-]+$'
         with transaction.atomic():
-            if username in usernames and username != self.object.username:
+            if username in usernames and username != self.origin_username:
                 form.add_error('username', '이미 존재하는 아이디입니다.')
                 return self.form_invalid(form)
 
@@ -158,21 +165,6 @@ class AccountSettingView(DetailView):
         context['icon_int'] = random.randint(1, 20)
         return context
 
-
-@method_decorator(login_required, name='dispatch')
-@method_decorator(AccountOwnershipDecorator, name='dispatch')
-class AccountNotificationUpdateView(RedirectView):
-    def dispatch(self, request, *args, **kwargs):
-        self.target_user = CustomUser.objects.get(pk=self.request.GET.get('object_pk'))
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('accountapp:setting', kwargs={'pk': self.target_user.pk})
-
-    def get(self, request, *args, **kwargs):
-        self.target_user.can_receive_notification = True if self.target_user.can_receive_notification == False else False
-        self.target_user.save()
-        return super(AccountNotificationUpdateView, self).get(request, *args, **kwargs)
 
 
 @method_decorator(login_required, name='dispatch')

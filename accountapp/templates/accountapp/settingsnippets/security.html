@@ -1,12 +1,8 @@
 <div class="frame frame-setting">
     <div class="spacing-title">
-        <span class="text-title-bold">계정 관리</span>
+        <span class="text-title-bold">계정 보안</span>
     </div>
     <div class="container">
-        <a href="{% url 'accountapp:usernameupdate' pk=target_user.pk %}" class="item">
-            <span class="text-content">아이디 변경</span>
-            <span class="material-icons icon" style="font-size:1.7rem;">manage_accounts</span>
-        </a>
         <a href="{% url 'accountapp:passwordupdate' pk=target_user.pk %}" class="item">
             <span class="text-content">비밀번호 변경</span>
             <span class="material-icons icon" style="font-size:1.65rem;">key</span>

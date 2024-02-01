@@ -10,7 +10,6 @@ from accountapp.models import CustomUser
 class Analytics(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateField(unique=True)
-    view_count = models.IntegerField(default=0)
     letter_count = models.IntegerField(default=0)
 
     def user_count(self):

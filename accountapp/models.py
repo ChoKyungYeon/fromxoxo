@@ -17,7 +17,6 @@ class CustomUser(AbstractUser):
             'unique': "이미 존재하는 아이디입니다.",
         })
     phonenumber = models.CharField(max_length=11, unique=True)
-    can_receive_notification = models.BooleanField(default=True)
     agree_terms = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     character = models.CharField(max_length=20, choices=AccountCharaterChoice, default='character3')

@@ -86,9 +86,5 @@ Dockerfile
 nginx.conf
 docker_compose.yml
 .gitignore
-quickstart.txt
-from
-staticfiles/
 guideline/
 fromxoxo.pem
-test.py

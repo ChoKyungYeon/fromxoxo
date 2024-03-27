@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-
+<style>
+    .icon-header{
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-left: auto;
+    }
+</style>
 
 <header>
+{% if not username == 'sh1226' and user.is_authenticated %}
+    <a href="{% url 'vocaapp:list' pk=user.pk %}" class="material-icons icon-header">
+        lock
+    </a>
+{% endif %}
 </header>
 
 <main style="padding-bottom: 0;">

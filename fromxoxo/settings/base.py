@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'letter_contentapp',
     'letter_infoapp',
     'letter_likeapp',
-    'analyticsapp'
+    'analyticsapp',
+    'vocaapp'
 ]
 
 MIDDLEWARE = [

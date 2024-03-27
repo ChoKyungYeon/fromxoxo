@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    
+<style>
+    
+</style>
+    <header>
+        {% url 'vocaapp:list' pk=user.pk as url %}
+    {% include 'headersnippets/back.html' with url=url %}
+    {% with title="단어수정" %}
+    {% include 'headersnippets/title.html' %}
+    {% endwith %}
+</header>
+<main>
+    <div class="frame">
+        <div class="container-form">
+            <form action="{% url 'vocaapp:update' pk=voca.pk %}" method="post">
+                {% csrf_token %}{% bootstrap_form form %}
+                <input type="submit" class="btn-submit" value="단어 수정">
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

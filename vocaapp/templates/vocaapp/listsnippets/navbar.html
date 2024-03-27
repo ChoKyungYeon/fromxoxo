@@ -1,0 +1,92 @@
+{% load static %}
+<style>
+
+
+
+#account-list-navbar {
+    background: var(--black);
+    padding-bottom:3rem;
+    padding-top:2.2rem;
+}
+
+
+
+#account-list-navbar .icon-star1,
+#account-list-navbar .icon-star3,
+#account-list-navbar .icon-star2{
+    position: absolute;
+    font-weight: 600;
+}
+#account-list-navbar .icon-star1 {
+    left: 25%;
+    top:-2.2rem;
+    font-size: 1rem;
+    color: #fdebb4;
+    transform: rotate(-45deg);
+}
+
+#account-list-navbar .icon-star2 {
+    left: 48.5%;
+    top: 3.7rem;
+    font-size: 0.9rem;
+    color: #ffdf80;
+    transform: rotate(-25deg);
+}
+
+
+#account-list-navbar .icon-star3 {
+    right: 0.3rem;
+    top: -1.3rem;
+    font-size: 0.8rem;
+    color: #fdebb4;
+    transform: rotate(-13deg);
+}
+
+#account-list-navbar .container-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+#account-list-navbar  .btn-untouched,
+#account-list-navbar  .btn-touched{
+    z-index:99;
+    width: 44%;
+    height: 4rem;
+    border-radius: var(--border-radius-btn);
+    background: var(--blackgray);
+    box-shadow: var(--shadow-btn-white);
+}
+#account-list-navbar  .btn-untouched{
+    background: transparent;
+    border:none;
+    color:var(--gray);
+    box-shadow: none;
+}
+
+
+
+
+</style>
+<div class="frame" id="account-list-navbar">
+    <div class="container-btn" style="position: relative">
+        <span class="icon-star1 material-icons">grade</span>
+        <span class="icon-star2 material-icons">grade</span>
+        <span class="icon-star3 material-icons">grade</span>
+        {% if slide == "writelist" %}
+        <a  class="btn-nav btn-touched">
+        {% else %}
+        <a href="{% url 'accountapp:writelist' pk=user.pk %}" class="btn-nav btn-untouched">
+        {% endif %}
+            작성한 편지
+        </a>
+        {% if slide == "savelist" %}
+        <a  class="btn-nav btn-touched">
+        {% else %}
+        <a href="{% url 'accountapp:savelist' pk=user.pk %}" class="btn-nav btn-untouched">
+        {% endif %}
+            저장한 편지
+        </a>
+    </div>
+</div>

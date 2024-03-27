@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<header>
+    {% include 'headersnippets/home.html' %}
+</header>
+
+<main>
+    {% include 'vocaapp/listsnippets/footer.html' %}
+    <div class="slide" style="display: block" id="slide1">
+        {% with vocas=vocas %}
+        {% include 'vocaapp/listsnippets/list.html' %}
+        {% endwith %}
+    </div>
+    <div class="slide" id="slide2">
+        {% with vocas=vocas_liked %}
+        {% include 'vocaapp/listsnippets/list.html' %}
+        {% endwith %}
+    </div>
+</main>
+
+{% endblock %}
+

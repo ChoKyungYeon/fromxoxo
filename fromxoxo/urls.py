@@ -32,7 +32,6 @@ urlpatterns = [
     path('letter_infos/', include('letter_infoapp.urls')),
     path('letter_likes/', include('letter_likeapp.urls')),
     path('documents/', include('documentapp.urls')),
-    path('events/', include('eventapp.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

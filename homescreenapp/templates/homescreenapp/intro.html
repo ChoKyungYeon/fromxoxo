@@ -11,11 +11,6 @@
 </style>
 
 <header>
-{% if user.is_authenticated and user.username == 'sh1226' %}
-    <a href="{% url 'vocaapp:list' pk=user.pk %}" class="material-icons icon-header">
-        lock
-    </a>
-{% endif %}
 </header>
 
 <main style="padding-bottom: 0;">

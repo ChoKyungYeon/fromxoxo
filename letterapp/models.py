@@ -18,10 +18,8 @@ class Letter(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     error = models.IntegerField(default=0)
     errored_at = models.DateTimeField(null=True)
-
     expire_from = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
-
     is_unsaved = models.BooleanField(default=False)
     progress = models.CharField(max_length=20, choices=LetterProgressChoice, default='progress1')
     state = models.CharField(max_length=20, choices=LetterStateChoice, default='unchecked')
@@ -70,7 +68,7 @@ class Letter(models.Model):
 
     def generate_url(self):
         base_url = reverse('letterapp:intro', kwargs={'pk': self.pk})
-        full_url = f'https://www.fromxoxo.com{base_url}'
+        full_url = f'http://www.fromxoxo.com{base_url}'
         return type_tiny.tinyurl.short(full_url)
 
 

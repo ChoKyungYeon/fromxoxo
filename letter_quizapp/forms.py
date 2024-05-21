@@ -25,6 +25,7 @@ class Letter_quizChoiceCreateForm(ModelForm):
             'choiceanswer': forms.CheckboxSelectMultiple(attrs={ 'class': 'selectmultiple','id': 'field-choiceanswer'}),
         }
 
+
 class Letter_quizWordCreateForm(ModelForm):
     class Meta:
         model = Letter_quiz
@@ -78,6 +79,7 @@ class Letter_quizChoiceVerifyForm(forms.Form):
         ('choice2', '✓'),
         ('choice3', '✓'),
     )
+
     choiceanswer = forms.MultipleChoiceField(
         choices=QuizAnswerChoice,
         label="",

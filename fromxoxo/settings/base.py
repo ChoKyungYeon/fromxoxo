@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'letter_infoapp',
     'letter_likeapp',
     'analyticsapp',
+    'eventapp',
 ]
 
 MIDDLEWARE = [

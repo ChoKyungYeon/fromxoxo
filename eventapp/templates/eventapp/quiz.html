@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <style>
+    .img{
+        width: 9rem;
+    }
+    .rabbit{
+        position: absolute;
+    }
+    </style>
+    <main class="main-centered" style="height: 100vh">
+        <h1>
+            김소빵을 {{ event.count_left }}번잡아주세요
+        </h1>
+        <a id="rabbit" class="rabbit" href="{% url 'eventapp:catch' %}?object_pk={{ event.pk }}">
+            <img class="img" src='/static/icons/homescreen/rabbit.png'>
+        </a>
+    </main>
+<script>
+const rabbit = document.getElementById('rabbit');
+const mainContainer = document.querySelector('.main-centered');
+
+// 랜덤한 초기 위치 설정
+let positionX = Math.floor(Math.random() * (mainContainer.offsetWidth - rabbit.offsetWidth));
+let positionY = Math.floor(Math.random() * (mainContainer.offsetHeight - rabbit.offsetHeight));
+let velocityX = 4;
+let velocityY = 4;
+
+function moveRabbit() {
+  positionX += velocityX;
+  positionY += velocityY;
+
+  // 벽에 부딪히면 방향 전환
+  if (positionX + rabbit.offsetWidth >= mainContainer.offsetWidth || positionX <= 0) {
+    velocityX = -velocityX;
+  }
+  if (positionY + rabbit.offsetHeight >= mainContainer.offsetHeight || positionY <= 0) {
+    velocityY = -velocityY;
+  }
+
+  rabbit.style.left = `${positionX}px`;
+  rabbit.style.top = `${positionY}px`;
+
+  requestAnimationFrame(moveRabbit);
+}
+
+moveRabbit();
+</script>
+{% endblock %}
